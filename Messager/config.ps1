@@ -1,1 +1,0 @@
-ssh -p 443 -o "StrictHostKeyChecking=no" -E "connection.txt" -R0:localhost:49152 tcp@a.pinggy.io
