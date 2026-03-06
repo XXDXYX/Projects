@@ -1,0 +1,3 @@
+set(__QT_DEPLOY_TARGET_appLdjj_FILE D:/Ldjj/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Debug/appLdjj.exe)
+set(__QT_DEPLOY_TARGET_appLdjj_TYPE EXECUTABLE)
+set(__QT_DEPLOY_TARGET_appLdjj_RUNTIME_DLLS D:/Qt/6.10.2/msvc2022_64/bin/Qt6Quickd.dll;D:/Qt/6.10.2/msvc2022_64/bin/Qt6OpenGLd.dll;D:/Qt/6.10.2/msvc2022_64/bin/Qt6Guid.dll;D:/Qt/6.10.2/msvc2022_64/bin/Qt6QmlMetad.dll;D:/Qt/6.10.2/msvc2022_64/bin/Qt6QmlModelsd.dll;D:/Qt/6.10.2/msvc2022_64/bin/Qt6QmlWorkerScriptd.dll;D:/Qt/6.10.2/msvc2022_64/bin/Qt6Qmld.dll;D:/Qt/6.10.2/msvc2022_64/bin/Qt6Networkd.dll;D:/Qt/6.10.2/msvc2022_64/bin/Qt6Cored.dll)
