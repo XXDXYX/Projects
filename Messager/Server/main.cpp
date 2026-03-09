@@ -6,7 +6,7 @@
 #include <QQmlContext>
 #pragma comment(lib,"ws2_32.lib")
 #include <ws2tcpip.h>
-#include "cppBackend.h"
+#include "ServerBackend.h"
 
 int main(int argc, char *argv[])
 {
@@ -22,6 +22,6 @@ int main(int argc, char *argv[])
         &app,
         []() { QCoreApplication::exit(-1); },
         Qt::QueuedConnection);
-    engine.loadFromModule("Ldjj", "Main");
+    engine.loadFromModule("ServerClient", "Main");
     return app.exec();
 }

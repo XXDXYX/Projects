@@ -1,0 +1,16 @@
+--bare
+-I
+C:/Users/Lenovo/Desktop/Projects/Messager/Server/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Debug
+-I
+C:/Users/Lenovo/Desktop/Projects/Messager/Server/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Debug/ServerClient
+-I
+C:/Users/Lenovo/Desktop/Projects/Messager/Server/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Debug
+-I
+D:/Qt/6.10.2/msvc2022_64/qml
+--resource
+C:/Users/Lenovo/Desktop/Projects/Messager/Server/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Debug/.qt/rcc/qmake_ServerClient.qrc
+--resource
+C:/Users/Lenovo/Desktop/Projects/Messager/Server/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Debug/.qt/rcc/appServerClient_raw_qml_0.qrc
+C:/Users/Lenovo/Desktop/Projects/Messager/Server/Main.qml
+--json
+C:/Users/Lenovo/Desktop/Projects/Messager/Server/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Debug/appServerClient_qmllint.json

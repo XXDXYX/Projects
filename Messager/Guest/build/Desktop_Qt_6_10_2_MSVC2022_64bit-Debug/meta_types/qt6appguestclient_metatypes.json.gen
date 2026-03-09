@@ -1,0 +1,29 @@
+[
+    {
+        "classes": [
+            {
+                "className": "Guest",
+                "lineNumber": 13,
+                "methods": [
+                    {
+                        "access": "public",
+                        "index": 0,
+                        "lineNumber": 49,
+                        "name": "connect_Guest",
+                        "returnType": "void"
+                    }
+                ],
+                "object": true,
+                "qualifiedClassName": "Guest",
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "QObject"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "GuestBackend.h",
+        "outputRevision": 69
+    }
+]

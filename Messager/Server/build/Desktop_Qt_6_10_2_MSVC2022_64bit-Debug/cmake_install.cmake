@@ -1,8 +1,8 @@
-# Install script for directory: D:/Ldjj
+# Install script for directory: C:/Users/Lenovo/Desktop/Projects/Messager/Server
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/Ldjj")
+  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/ServerClient")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -33,7 +33,7 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE EXECUTABLE FILES "D:/Ldjj/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Debug/appLdjj.exe")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE EXECUTABLE FILES "C:/Users/Lenovo/Desktop/Projects/Messager/Server/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Debug/appServerClient.exe")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -51,6 +51,6 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-  file(WRITE "D:/Ldjj/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Debug/${CMAKE_INSTALL_MANIFEST}"
+  file(WRITE "C:/Users/Lenovo/Desktop/Projects/Messager/Server/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()

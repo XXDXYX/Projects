@@ -1,0 +1,36 @@
+[
+    {
+        "classes": [
+            {
+                "className": "Connect",
+                "lineNumber": 12,
+                "methods": [
+                    {
+                        "access": "public",
+                        "index": 0,
+                        "lineNumber": 18,
+                        "name": "set_socket",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "index": 1,
+                        "lineNumber": 48,
+                        "name": "startServer",
+                        "returnType": "void"
+                    }
+                ],
+                "object": true,
+                "qualifiedClassName": "Connect",
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "QObject"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "ServerBackend.h",
+        "outputRevision": 69
+    }
+]

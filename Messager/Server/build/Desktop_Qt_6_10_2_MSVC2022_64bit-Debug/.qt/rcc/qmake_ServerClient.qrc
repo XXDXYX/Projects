@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="/qt/qml/ServerClient">
+    <file alias="qmldir">C:/Users/Lenovo/Desktop/Projects/Messager/Server/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Debug/ServerClient/qmldir</file>
+  </qresource>
+</RCC>
+
