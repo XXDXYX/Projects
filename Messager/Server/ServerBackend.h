@@ -14,6 +14,11 @@ class Connect :public QObject{
 public:
     explicit Connect(QObject *parent = nullptr) : QObject(parent) {
     }
+signals:
+    void sendMessage(){
+
+    }
+
     std::mutex mtx;
     Q_INVOKABLE void set_socket() {
         WSADATA wsaData;
@@ -37,16 +42,13 @@ public:
             qDebug() << "\nFriend connected!!!";
             std::thread client([this, &clientSoc]() { Client(std::ref(clientSoc)); });
             std::thread server([this, &clientSoc]() { Server(std::ref(clientSoc)); });
-
-            client.join();
-            server.join();
-
-
+            client.detach();
+            server.detach();
         }
 
     }
     Q_INVOKABLE void startServer() {
-        std::thread([this]() { set_socket(); }).detach();
+        std::thread([this]() {set_socket(); }).detach();
     }
     void Client(SOCKET clientSoc) {
         std::string str;
@@ -72,7 +74,6 @@ public:
     }
     void Server( SOCKET clientSoc) {
         while (true) {
-
             QTextStream cin(stdin);
             qDebug() << "Server: ";
             QString str = cin.readLine();

@@ -52,12 +52,13 @@ Q_INVOKABLE void connect_Guest() {
 void Server(SOCKET clientSoc) {
     string myReply;
     while (true) {
-        qDebug() << "Me: ";
-        getline(cin, myReply);
+        QTextStream cin(stdin);
+        qDebug() << "Server: ";
+        QString myReply = cin.readLine();
+        const char* cstr = myReply.toUtf8().constData();
         lock_guard<mutex>lg(mt);
         myReply += "\n";
-        send(clientSoc, myReply.c_str(), myReply.length(), 0);
-
+        send(clientSoc, cstr, myReply.length(), 0);
     }
 }
  int guest_client()
@@ -78,8 +79,8 @@ void Server(SOCKET clientSoc) {
     hints.ai_socktype = SOCK_STREAM;
     hints.ai_protocol = IPPROTO_TCP;
 
-    const char* pinggy_host = "phlir-195-225-49-21.a.free.pinggy.link";
-    const char* pinggy_port = "36689";
+    const char* pinggy_host = "vxbob-195-225-49-21.a.free.pinggy.link";
+    const char* pinggy_port = "41483";
 
     int res = getaddrinfo(pinggy_host, pinggy_port, &hints, &result);
     if (res != 0) {
@@ -96,8 +97,8 @@ void Server(SOCKET clientSoc) {
 
     std::thread cl([this, &soc](){Client(ref(soc));});
     std::thread server([this, &soc]() { Server(ref(soc));});
-    cl.join();
-    server.join();
+    cl.detach();
+    server.detach();
 
     closesocket(soc);
     WSACleanup();
