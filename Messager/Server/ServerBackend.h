@@ -14,21 +14,15 @@ class Connect :public QObject{
 public:
     explicit Connect(QObject *parent = nullptr) : QObject(parent) {
     }
-signals:
-    void sendMessage(){
-
-    }
-
+    SOCKET socket_buf = INVALID_SOCKET;
     std::mutex mtx;
-    Q_INVOKABLE void set_socket() {
+    int set_socket() {
         WSADATA wsaData;
         WSAStartup(MAKEWORD(2,2),&wsaData);
         auto soc = socket(AF_INET, SOCK_STREAM, 0);
-        if (soc != INVALID_SOCKET) {
-            qDebug() << "Socket was created";
-        }
-        else {
-             qDebug() << "Socket wasn`t created";
+        if (soc == INVALID_SOCKET) {
+            emit errorCode(1);
+            return 1;
         }
         sockaddr_in sockadr;
         sockadr.sin_family = AF_INET;
@@ -37,15 +31,19 @@ signals:
         bind(soc, (sockaddr*)&sockadr, sizeof(sockadr));
         listen(soc, SOMAXCONN);
         qDebug() << "Waiting for connection...";
+
         while (true) {
             SOCKET clientSoc = accept(soc, nullptr, nullptr);
-            qDebug() << "\nFriend connected!!!";
-            std::thread client([this, &clientSoc]() { Client(std::ref(clientSoc)); });
-            std::thread server([this, &clientSoc]() { Server(std::ref(clientSoc)); });
-            client.detach();
-            server.detach();
+                if(clientSoc != INVALID_SOCKET){
+                    std::lock_guard<std::mutex> lg(mtx);
+                    this->socket_buf = clientSoc;
+                    emit getString("Friend connected");
+                    std::thread([this, clientSoc]() { Client(clientSoc); }).detach();
+                }
+                else{
+                    emit errorCode(2);
+                }
         }
-
     }
     Q_INVOKABLE void startServer() {
         std::thread([this]() {set_socket(); }).detach();
@@ -57,31 +55,32 @@ signals:
         do {
             receivedBytes = recv(clientSoc, buffer, 1024, 0);
             if (receivedBytes <= 0) {
-                qDebug() << "Connection lost...";
                 break;
             } else if (receivedBytes > 0) {
                 buffer[receivedBytes] = '\0';
                 str.append(buffer, receivedBytes);
                 if (str.find('\n') != std::string::npos || str.find('\r') != std::string::npos) {
-                    std::lock_guard<std::mutex> lg(mtx);
-                    qDebug() << "\r" << std::string(80, ' ') << "\r";
-                    qDebug() << str;
-                    qDebug() << "Server: ";
+                    emit newMessageReceived(QString::fromStdString(str));
                     str.clear();
                 }
             }
         } while (receivedBytes > 0);
+         closesocket(clientSoc);
     }
-    void Server( SOCKET clientSoc) {
-        while (true) {
-            QTextStream cin(stdin);
-            qDebug() << "Server: ";
-            QString str = cin.readLine();
-            const char* cstr = str.toUtf8().constData();
-            std::lock_guard<std::mutex>lg(mtx);
-            str += "\n";
-            send(clientSoc, cstr, str.length(), 0);
-        }
+signals:
+    void btn_sendMessage();
+    void newMessageReceived(QString text);
+    void errorCode(int code);
+    void getString(std::string str);
+public slots:
+    void sendMessage(const QString &value){
+        if (socket_buf == INVALID_SOCKET) return;
+        QString str = value;
+         str += "\n";
+        const char* cstr = str.toUtf8().constData();
+        std::lock_guard<std::mutex>lg(mtx);
+        send(socket_buf, cstr, str.length(), 0);
     }
+    //void getMessage(const QString &text);
 };
 #endif

@@ -39,16 +39,41 @@ template <> constexpr inline auto Connect::qt_create_metaobjectdata<qt_meta_tag_
     namespace QMC = QtMocConstants;
     QtMocHelpers::StringRefStorage qt_stringData {
         "Connect",
-        "set_socket",
+        "btn_sendMessage",
         "",
+        "newMessageReceived",
+        "text",
+        "errorCode",
+        "code",
+        "getString",
+        "std::string",
+        "str",
+        "sendMessage",
+        "value",
         "startServer"
     };
 
     QtMocHelpers::UintData qt_methods {
-        // Method 'set_socket'
-        QtMocHelpers::MethodData<void()>(1, 2, QMC::AccessPublic, QMetaType::Void),
+        // Signal 'btn_sendMessage'
+        QtMocHelpers::SignalData<void()>(1, 2, QMC::AccessPublic, QMetaType::Void),
+        // Signal 'newMessageReceived'
+        QtMocHelpers::SignalData<void(QString)>(3, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::QString, 4 },
+        }}),
+        // Signal 'errorCode'
+        QtMocHelpers::SignalData<void(int)>(5, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::Int, 6 },
+        }}),
+        // Signal 'getString'
+        QtMocHelpers::SignalData<void(std::string)>(7, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { 0x80000000 | 8, 9 },
+        }}),
+        // Slot 'sendMessage'
+        QtMocHelpers::SlotData<void(const QString &)>(10, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::QString, 11 },
+        }}),
         // Method 'startServer'
-        QtMocHelpers::MethodData<void()>(3, 2, QMC::AccessPublic, QMetaType::Void),
+        QtMocHelpers::MethodData<void()>(12, 2, QMC::AccessPublic, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -72,12 +97,25 @@ void Connect::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
     auto *_t = static_cast<Connect *>(_o);
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
-        case 0: _t->set_socket(); break;
-        case 1: _t->startServer(); break;
+        case 0: _t->btn_sendMessage(); break;
+        case 1: _t->newMessageReceived((*reinterpret_cast<std::add_pointer_t<QString>>(_a[1]))); break;
+        case 2: _t->errorCode((*reinterpret_cast<std::add_pointer_t<int>>(_a[1]))); break;
+        case 3: _t->getString((*reinterpret_cast<std::add_pointer_t<std::string>>(_a[1]))); break;
+        case 4: _t->sendMessage((*reinterpret_cast<std::add_pointer_t<QString>>(_a[1]))); break;
+        case 5: _t->startServer(); break;
         default: ;
         }
     }
-    (void)_a;
+    if (_c == QMetaObject::IndexOfMethod) {
+        if (QtMocHelpers::indexOfMethod<void (Connect::*)()>(_a, &Connect::btn_sendMessage, 0))
+            return;
+        if (QtMocHelpers::indexOfMethod<void (Connect::*)(QString )>(_a, &Connect::newMessageReceived, 1))
+            return;
+        if (QtMocHelpers::indexOfMethod<void (Connect::*)(int )>(_a, &Connect::errorCode, 2))
+            return;
+        if (QtMocHelpers::indexOfMethod<void (Connect::*)(std::string )>(_a, &Connect::getString, 3))
+            return;
+    }
 }
 
 const QMetaObject *Connect::metaObject() const
@@ -99,15 +137,39 @@ int Connect::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 2)
+        if (_id < 6)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 2;
+        _id -= 6;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 2)
+        if (_id < 6)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 2;
+        _id -= 6;
     }
     return _id;
+}
+
+// SIGNAL 0
+void Connect::btn_sendMessage()
+{
+    QMetaObject::activate(this, &staticMetaObject, 0, nullptr);
+}
+
+// SIGNAL 1
+void Connect::newMessageReceived(QString _t1)
+{
+    QMetaObject::activate<void>(this, &staticMetaObject, 1, nullptr, _t1);
+}
+
+// SIGNAL 2
+void Connect::errorCode(int _t1)
+{
+    QMetaObject::activate<void>(this, &staticMetaObject, 2, nullptr, _t1);
+}
+
+// SIGNAL 3
+void Connect::getString(std::string _t1)
+{
+    QMetaObject::activate<void>(this, &staticMetaObject, 3, nullptr, _t1);
 }
 QT_WARNING_POP

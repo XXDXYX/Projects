@@ -39,13 +39,34 @@ template <> constexpr inline auto Guest::qt_create_metaobjectdata<qt_meta_tag_ZN
     namespace QMC = QtMocConstants;
     QtMocHelpers::StringRefStorage qt_stringData {
         "Guest",
-        "connect_Guest",
-        ""
+        "btn_sendMessage",
+        "",
+        "newMessageReceived",
+        "text",
+        "errorOccurred",
+        "code",
+        "sendMessage",
+        "value",
+        "connect_Guest"
     };
 
     QtMocHelpers::UintData qt_methods {
+        // Signal 'btn_sendMessage'
+        QtMocHelpers::SignalData<void()>(1, 2, QMC::AccessPublic, QMetaType::Void),
+        // Signal 'newMessageReceived'
+        QtMocHelpers::SignalData<void(QString)>(3, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::QString, 4 },
+        }}),
+        // Signal 'errorOccurred'
+        QtMocHelpers::SignalData<void(int)>(5, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::Int, 6 },
+        }}),
+        // Slot 'sendMessage'
+        QtMocHelpers::SlotData<void(const QString &)>(7, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::QString, 8 },
+        }}),
         // Method 'connect_Guest'
-        QtMocHelpers::MethodData<void()>(1, 2, QMC::AccessPublic, QMetaType::Void),
+        QtMocHelpers::MethodData<void()>(9, 2, QMC::AccessPublic, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -69,11 +90,22 @@ void Guest::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void 
     auto *_t = static_cast<Guest *>(_o);
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
-        case 0: _t->connect_Guest(); break;
+        case 0: _t->btn_sendMessage(); break;
+        case 1: _t->newMessageReceived((*reinterpret_cast<std::add_pointer_t<QString>>(_a[1]))); break;
+        case 2: _t->errorOccurred((*reinterpret_cast<std::add_pointer_t<int>>(_a[1]))); break;
+        case 3: _t->sendMessage((*reinterpret_cast<std::add_pointer_t<QString>>(_a[1]))); break;
+        case 4: _t->connect_Guest(); break;
         default: ;
         }
     }
-    (void)_a;
+    if (_c == QMetaObject::IndexOfMethod) {
+        if (QtMocHelpers::indexOfMethod<void (Guest::*)()>(_a, &Guest::btn_sendMessage, 0))
+            return;
+        if (QtMocHelpers::indexOfMethod<void (Guest::*)(QString )>(_a, &Guest::newMessageReceived, 1))
+            return;
+        if (QtMocHelpers::indexOfMethod<void (Guest::*)(int )>(_a, &Guest::errorOccurred, 2))
+            return;
+    }
 }
 
 const QMetaObject *Guest::metaObject() const
@@ -95,15 +127,33 @@ int Guest::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 1)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 1;
+        _id -= 5;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 1)
+        if (_id < 5)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 1;
+        _id -= 5;
     }
     return _id;
+}
+
+// SIGNAL 0
+void Guest::btn_sendMessage()
+{
+    QMetaObject::activate(this, &staticMetaObject, 0, nullptr);
+}
+
+// SIGNAL 1
+void Guest::newMessageReceived(QString _t1)
+{
+    QMetaObject::activate<void>(this, &staticMetaObject, 1, nullptr, _t1);
+}
+
+// SIGNAL 2
+void Guest::errorOccurred(int _t1)
+{
+    QMetaObject::activate<void>(this, &staticMetaObject, 2, nullptr, _t1);
 }
 QT_WARNING_POP

@@ -6,14 +6,7 @@
             "methods": [
                 {
                     "access": "public",
-                    "index": 0,
-                    "lineNumber": 18,
-                    "name": "set_socket",
-                    "returnType": "void"
-                },
-                {
-                    "access": "public",
-                    "index": 1,
+                    "index": 5,
                     "lineNumber": 48,
                     "name": "startServer",
                     "returnType": "void"
@@ -21,6 +14,69 @@
             ],
             "object": true,
             "qualifiedClassName": "Connect",
+            "signals": [
+                {
+                    "access": "public",
+                    "index": 0,
+                    "lineNumber": 71,
+                    "name": "btn_sendMessage",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "text",
+                            "type": "QString"
+                        }
+                    ],
+                    "index": 1,
+                    "lineNumber": 72,
+                    "name": "newMessageReceived",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "code",
+                            "type": "int"
+                        }
+                    ],
+                    "index": 2,
+                    "lineNumber": 73,
+                    "name": "errorCode",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "str",
+                            "type": "std::string"
+                        }
+                    ],
+                    "index": 3,
+                    "lineNumber": 74,
+                    "name": "getString",
+                    "returnType": "void"
+                }
+            ],
+            "slots": [
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "value",
+                            "type": "QString"
+                        }
+                    ],
+                    "index": 4,
+                    "lineNumber": 76,
+                    "name": "sendMessage",
+                    "returnType": "void"
+                }
+            ],
             "superClasses": [
                 {
                     "access": "public",
