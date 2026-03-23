@@ -1,0 +1,6 @@
+module ServerClient
+typeinfo appServerClient.qmltypes
+prefer :/qt/qml/ServerClient/
+Main 254.0 Main.qml
+depends QtQuick
+

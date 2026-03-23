@@ -14,12 +14,20 @@ Window {
          Guest.connect_Guest()
     }
 
+
+
     Rectangle {
         id: mainRectangle
         anchors.fill: parent
         color: "#F6F2F2"
         radius: 20
-
+        Connections{
+            target: Guest
+            function onNewMessageReceived(text) {
+                    chatModel.append({ "author": "Друг", "content": text })
+                    chatView.positionViewAtEnd()
+                }
+        }
         antialiasing: true
         Rectangle {
             id: inputWrapper
@@ -54,14 +62,13 @@ Window {
                     verticalAlignment: Text.AlignVCenter
                 }
                 onAccepted: {
-
                     if (text !== "") {
                         chatModel.append({
                             "author": "Я",
                             "content": text
                         })
                         chatView.positionViewAtEnd()
-
+                        Guest.sendMessage(text);
                         text = ""
                     }
                 }

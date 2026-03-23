@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="/qt/qml/ServerClient/">
+    <file alias="Main.qml">C:/Users/Lenovo/Desktop/Projects/Messager/Server/Main.qml</file>
+  </qresource>
+</RCC>
+

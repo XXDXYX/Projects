@@ -11,7 +11,7 @@ Window {
     flags: Qt.FramelessWindowHint | Qt.Window
     color: "transparent"
     Component.onCompleted: {
-        Connect.startServer();
+        connect.startServer();
     }
 
     Rectangle {
@@ -19,6 +19,14 @@ Window {
         anchors.fill: parent
         color: "#F6F2F2"
         radius: 20
+        Connections{
+            target: connect
+            function onnewMessageReceived(text) {
+                    chatModel.append({ "author": "Друг", "content": text })
+                    chatView.positionViewAtEnd()
+                }
+        }
+
 
         antialiasing: true
         Rectangle {
@@ -54,14 +62,13 @@ Window {
                     verticalAlignment: Text.AlignVCenter
                 }
                 onAccepted: {
-
                     if (text !== "") {
                         chatModel.append({
                             "author": "Я",
                             "content": text
                         })
                         chatView.positionViewAtEnd()
-
+                        connect.sendMessage(text);
                         text = ""
                     }
                 }

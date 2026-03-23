@@ -6,17 +6,16 @@
 #include <thread>
 #include <mutex>
 #include <ws2tcpip.h>
-#include <string>
 #pragma comment(lib,"ws2_32.lib")
-using namespace std;
 class Guest: public QObject{
     Q_OBJECT
     public:
     explicit Guest(QObject *parent = nullptr) : QObject(parent) {
     }
-mutex mt;
-SOCKET socket_buf;
+std::mutex mt;
+SOCKET socket_buf = INVALID_SOCKET;
 int error_code;
+
 int guest_client()
 {
     WSAData wsData;
@@ -32,8 +31,8 @@ int guest_client()
     hints.ai_socktype = SOCK_STREAM;
     hints.ai_protocol = IPPROTO_TCP;
 
-    const char* pinggy_host = "vxbob-195-225-49-21.a.free.pinggy.link";
-    const char* pinggy_port = "41483";
+    const char* pinggy_host = "puogu-195-225-49-21.a.free.pinggy.link";
+    const char* pinggy_port = "45193";
     socket_buf = soc;
     int res = getaddrinfo(pinggy_host, pinggy_port, &hints, &result);
     if (res != 0) {
@@ -47,40 +46,38 @@ int guest_client()
     }
     freeaddrinfo(result);
     qDebug()  << "Connected to friend via Pinggy!";
-    std::thread cl([this, soc](){ Client(soc); });
+    std::thread cl([this, soc](){ Client(); });
     cl.detach();
     return 0;
 }
-void Client(SOCKET clientSoc) {
-    string message;
+void Client() {
+    QString message;
     int receivedBytes = 0;
     char buffer[1024];
     do {
-        receivedBytes = recv(clientSoc, buffer, 1024, 0);
-        if (receivedBytes > 0) {
+        receivedBytes = recv(socket_buf, buffer, 1024-1, 0);
+        if (receivedBytes <= 0) {
+            break;
+        } else if (receivedBytes > 0) {
             buffer[receivedBytes] = '\0';
-            message.append(buffer, receivedBytes);
-            if (message.find('\n') != string::npos || message.find('\r') != string::npos) {
-                lock_guard<mutex> lg(mt);
-                emit newMessageReceived(QString::fromStdString(message));
+            message.append(QString::fromUtf8(buffer, receivedBytes));
+            if (message.contains('\n') || message.contains('\r')) {
+                QString msg = message.trimmed();
                 message.clear();
+                QMetaObject::invokeMethod(this, [this, msg]() {
+                    emit newMessageReceived(msg);
+                }, Qt::QueuedConnection);
             }
-        } else if (receivedBytes == 0) {
-            qDebug()  << "Client disconnected";
-            break;
-        } else {
-            qDebug() << "recv failed";
-            break;
         }
 
-    } while (true);
-    closesocket(clientSoc);
+    } while (receivedBytes > 0);
+    closesocket(socket_buf);
 }
 Q_INVOKABLE void connect_Guest() {
     std::thread([this]() { guest_client(); }).detach();
 }
 signals:
-    void btn_sendMessage();
+
     void newMessageReceived(QString text);
     void errorOccurred(int code);
 public slots:
@@ -88,11 +85,11 @@ public slots:
         if (socket_buf == INVALID_SOCKET) return;
         QString str = value;
         str += "\n";
-        const char* cstr = str.toUtf8().constData();
+        QByteArray bytes = str.toUtf8();
         std::lock_guard<std::mutex>lg(mt);
-        send(socket_buf, cstr, str.length(), 0);
+        send(socket_buf, bytes.constData(), bytes.size(), 0);
 }
-   // void getMessage(const QString &text);
+
 
 };
 #endif

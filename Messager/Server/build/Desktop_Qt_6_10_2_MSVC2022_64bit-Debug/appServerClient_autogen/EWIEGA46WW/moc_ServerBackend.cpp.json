@@ -6,7 +6,7 @@
             "methods": [
                 {
                     "access": "public",
-                    "index": 5,
+                    "index": 4,
                     "lineNumber": 48,
                     "name": "startServer",
                     "returnType": "void"
@@ -18,7 +18,7 @@
                 {
                     "access": "public",
                     "index": 0,
-                    "lineNumber": 71,
+                    "lineNumber": 74,
                     "name": "btn_sendMessage",
                     "returnType": "void"
                 },
@@ -31,7 +31,7 @@
                         }
                     ],
                     "index": 1,
-                    "lineNumber": 72,
+                    "lineNumber": 75,
                     "name": "newMessageReceived",
                     "returnType": "void"
                 },
@@ -44,21 +44,8 @@
                         }
                     ],
                     "index": 2,
-                    "lineNumber": 73,
+                    "lineNumber": 76,
                     "name": "errorCode",
-                    "returnType": "void"
-                },
-                {
-                    "access": "public",
-                    "arguments": [
-                        {
-                            "name": "str",
-                            "type": "std::string"
-                        }
-                    ],
-                    "index": 3,
-                    "lineNumber": 74,
-                    "name": "getString",
                     "returnType": "void"
                 }
             ],
@@ -71,8 +58,8 @@
                             "type": "QString"
                         }
                     ],
-                    "index": 4,
-                    "lineNumber": 76,
+                    "index": 3,
+                    "lineNumber": 78,
                     "name": "sendMessage",
                     "returnType": "void"
                 }

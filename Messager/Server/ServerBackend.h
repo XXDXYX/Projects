@@ -7,7 +7,7 @@
 #include <ws2tcpip.h>
 #include <thread>
 #include <mutex>
-#include <string>
+
 
 class Connect :public QObject{
     Q_OBJECT
@@ -16,6 +16,7 @@ public:
     }
     SOCKET socket_buf = INVALID_SOCKET;
     std::mutex mtx;
+
     int set_socket() {
         WSADATA wsaData;
         WSAStartup(MAKEWORD(2,2),&wsaData);
@@ -30,15 +31,14 @@ public:
         sockadr.sin_addr.S_un.S_addr = INADDR_ANY;
         bind(soc, (sockaddr*)&sockadr, sizeof(sockadr));
         listen(soc, SOMAXCONN);
-        qDebug() << "Waiting for connection...";
-
+     qDebug() << "Waiting for connection...";
         while (true) {
             SOCKET clientSoc = accept(soc, nullptr, nullptr);
                 if(clientSoc != INVALID_SOCKET){
                     std::lock_guard<std::mutex> lg(mtx);
                     this->socket_buf = clientSoc;
-                    emit getString("Friend connected");
-                    std::thread([this, clientSoc]() { Client(clientSoc); }).detach();
+                    qDebug() << "Connect succesful";
+                    std::thread([this]() { received_msg(); }).detach();
                 }
                 else{
                     emit errorCode(2);
@@ -48,39 +48,41 @@ public:
     Q_INVOKABLE void startServer() {
         std::thread([this]() {set_socket(); }).detach();
     }
-    void Client(SOCKET clientSoc) {
-        std::string str;
+    void received_msg(){
+        QString text;
         int receivedBytes = 0;
         char buffer[1024];
         do {
-            receivedBytes = recv(clientSoc, buffer, 1024, 0);
+            receivedBytes = recv(socket_buf, buffer, 1023, 0);
             if (receivedBytes <= 0) {
                 break;
             } else if (receivedBytes > 0) {
                 buffer[receivedBytes] = '\0';
-                str.append(buffer, receivedBytes);
-                if (str.find('\n') != std::string::npos || str.find('\r') != std::string::npos) {
-                    emit newMessageReceived(QString::fromStdString(str));
-                    str.clear();
+                text.append(QString::fromUtf8(buffer, receivedBytes));
+                if (text.contains('\n') || text.contains('\r')) {
+                    QString msg = text.trimmed();
+                    text.clear();
+                    QMetaObject::invokeMethod(this, [this, msg]() {
+                        emit newMessageReceived(msg);
+                    }, Qt::QueuedConnection);
                 }
             }
         } while (receivedBytes > 0);
-         closesocket(clientSoc);
     }
+
 signals:
     void btn_sendMessage();
     void newMessageReceived(QString text);
     void errorCode(int code);
-    void getString(std::string str);
 public slots:
     void sendMessage(const QString &value){
         if (socket_buf == INVALID_SOCKET) return;
         QString str = value;
          str += "\n";
-        const char* cstr = str.toUtf8().constData();
+        QByteArray bytes = str.toUtf8();
         std::lock_guard<std::mutex>lg(mtx);
-        send(socket_buf, cstr, str.length(), 0);
+        send(socket_buf, bytes.constData(), bytes.size(), 0);
     }
-    //void getMessage(const QString &text);
+
 };
 #endif

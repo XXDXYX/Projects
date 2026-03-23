@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
     Connect con;
     QQmlApplicationEngine engine;
-    engine.rootContext()->setContextProperty("Connect",&con);
+    engine.rootContext()->setContextProperty("connect",&con);
 
     QObject::connect(
         &engine,

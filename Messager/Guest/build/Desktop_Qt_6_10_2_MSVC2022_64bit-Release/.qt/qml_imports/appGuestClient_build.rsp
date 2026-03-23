@@ -1,0 +1,14 @@
+-rootPath
+C:/Users/Lenovo/Desktop/Projects/Messager/Guest
+-cmake-output
+-output-file
+C:/Users/Lenovo/Desktop/Projects/Messager/Guest/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Release/.qt/qml_imports/appGuestClient_build.cmake
+-importPath
+C:/Users/Lenovo/Desktop/Projects/Messager/Guest/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Release
+-importPath
+C:/Users/Lenovo/Desktop/Projects/Messager/Guest/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Release/GuestClient
+-importPath
+D:/Qt/6.10.2/msvc2022_64/qml
+-qrcFiles
+C:/Users/Lenovo/Desktop/Projects/Messager/Guest/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Release/.qt/rcc/qmake_GuestClient.qrc
+C:/Users/Lenovo/Desktop/Projects/Messager/Guest/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Release/.qt/rcc/appGuestClient_raw_qml_0.qrc

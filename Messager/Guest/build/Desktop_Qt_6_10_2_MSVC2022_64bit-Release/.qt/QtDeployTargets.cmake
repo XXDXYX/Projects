@@ -1,0 +1,3 @@
+set(__QT_DEPLOY_TARGET_appGuestClient_FILE C:/Users/Lenovo/Desktop/Projects/Messager/Guest/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Release/appGuestClient.exe)
+set(__QT_DEPLOY_TARGET_appGuestClient_TYPE EXECUTABLE)
+set(__QT_DEPLOY_TARGET_appGuestClient_RUNTIME_DLLS D:/Qt/6.10.2/msvc2022_64/bin/Qt6Quick.dll;D:/Qt/6.10.2/msvc2022_64/bin/Qt6OpenGL.dll;D:/Qt/6.10.2/msvc2022_64/bin/Qt6Gui.dll;D:/Qt/6.10.2/msvc2022_64/bin/Qt6QmlMeta.dll;D:/Qt/6.10.2/msvc2022_64/bin/Qt6QmlModels.dll;D:/Qt/6.10.2/msvc2022_64/bin/Qt6QmlWorkerScript.dll;D:/Qt/6.10.2/msvc2022_64/bin/Qt6Qml.dll;D:/Qt/6.10.2/msvc2022_64/bin/Qt6Network.dll;D:/Qt/6.10.2/msvc2022_64/bin/Qt6Core.dll)
