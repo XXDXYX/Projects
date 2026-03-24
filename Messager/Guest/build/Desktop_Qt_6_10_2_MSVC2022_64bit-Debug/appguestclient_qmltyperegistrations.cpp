@@ -16,10 +16,9 @@
 #endif
 Q_QMLTYPE_EXPORT void qml_register_types_GuestClient()
 {
-    qmlRegisterModule("GuestClient", 254, 0);
     QT_WARNING_PUSH QT_WARNING_DISABLE_DEPRECATED
     QT_WARNING_POP
-    qmlRegisterModule("GuestClient", 254, 254);
+    qmlRegisterModule("GuestClient", 1, 0);
 }
 
 static const QQmlModuleRegistration guestClientRegistration("GuestClient", qml_register_types_GuestClient);

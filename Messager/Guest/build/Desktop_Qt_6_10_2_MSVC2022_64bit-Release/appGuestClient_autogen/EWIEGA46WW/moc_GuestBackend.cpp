@@ -39,7 +39,7 @@ template <> constexpr inline auto Guest::qt_create_metaobjectdata<qt_meta_tag_ZN
     namespace QMC = QtMocConstants;
     QtMocHelpers::StringRefStorage qt_stringData {
         "Guest",
-        "NewMessageReceived",
+        "newMessageReceived",
         "",
         "text",
         "errorOccurred",
@@ -50,7 +50,7 @@ template <> constexpr inline auto Guest::qt_create_metaobjectdata<qt_meta_tag_ZN
     };
 
     QtMocHelpers::UintData qt_methods {
-        // Signal 'NewMessageReceived'
+        // Signal 'newMessageReceived'
         QtMocHelpers::SignalData<void(QString)>(1, 2, QMC::AccessPublic, QMetaType::Void, {{
             { QMetaType::QString, 3 },
         }}),
@@ -87,7 +87,7 @@ void Guest::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void 
     auto *_t = static_cast<Guest *>(_o);
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
-        case 0: _t->NewMessageReceived((*reinterpret_cast<std::add_pointer_t<QString>>(_a[1]))); break;
+        case 0: _t->newMessageReceived((*reinterpret_cast<std::add_pointer_t<QString>>(_a[1]))); break;
         case 1: _t->errorOccurred((*reinterpret_cast<std::add_pointer_t<int>>(_a[1]))); break;
         case 2: _t->sendMessage((*reinterpret_cast<std::add_pointer_t<QString>>(_a[1]))); break;
         case 3: _t->connect_Guest(); break;
@@ -95,7 +95,7 @@ void Guest::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void 
         }
     }
     if (_c == QMetaObject::IndexOfMethod) {
-        if (QtMocHelpers::indexOfMethod<void (Guest::*)(QString )>(_a, &Guest::NewMessageReceived, 0))
+        if (QtMocHelpers::indexOfMethod<void (Guest::*)(QString )>(_a, &Guest::newMessageReceived, 0))
             return;
         if (QtMocHelpers::indexOfMethod<void (Guest::*)(int )>(_a, &Guest::errorOccurred, 1))
             return;
@@ -134,7 +134,7 @@ int Guest::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void Guest::NewMessageReceived(QString _t1)
+void Guest::newMessageReceived(QString _t1)
 {
     QMetaObject::activate<void>(this, &staticMetaObject, 0, nullptr, _t1);
 }

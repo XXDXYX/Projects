@@ -1,6 +1,6 @@
 module GuestClient
 typeinfo appGuestClient.qmltypes
 prefer :/qt/qml/GuestClient/
-Main 254.0 Main.qml
+Main 1.0 Main.qml
 depends QtQuick
 

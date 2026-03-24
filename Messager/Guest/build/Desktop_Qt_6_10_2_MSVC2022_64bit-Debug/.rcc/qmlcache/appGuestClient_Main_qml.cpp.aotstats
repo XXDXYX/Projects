@@ -8,7 +8,7 @@
                         {
                             "codegenResult": 0,
                             "column": 12,
-                            "durationMicroseconds": 0,
+                            "durationMicroseconds": 53000,
                             "functionName": "flags",
                             "line": 11,
                             "message": ""

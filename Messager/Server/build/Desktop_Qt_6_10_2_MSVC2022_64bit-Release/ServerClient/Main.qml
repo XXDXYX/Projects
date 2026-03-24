@@ -62,7 +62,6 @@ Window {
                     verticalAlignment: Text.AlignVCenter
                 }
                 onAccepted: {
-
                     if (text !== "") {
                         chatModel.append({
                             "author": "Я",
