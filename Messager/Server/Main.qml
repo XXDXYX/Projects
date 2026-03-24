@@ -42,6 +42,7 @@ Window {
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.margins: 15
+            anchors.rightMargin: 50
 
             TextInput {
                 id: messageInput
@@ -168,5 +169,36 @@ Window {
                        ColorAnimation { duration: 150 }
                    }
         }
+    }
+    RoundButton{
+        id:sendButton
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        anchors.rightMargin: 10
+        anchors.bottomMargin: 18
+        width: 35
+       height: 35
+       padding: 0
+        background: Rectangle{
+        color:"white"
+        radius: width/2
+        }
+        onClicked:{
+            if (messageInput.text !== "") {
+                chatModel.append({
+                    "author": "Я",
+                    "content": messageInput.text
+                })
+                chatView.positionViewAtEnd()
+                connect.sendMessage(messageInput.text);
+                messageInput.text = ""
+            }
+        }
+       contentItem: Image {
+              source: "qrc:/qt/qml/ServerClient/free-icon-email-8748009.png"
+              fillMode: Image.PreserveAspectFit
+                anchors.fill: parent
+           }
+
     }
 }

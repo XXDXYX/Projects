@@ -31,8 +31,8 @@ int guest_client()
     hints.ai_socktype = SOCK_STREAM;
     hints.ai_protocol = IPPROTO_TCP;
 
-    const char* pinggy_host = "wtuhr-195-225-49-21.a.free.pinggy.link";
-    const char* pinggy_port = "36627";
+    const char* pinggy_host = "fbiql-195-225-49-21.a.free.pinggy.link";
+    const char* pinggy_port = "33339";
     socket_buf = soc;
     int res = getaddrinfo(pinggy_host, pinggy_port, &hints, &result);
     if (res != 0) {

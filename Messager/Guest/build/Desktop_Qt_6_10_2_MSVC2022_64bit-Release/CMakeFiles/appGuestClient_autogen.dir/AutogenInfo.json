@@ -968,6 +968,7 @@
 		"D:/Qt/6.10.2/msvc2022_64/lib/cmake/Qt6Core/Qt6CoreConfigureFileTemplate.in",
 		"D:/Qt/6.10.2/msvc2022_64/lib/cmake/Qt6Qml/Qt6QmlModuleDirMappingTemplate.qrc.in",
 		"D:/Qt/6.10.2/msvc2022_64/lib/cmake/Qt6Core/Qt6CoreConfigureFileTemplate.in",
+		"D:/Qt/6.10.2/msvc2022_64/lib/cmake/Qt6Core/Qt6CoreConfigureFileTemplate.in",
 		"D:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/GNUInstallDirs.cmake",
 		"D:/Qt/6.10.2/msvc2022_64/lib/cmake/Qt6Qml/Qt6qmldirTemplate.cmake.in",
 		"C:/Users/Lenovo/Desktop/Projects/Messager/Guest/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Release/.qt/qml_imports/appGuestClient_conf.cmake"
@@ -1042,6 +1043,7 @@
 	"MOC_SKIP" : 
 	[
 		"C:/Users/Lenovo/Desktop/Projects/Messager/Guest/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Release/.qt/rcc/qrc_appGuestClient_raw_qml_0.cpp",
+		"C:/Users/Lenovo/Desktop/Projects/Messager/Guest/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Release/.qt/rcc/qrc_appGuestClient_raw_res_0.cpp",
 		"C:/Users/Lenovo/Desktop/Projects/Messager/Guest/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Release/.qt/rcc/qrc_qmake_GuestClient.cpp",
 		"C:/Users/Lenovo/Desktop/Projects/Messager/Guest/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Release/.rcc/qmlcache/appGuestClient_Main_qml.cpp",
 		"C:/Users/Lenovo/Desktop/Projects/Messager/Guest/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Release/.rcc/qmlcache/appGuestClient_qmlcache_loader.cpp",
@@ -1068,6 +1070,7 @@
 	"UIC_SKIP" : 
 	[
 		"C:/Users/Lenovo/Desktop/Projects/Messager/Guest/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Release/.qt/rcc/qrc_appGuestClient_raw_qml_0.cpp",
+		"C:/Users/Lenovo/Desktop/Projects/Messager/Guest/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Release/.qt/rcc/qrc_appGuestClient_raw_res_0.cpp",
 		"C:/Users/Lenovo/Desktop/Projects/Messager/Guest/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Release/.qt/rcc/qrc_qmake_GuestClient.cpp",
 		"C:/Users/Lenovo/Desktop/Projects/Messager/Guest/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Release/.rcc/qmlcache/appGuestClient_Main_qml.cpp",
 		"C:/Users/Lenovo/Desktop/Projects/Messager/Guest/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Release/.rcc/qmlcache/appGuestClient_qmlcache_loader.cpp",

@@ -19,6 +19,8 @@ qt_add_qml_module(appGuestClient
         Main.qml
     SOURCES
         GuestBackend.h
+    RESOURCES
+        free-icon-email-8748009.png
 )
 
 set_target_properties(appGuestClient PROPERTIES

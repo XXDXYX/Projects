@@ -19,7 +19,9 @@ qt_add_qml_module(appServerClient
         SOURCES
         SOURCES
         SOURCES ServerBackend.h
-)
+    RESOURCES
+        free-icon-email-8748009.png
+    )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an

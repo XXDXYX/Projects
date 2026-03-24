@@ -42,14 +42,15 @@ Window {
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.margins: 15
+            anchors.rightMargin: 50
 
             TextInput {
                 id: messageInput
                 anchors.fill: parent
                 anchors.leftMargin: 10
+                anchors.right: sendButton.left
                 anchors.rightMargin: 10
                 verticalAlignment: Text.AlignVCenter
-
                 font.pixelSize: 16
                 color: "black"
                 focus: true
@@ -60,17 +61,6 @@ Window {
                     visible: !messageInput.text
                     anchors.fill: parent
                     verticalAlignment: Text.AlignVCenter
-                }
-                onAccepted: {
-                    if (text !== "") {
-                        chatModel.append({
-                            "author": "Я",
-                            "content": text
-                        })
-                        chatView.positionViewAtEnd()
-                        Guest.sendMessage(text);
-                        text = ""
-                    }
                 }
             }
         }
@@ -160,13 +150,44 @@ Window {
         text: "X"
         onClicked: close()
         background: Rectangle{
-            implicitWidth: parent.width
-            implicitHeight: parent.height
+
             color: closeButton.hovered ? "#DE1616" : header.color
             radius: width/2
             Behavior on color {
                        ColorAnimation { duration: 150 }
                    }
         }
+    }
+    RoundButton{
+        id:sendButton
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        anchors.rightMargin: 10
+        anchors.bottomMargin: 18
+        width: 35
+       height: 35
+       padding: 0
+
+        background: Rectangle{
+        color:"white"
+        radius: width/2
+        }
+        onClicked:{
+            if (messageInput.text !== "") {
+                chatModel.append({
+                    "author": "Я",
+                    "content": messageInput.text
+                })
+                chatView.positionViewAtEnd()
+                Guest.sendMessage(messageInput.text);
+                messageInput.text = ""
+            }
+        }
+       contentItem: Image {
+              source: "qrc:/qt/qml/GuestClient/free-icon-email-8748009.png"
+              fillMode: Image.PreserveAspectFit
+                anchors.fill: parent
+           }
+
     }
 }

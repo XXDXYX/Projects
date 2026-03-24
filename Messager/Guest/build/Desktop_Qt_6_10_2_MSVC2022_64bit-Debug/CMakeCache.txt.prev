@@ -366,6 +366,9 @@ Vulkan_INCLUDE_DIR:PATH=Vulkan_INCLUDE_DIR-NOTFOUND
 Vulkan_LIBRARY:FILEPATH=Vulkan_LIBRARY-NOTFOUND
 
 //Path to a program.
+WINDEPLOYQT:FILEPATH=D:/Qt/6.10.2/msvc2022_64/bin/windeployqt.exe
+
+//Path to a program.
 WINDEPLOYQT_EXECUTABLE:FILEPATH=D:/Qt/6.10.2/msvc2022_64/bin/windeployqt.exe
 
 
