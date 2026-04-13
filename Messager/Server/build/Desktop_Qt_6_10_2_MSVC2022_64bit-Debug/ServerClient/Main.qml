@@ -190,7 +190,7 @@ Window {
                     "content": messageInput.text
                 })
                 chatView.positionViewAtEnd()
-                Guest.sendMessage(messageInput.text);
+                connect.sendMessage(messageInput.text);
                 messageInput.text = ""
             }
         }
