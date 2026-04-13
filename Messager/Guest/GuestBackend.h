@@ -31,10 +31,10 @@ int guest_client()
     hints.ai_socktype = SOCK_STREAM;
     hints.ai_protocol = IPPROTO_TCP;
 
-    const char* pinggy_host = "6.tcp.eu.ngrok.io";
-    const char* pinggy_port = "10367";
+    const char* ngrok_host = "6.tcp.eu.ngrok.io";
+    const char* ngrok_port = "10367";
     socket_buf = soc;
-    int res = getaddrinfo(pinggy_host, pinggy_port, &hints, &result);
+    int res = getaddrinfo(ngrok_host, ngrok_port, &hints, &result);
     if (res != 0) {
         emit errorOccurred(2);
         return 2;
