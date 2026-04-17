@@ -30,9 +30,8 @@ int guest_client()
     hints.ai_family = AF_INET;
     hints.ai_socktype = SOCK_STREAM;
     hints.ai_protocol = IPPROTO_TCP;
-
-    const char* ngrok_host = "6.tcp.eu.ngrok.io";
-    const char* ngrok_port = "10367";
+    const char* ngrok_host = "5.tcp.eu.ngrok.io";
+    const char* ngrok_port = "18637";
     socket_buf = soc;
     int res = getaddrinfo(ngrok_host, ngrok_port, &hints, &result);
     if (res != 0) {
