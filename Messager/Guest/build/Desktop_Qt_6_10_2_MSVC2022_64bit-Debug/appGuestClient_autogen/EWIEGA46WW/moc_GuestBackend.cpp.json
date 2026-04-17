@@ -7,7 +7,7 @@
                 {
                     "access": "public",
                     "index": 3,
-                    "lineNumber": 76,
+                    "lineNumber": 75,
                     "name": "connect_Guest",
                     "returnType": "void"
                 }
@@ -24,7 +24,7 @@
                         }
                     ],
                     "index": 0,
-                    "lineNumber": 81,
+                    "lineNumber": 80,
                     "name": "newMessageReceived",
                     "returnType": "void"
                 },
@@ -37,7 +37,7 @@
                         }
                     ],
                     "index": 1,
-                    "lineNumber": 82,
+                    "lineNumber": 81,
                     "name": "errorOccurred",
                     "returnType": "void"
                 }
@@ -52,7 +52,7 @@
                         }
                     ],
                     "index": 2,
-                    "lineNumber": 84,
+                    "lineNumber": 83,
                     "name": "sendMessage",
                     "returnType": "void"
                 }

@@ -87,17 +87,45 @@ Window {
             anchors.margins: 10
             model: chatModel
             clip: true
-            delegate: Rectangle {
+
+            delegate: Item {
+                id: messageWrapper
                 width: chatView.width
-                height: messageText.height + 20
-                color: "transparent"
-               Text {
-                    id: messageText
-                    text: model.author + ": " + model.content
-                    width: parent.width
-                    wrapMode: Text.WordWrap
-                    font.pixelSize: 14
-                    color: "black"
+                height: messageBubble.height + 20
+
+                property bool isMe: model.author === "Я"
+
+                Rectangle {
+                    id: messageBubble
+                    radius: 15
+                    color: isMe ? "#F79B9B" : "white"
+                    border.color: isMe ? "#F26262" : "#bdc3c7"
+                    border.width: isMe ? 2 : 1
+
+
+                    width: Math.min(messageText.implicitWidth + 24, messageWrapper.width * 0.7)
+                    height: messageText.implicitHeight + 16
+
+                    anchors.right: isMe ? parent.right : undefined
+                    anchors.left: isMe ? undefined : parent.left
+                    anchors.margins: 10
+                    anchors.verticalCenter: parent.verticalCenter
+
+                    Text {
+                        id: messageText
+                        text: model.content
+
+
+                        anchors.fill: parent
+                        anchors.margins: 8
+
+                        wrapMode: Text.WordWrap
+                        verticalAlignment: Text.AlignVCenter
+                        horizontalAlignment: isMe ? Text.AlignRight : Text.AlignLeft
+
+                        font.pixelSize: 14
+                        color: "black"
+                    }
                 }
             }
         }
