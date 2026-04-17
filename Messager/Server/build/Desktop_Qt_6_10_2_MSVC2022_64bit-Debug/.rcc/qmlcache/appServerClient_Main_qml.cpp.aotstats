@@ -80,7 +80,7 @@
                         {
                             "codegenResult": 2,
                             "column": 29,
-                            "durationMicroseconds": 1000,
+                            "durationMicroseconds": 0,
                             "functionName": "onAccepted",
                             "line": 65,
                             "message": "Cannot access value for name connect"
@@ -162,7 +162,7 @@
                             "column": 24,
                             "durationMicroseconds": 0,
                             "functionName": "width",
-                            "line": 91,
+                            "line": 93,
                             "message": "Cannot access value for name chatView"
                         },
                         {
@@ -170,31 +170,119 @@
                             "column": 25,
                             "durationMicroseconds": 0,
                             "functionName": "height",
-                            "line": 92,
+                            "line": 94,
                             "message": ""
                         },
                         {
                             "codegenResult": 2,
-                            "column": 27,
+                            "column": 37,
                             "durationMicroseconds": 0,
-                            "functionName": "text",
+                            "functionName": "isMe",
                             "line": 96,
                             "message": "Cannot access value for name model"
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 28,
+                            "durationMicroseconds": 0,
+                            "functionName": "color",
+                            "line": 101,
+                            "message": "Cannot access value for name isMe"
                         },
                         {
                             "codegenResult": 0,
                             "column": 28,
                             "durationMicroseconds": 0,
                             "functionName": "width",
-                            "line": 97,
+                            "line": 106,
                             "message": ""
                         },
                         {
                             "codegenResult": 0,
+                            "column": 29,
+                            "durationMicroseconds": 0,
+                            "functionName": "height",
+                            "line": 107,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 35,
+                            "durationMicroseconds": 0,
+                            "functionName": "color",
+                            "line": 102,
+                            "message": "Cannot access value for name isMe"
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 35,
+                            "durationMicroseconds": 0,
+                            "functionName": "width",
+                            "line": 103,
+                            "message": "Cannot access value for name isMe"
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 36,
+                            "durationMicroseconds": 0,
+                            "functionName": "right",
+                            "line": 109,
+                            "message": "Cannot access value for name isMe"
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 35,
+                            "durationMicroseconds": 0,
+                            "functionName": "left",
+                            "line": 110,
+                            "message": "Cannot access value for name isMe"
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 45,
+                            "durationMicroseconds": 0,
+                            "functionName": "verticalCenter",
+                            "line": 112,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 2,
                             "column": 31,
                             "durationMicroseconds": 0,
+                            "functionName": "text",
+                            "line": 116,
+                            "message": "Cannot access value for name model"
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 35,
+                            "durationMicroseconds": 0,
                             "functionName": "wrapMode",
-                            "line": 98,
+                            "line": 122,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 44,
+                            "durationMicroseconds": 0,
+                            "functionName": "verticalAlignment",
+                            "line": 123,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 46,
+                            "durationMicroseconds": 0,
+                            "functionName": "horizontalAlignment",
+                            "line": 124,
+                            "message": "Cannot access value for name isMe"
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 39,
+                            "durationMicroseconds": 0,
+                            "functionName": "fill",
+                            "line": 119,
                             "message": ""
                         },
                         {
@@ -202,7 +290,7 @@
                             "column": 24,
                             "durationMicroseconds": 0,
                             "functionName": "width",
-                            "line": 106,
+                            "line": 134,
                             "message": ""
                         },
                         {
@@ -210,7 +298,7 @@
                             "column": 30,
                             "durationMicroseconds": 0,
                             "functionName": "top",
-                            "line": 109,
+                            "line": 137,
                             "message": "cannot convert from (component in C:/Users/Lenovo/Desktop/Projects/Messager/Server/Main.qml)::parent with type QQuickItem to QQuickAnchorLine"
                         },
                         {
@@ -218,7 +306,7 @@
                             "column": 31,
                             "durationMicroseconds": 0,
                             "functionName": "left",
-                            "line": 110,
+                            "line": 138,
                             "message": "cannot convert from (component in C:/Users/Lenovo/Desktop/Projects/Messager/Server/Main.qml)::parent with type QQuickItem to QQuickAnchorLine"
                         },
                         {
@@ -226,7 +314,7 @@
                             "column": 23,
                             "durationMicroseconds": 0,
                             "functionName": "width",
-                            "line": 117,
+                            "line": 145,
                             "message": ""
                         },
                         {
@@ -234,7 +322,7 @@
                             "column": 23,
                             "durationMicroseconds": 0,
                             "functionName": "color",
-                            "line": 119,
+                            "line": 147,
                             "message": "Cannot load property color from (component in C:/Users/Lenovo/Desktop/Projects/Messager/Server/Main.qml)::parent with type QQuickItem."
                         },
                         {
@@ -242,7 +330,7 @@
                             "column": 33,
                             "durationMicroseconds": 0,
                             "functionName": "bottom",
-                            "line": 115,
+                            "line": 143,
                             "message": ""
                         },
                         {
@@ -250,7 +338,7 @@
                             "column": 31,
                             "durationMicroseconds": 0,
                             "functionName": "left",
-                            "line": 116,
+                            "line": 144,
                             "message": "cannot convert from (component in C:/Users/Lenovo/Desktop/Projects/Messager/Server/Main.qml)::parent with type QQuickItem to QQuickAnchorLine"
                         },
                         {
@@ -258,7 +346,7 @@
                             "column": 16,
                             "durationMicroseconds": 0,
                             "functionName": "width",
-                            "line": 128,
+                            "line": 156,
                             "message": ""
                         },
                         {
@@ -266,7 +354,7 @@
                             "column": 25,
                             "durationMicroseconds": 0,
                             "functionName": "bottom",
-                            "line": 126,
+                            "line": 154,
                             "message": ""
                         },
                         {
@@ -274,7 +362,7 @@
                             "column": 23,
                             "durationMicroseconds": 0,
                             "functionName": "fill",
-                            "line": 133,
+                            "line": 161,
                             "message": ""
                         },
                         {
@@ -282,7 +370,7 @@
                             "column": 42,
                             "durationMicroseconds": 0,
                             "functionName": "lastMousePos",
-                            "line": 142,
+                            "line": 170,
                             "message": ""
                         },
                         {
@@ -290,7 +378,7 @@
                             "column": 24,
                             "durationMicroseconds": 0,
                             "functionName": "onPressed",
-                            "line": 143,
+                            "line": 171,
                             "message": ""
                         },
                         {
@@ -298,15 +386,7 @@
                             "column": 24,
                             "durationMicroseconds": 0,
                             "functionName": "onPressed",
-                            "line": 143,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 32,
-                            "durationMicroseconds": 1000,
-                            "functionName": "onPositionChanged",
-                            "line": 146,
+                            "line": 171,
                             "message": ""
                         },
                         {
@@ -314,7 +394,15 @@
                             "column": 32,
                             "durationMicroseconds": 0,
                             "functionName": "onPositionChanged",
-                            "line": 146,
+                            "line": 174,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 32,
+                            "durationMicroseconds": 0,
+                            "functionName": "onPositionChanged",
+                            "line": 174,
                             "message": ""
                         },
                         {
@@ -322,7 +410,7 @@
                             "column": 27,
                             "durationMicroseconds": 0,
                             "functionName": "fill",
-                            "line": 141,
+                            "line": 169,
                             "message": ""
                         },
                         {
@@ -330,7 +418,7 @@
                             "column": 20,
                             "durationMicroseconds": 0,
                             "functionName": "onClicked",
-                            "line": 162,
+                            "line": 190,
                             "message": "Could not find signal \"clicked\"."
                         },
                         {
@@ -338,7 +426,7 @@
                             "column": 24,
                             "durationMicroseconds": 0,
                             "functionName": "right",
-                            "line": 155,
+                            "line": 183,
                             "message": "Could not find property \"right\"."
                         },
                         {
@@ -346,7 +434,7 @@
                             "column": 22,
                             "durationMicroseconds": 0,
                             "functionName": "top",
-                            "line": 156,
+                            "line": 184,
                             "message": "Could not find property \"top\"."
                         },
                         {
@@ -354,7 +442,7 @@
                             "column": 28,
                             "durationMicroseconds": 0,
                             "functionName": "implicitWidth",
-                            "line": 164,
+                            "line": 192,
                             "message": ""
                         },
                         {
@@ -362,7 +450,7 @@
                             "column": 29,
                             "durationMicroseconds": 0,
                             "functionName": "implicitHeight",
-                            "line": 165,
+                            "line": 193,
                             "message": ""
                         },
                         {
@@ -370,7 +458,7 @@
                             "column": 20,
                             "durationMicroseconds": 0,
                             "functionName": "color",
-                            "line": 166,
+                            "line": 194,
                             "message": "Cannot access value for name closeButton"
                         },
                         {
@@ -378,7 +466,7 @@
                             "column": 21,
                             "durationMicroseconds": 0,
                             "functionName": "radius",
-                            "line": 167,
+                            "line": 195,
                             "message": ""
                         },
                         {
@@ -386,7 +474,7 @@
                             "column": 19,
                             "durationMicroseconds": 0,
                             "functionName": "onClicked",
-                            "line": 186,
+                            "line": 214,
                             "message": "Could not find signal \"clicked\"."
                         },
                         {
@@ -394,7 +482,7 @@
                             "column": 24,
                             "durationMicroseconds": 0,
                             "functionName": "right",
-                            "line": 175,
+                            "line": 203,
                             "message": "Could not find property \"right\"."
                         },
                         {
@@ -402,7 +490,7 @@
                             "column": 25,
                             "durationMicroseconds": 0,
                             "functionName": "bottom",
-                            "line": 176,
+                            "line": 204,
                             "message": "Could not find property \"bottom\"."
                         },
                         {
@@ -410,7 +498,7 @@
                             "column": 17,
                             "durationMicroseconds": 0,
                             "functionName": "radius",
-                            "line": 184,
+                            "line": 212,
                             "message": ""
                         },
                         {
@@ -418,7 +506,7 @@
                             "column": 25,
                             "durationMicroseconds": 0,
                             "functionName": "fillMode",
-                            "line": 199,
+                            "line": 227,
                             "message": ""
                         },
                         {
@@ -426,7 +514,7 @@
                             "column": 31,
                             "durationMicroseconds": 0,
                             "functionName": "fill",
-                            "line": 200,
+                            "line": 228,
                             "message": ""
                         }
                     ],

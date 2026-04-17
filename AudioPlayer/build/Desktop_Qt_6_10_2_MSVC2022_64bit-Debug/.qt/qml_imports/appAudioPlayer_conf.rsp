@@ -1,0 +1,14 @@
+-rootPath
+C:/Users/Lenovo/Desktop/Projects/AudioPlayer/AudioPlayer
+-cmake-output
+-output-file
+C:/Users/Lenovo/Desktop/Projects/AudioPlayer/AudioPlayer/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Debug/.qt/qml_imports/appAudioPlayer_conf.cmake
+-importPath
+C:/Users/Lenovo/Desktop/Projects/AudioPlayer/AudioPlayer/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Debug
+-importPath
+C:/Users/Lenovo/Desktop/Projects/AudioPlayer/AudioPlayer/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Debug/AudioPlayer
+-importPath
+D:/Qt/6.10.2/msvc2022_64/qml
+-qrcFiles
+C:/Users/Lenovo/Desktop/Projects/AudioPlayer/AudioPlayer/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Debug/.qt/rcc/qmake_AudioPlayer.qrc
+C:/Users/Lenovo/Desktop/Projects/AudioPlayer/AudioPlayer/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Debug/.qt/rcc/appAudioPlayer_raw_qml_0.qrc

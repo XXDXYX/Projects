@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="/qt/qml/AudioPlayer">
+    <file alias="qmldir">C:/Users/Lenovo/Desktop/Projects/AudioPlayer/AudioPlayer/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Debug/AudioPlayer/qmldir</file>
+  </qresource>
+</RCC>
+
