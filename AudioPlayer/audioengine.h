@@ -16,8 +16,30 @@ public:
     Q_PROPERTY(qint64 duration READ duration NOTIFY durationChanged)
 
 
+    bool isPlaying()const;
+    qint64 getPosition()const;
+    qint64 getDuration()const;
 
+public slots:
+    Q_INVOKABLE void play();
+    Q_INVOKABLE void pause();
+    Q_INVOKABLE void stop();
+    Q_INVOKABLE void seek(qint64 positionMs);
+    Q_INVOKABLE void load_track(const QUrl& url);
 
+signals:
+    void isPlayingChanged();
+    void positionChanged();
+    void durationChanged();
+
+private slots:
+    void onPositionChanged(qint64 position);
+    void onDurationChanged(qint64 duration);
+    void onPlaybackStateChanged(QMediaPlayer::PlaybackState state);
+private:
+    QMediaPlayer* m_palyer;
+    QAudioOutput* m_audioOut;
+    bool m_isPlaying = false;
 };
 
 #endif
