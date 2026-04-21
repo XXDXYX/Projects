@@ -37,7 +37,7 @@ private slots:
     void onDurationChanged(qint64 duration);
     void onPlaybackStateChanged(QMediaPlayer::PlaybackState state);
 private:
-    QMediaPlayer* m_palyer;
+    QMediaPlayer* m_player;
     QAudioOutput* m_audioOut;
     bool m_isPlaying = false;
 };
