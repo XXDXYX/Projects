@@ -15,10 +15,12 @@ qt_add_executable(appAudioPlayer
 
 qt_add_qml_module(appAudioPlayer
     URI AudioPlayer
+    VERSION 1.0
     QML_FILES
         Main.qml
         SOURCES audioengine.h
         SOURCES audioengine.cpp
+        RESOURCES photo.png
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
@@ -34,8 +36,11 @@ set_target_properties(appAudioPlayer PROPERTIES
 
 target_link_libraries(appAudioPlayer
     PRIVATE
-    Qt6::Quick
-    Qt6::Multimedia
+    Qt6::Core
+        Qt6::Gui
+        Qt6::Qml
+        Qt6::Quick
+        Qt6::Multimedia
 )
 
 include(GNUInstallDirs)

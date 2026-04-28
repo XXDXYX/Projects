@@ -12,8 +12,8 @@ class AudioEngine: public QObject{
 public:
     explicit AudioEngine(QObject* parent = nullptr);
     Q_PROPERTY(bool isPlaying READ isPlaying NOTIFY isPlayingChanged)
-    Q_PROPERTY(qint64 position READ position NOTIFY positionChanged)
-    Q_PROPERTY(qint64 duration READ duration NOTIFY durationChanged)
+    Q_PROPERTY(qint64 position READ getPosition NOTIFY positionChanged)
+    Q_PROPERTY(qint64 duration READ getDuration NOTIFY durationChanged)
 
 
     bool isPlaying()const;
@@ -29,8 +29,8 @@ public slots:
 
 signals:
     void isPlayingChanged();
-    void positionChanged();
-    void durationChanged();
+    void positionChanged(qint64 position);
+    void durationChanged(qint64 position);
 
 private slots:
     void onPositionChanged(qint64 position);

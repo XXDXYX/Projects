@@ -3,7 +3,8 @@
 AudioEngine::AudioEngine(QObject *parent):QObject(parent){
     m_player = new QMediaPlayer(this);
     m_audioOut = new QAudioOutput(this);
-    m_player->SetAudioOutput(m_audioOut);
+    m_player->setAudioOutput(m_audioOut);
+
     connect(m_player, &QMediaPlayer::positionChanged,
             this,     &AudioEngine::onPositionChanged);
     connect(m_player, &QMediaPlayer::durationChanged,
@@ -11,7 +12,7 @@ AudioEngine::AudioEngine(QObject *parent):QObject(parent){
 
     connect(m_player, &QMediaPlayer::playbackStateChanged,
             this,     &AudioEngine::onPlaybackStateChanged);
-
+}
     bool AudioEngine::isPlaying()const{
         return m_isPlaying;
     }
@@ -24,6 +25,7 @@ AudioEngine::AudioEngine(QObject *parent):QObject(parent){
 
     void AudioEngine::play()
     {
+        m_player->setSource(QUrl::fromLocalFile("D:/Google Disk/Music/Linkin Park - Numb.mp3"));
         m_player->play();
     }
 
@@ -42,21 +44,25 @@ AudioEngine::AudioEngine(QObject *parent):QObject(parent){
         m_player->setPosition(positionMs);
     }
 
-    void AudioEngine::loadTrack(const QUrl& url)
+    void AudioEngine::load_track(const QUrl& url)
     {
         m_player->setSource(url);
         play();
+    }
+    void AudioEngine::onPlaybackStateChanged(QMediaPlayer::PlaybackState state){
+        m_isPlaying = (state == QMediaPlayer::PlayingState);
+        emit isPlayingChanged();
     }
 
 
     void AudioEngine::onPositionChanged(qint64 position)
     {
-        emit positionChanged();
+        emit positionChanged(position);
     }
 
     void AudioEngine::onDurationChanged(qint64 duration)
     {
-        emit durationChanged();
+        emit durationChanged(duration);
     }
-}
+
 
