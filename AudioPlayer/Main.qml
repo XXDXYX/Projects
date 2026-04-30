@@ -24,4 +24,31 @@ ApplicationWindow{
             y: 0
          }
     }
+    Rectangle{
+        id: panel
+        color: "transparent"
+        width: 950
+        height: 80
+
+
+        anchors.bottom: parent.bottom
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.bottomMargin: 8
+        Rectangle{
+        id: start_bottom
+        width:45
+         height: 45
+         color: "transparent"
+         anchors.bottom: parent.bottom
+         anchors.horizontalCenter: parent.horizontalCenter
+         anchors.bottomMargin: 2
+         radius: width * 0.5
+         Image{
+            source: "play.png"
+            anchors.fill: parent
+            fillMode: Image.Stretch
+         }
+
+        }
+    }
 }
