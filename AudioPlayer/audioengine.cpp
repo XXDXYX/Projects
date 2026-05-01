@@ -25,7 +25,7 @@ AudioEngine::AudioEngine(QObject *parent):QObject(parent){
 
     void AudioEngine::play()
     {
-        m_player->setSource(QUrl::fromLocalFile("D:/Google Disk/Music/Linkin Park - Numb.mp3"));
+        m_player->setSource(QUrl::fromLocalFile("D:/Google Disk/Music/Disturbed - Decadence.flac"));
         m_player->play();
     }
 

@@ -35,19 +35,78 @@ ApplicationWindow{
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottomMargin: 8
         Rectangle{
-        id: start_bottom
+        id: start_and_stop_bottom
         width:45
          height: 45
-         color: "transparent"
+
          anchors.bottom: parent.bottom
          anchors.horizontalCenter: parent.horizontalCenter
          anchors.bottomMargin: 2
+         color:  "transparent"
          radius: width * 0.5
+
          Image{
+            id: start_stop_ico
             source: "play.png"
             anchors.fill: parent
             fillMode: Image.Stretch
          }
+         MouseArea {
+
+                 anchors.fill: parent
+                 hoverEnabled: true
+                 cursorShape: Qt.PointingHandCursor
+                 onClicked:
+                    if(start_stop_ico.source.toString().includes("play.png")){
+                    start_stop_ico.source = "stop.png";
+                      audEng.pause();
+                    }else{
+                      start_stop_ico.source = "play.png";
+                      audEng.play();
+                    }
+                }
+        }
+        Rectangle{
+            width: 45
+            height: 45
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 2
+            anchors.left: start_and_stop_bottom.right
+            anchors.leftMargin: 2
+            color:  "transparent"
+            radius: width * 0.5
+            Image{
+               id: right_button_ico
+               source: "right.png"
+               anchors.fill: parent
+                fillMode: Image.Stretch
+            }
+            MouseArea {
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
+            }
+        }
+        Rectangle{
+            width: 45
+            height: 45
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 2
+            anchors.right: start_and_stop_bottom.left
+            anchors.leftMargin: 2
+            color:  "transparent"
+            radius: width * 0.5
+            Image{
+               id: left_button_ico
+               source: "left.png"
+               anchors.fill: parent
+                fillMode: Image.Stretch
+            }
+            MouseArea {
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
+            }
 
         }
     }
