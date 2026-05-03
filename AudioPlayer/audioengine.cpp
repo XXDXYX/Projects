@@ -1,10 +1,10 @@
 #include "audioengine.h"
-
+#include "QFileDialog"
 AudioEngine::AudioEngine(QObject *parent):QObject(parent){
     m_player = new QMediaPlayer(this);
     m_audioOut = new QAudioOutput(this);
     m_player->setAudioOutput(m_audioOut);
-
+    QList<const QUrl>::iterator pointer;
     connect(m_player, &QMediaPlayer::positionChanged,
             this,     &AudioEngine::onPositionChanged);
     connect(m_player, &QMediaPlayer::durationChanged,
@@ -22,10 +22,9 @@ AudioEngine::AudioEngine(QObject *parent):QObject(parent){
     qint64 AudioEngine::getDuration()const{
         return m_player->duration();
     }
-
+    QList<QUrl> playList;
     void AudioEngine::play()
     {
-        m_player->setSource(QUrl::fromLocalFile("D:/Google Disk/Music/Disturbed - Decadence.flac"));
         m_player->play();
     }
 
@@ -44,9 +43,12 @@ AudioEngine::AudioEngine(QObject *parent):QObject(parent){
         m_player->setPosition(positionMs);
     }
 
-    void AudioEngine::load_track(const QUrl& url)
+    void AudioEngine::load_track()
     {
-        m_player->setSource(url);
+        QString fileName = QFileDialog::getOpenFileName(nullptr, tr("Открыть файл"), "/home/", tr("(*.mp3 *.flac)"));
+       const QUrl url = QUrl::fromUserInput(fileName);
+        playList.append(url);
+       m_player->setSource(playList[0]);
         play();
     }
     void AudioEngine::onPlaybackStateChanged(QMediaPlayer::PlaybackState state){

@@ -25,7 +25,7 @@ public slots:
     Q_INVOKABLE void pause();
     Q_INVOKABLE void stop();
     Q_INVOKABLE void seek(qint64 positionMs);
-    Q_INVOKABLE void load_track(const QUrl& url);
+    Q_INVOKABLE void load_track();
 
 signals:
     void isPlayingChanged();

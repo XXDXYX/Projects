@@ -59,10 +59,12 @@ ApplicationWindow{
                  onClicked:
                     if(start_stop_ico.source.toString().includes("play.png")){
                     start_stop_ico.source = "stop.png";
-                      audEng.pause();
+
+                        audEng.pause();
                     }else{
                       start_stop_ico.source = "play.png";
-                      audEng.play();
+
+                        audEng.play();
                     }
                 }
         }
@@ -110,4 +112,27 @@ ApplicationWindow{
 
         }
     }
+    Rectangle{
+        id: add_button
+        width: 60
+        height: 60
+        anchors.top: parent.top
+        anchors.right: parent.right
+        anchors.topMargin: 3
+        anchors.rightMargin: 3
+        color:"transparent"
+        Image{
+           source: "add_track.png"
+           anchors.fill: parent
+            fillMode: Image.Stretch
+        }
+        MouseArea {
+                anchors.fill: parent
+                hoverEnabled: true
+                cursorShape: Qt.PointingHandCursor
+                onClicked: audEng.load_track();
+        }
+
+    }
 }
+
