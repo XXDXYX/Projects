@@ -87,6 +87,7 @@ ApplicationWindow{
                     anchors.fill: parent
                     hoverEnabled: true
                     cursorShape: Qt.PointingHandCursor
+                    onClicked: audEng.track_forward();
             }
         }
         Rectangle{
@@ -108,6 +109,7 @@ ApplicationWindow{
                     anchors.fill: parent
                     hoverEnabled: true
                     cursorShape: Qt.PointingHandCursor
+                    onClicked: audEng.track_back();
             }
 
         }

@@ -4,7 +4,8 @@ AudioEngine::AudioEngine(QObject *parent):QObject(parent){
     m_player = new QMediaPlayer(this);
     m_audioOut = new QAudioOutput(this);
     m_player->setAudioOutput(m_audioOut);
-    QList<const QUrl>::iterator pointer;
+
+
     connect(m_player, &QMediaPlayer::positionChanged,
             this,     &AudioEngine::onPositionChanged);
     connect(m_player, &QMediaPlayer::durationChanged,
@@ -13,6 +14,8 @@ AudioEngine::AudioEngine(QObject *parent):QObject(parent){
     connect(m_player, &QMediaPlayer::playbackStateChanged,
             this,     &AudioEngine::onPlaybackStateChanged);
 }
+
+
     bool AudioEngine::isPlaying()const{
         return m_isPlaying;
     }
@@ -23,6 +26,8 @@ AudioEngine::AudioEngine(QObject *parent):QObject(parent){
         return m_player->duration();
     }
     QList<QUrl> playList;
+    QList<QUrl>::iterator pointer = playList.begin();
+
     void AudioEngine::play()
     {
         m_player->play();
@@ -43,12 +48,27 @@ AudioEngine::AudioEngine(QObject *parent):QObject(parent){
         m_player->setPosition(positionMs);
     }
 
+    void AudioEngine::track_forward(){
+        if(!playList.isEmpty() && pointer != --playList.end()){ //подумай
+            ++pointer;
+            m_player->setSource((*pointer));
+            play();
+        }
+    }
+    void AudioEngine::track_back(){
+        if(!playList.isEmpty() && pointer != ++playList.begin()){ //подумай
+            --pointer;
+            m_player->setSource((*pointer));
+            play();
+        }
+    }
     void AudioEngine::load_track()
     {
-        QString fileName = QFileDialog::getOpenFileName(nullptr, tr("Открыть файл"), "/home/", tr("(*.mp3 *.flac)"));
-       const QUrl url = QUrl::fromUserInput(fileName);
+        QString fileName = QFileDialog::getOpenFileName(nullptr, tr("Open file"), "/home/", tr("(*.mp3 *.flac)"));
+        QUrl url = QUrl::fromUserInput(fileName);
         playList.append(url);
-       m_player->setSource(playList[0]);
+        pointer = --playList.end();
+       m_player->setSource(*pointer);
         play();
     }
     void AudioEngine::onPlaybackStateChanged(QMediaPlayer::PlaybackState state){

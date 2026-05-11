@@ -26,7 +26,8 @@ public slots:
     Q_INVOKABLE void stop();
     Q_INVOKABLE void seek(qint64 positionMs);
     Q_INVOKABLE void load_track();
-
+    Q_INVOKABLE void track_forward();
+    Q_INVOKABLE void track_back();
 signals:
     void isPlayingChanged();
     void positionChanged(qint64 position);
