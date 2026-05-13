@@ -26,6 +26,7 @@ qt_add_qml_module(appAudioPlayer
         RESOURCES right.png
         RESOURCES left.png
         RESOURCES add_track.png
+        RESOURCES list.txt
     )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

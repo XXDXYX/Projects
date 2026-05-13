@@ -28,6 +28,9 @@ public slots:
     Q_INVOKABLE void load_track();
     Q_INVOKABLE void track_forward();
     Q_INVOKABLE void track_back();
+    Q_INVOKABLE void load_list();
+    Q_INVOKABLE void append_list(QUrl url);
+
 signals:
     void isPlayingChanged();
     void positionChanged(qint64 position);

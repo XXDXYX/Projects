@@ -132,9 +132,13 @@ ApplicationWindow{
                 anchors.fill: parent
                 hoverEnabled: true
                 cursorShape: Qt.PointingHandCursor
-                onClicked: audEng.load_track();
+                onClicked:
+                    audEng.load_track();
         }
 
     }
+
+
 }
+
 

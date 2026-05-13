@@ -5,7 +5,6 @@ AudioEngine::AudioEngine(QObject *parent):QObject(parent){
     m_audioOut = new QAudioOutput(this);
     m_player->setAudioOutput(m_audioOut);
 
-
     connect(m_player, &QMediaPlayer::positionChanged,
             this,     &AudioEngine::onPositionChanged);
     connect(m_player, &QMediaPlayer::durationChanged,
@@ -13,8 +12,11 @@ AudioEngine::AudioEngine(QObject *parent):QObject(parent){
 
     connect(m_player, &QMediaPlayer::playbackStateChanged,
             this,     &AudioEngine::onPlaybackStateChanged);
+
+    load_list();
 }
 
+    QFile file("C:/Users/Lenovo/Desktop/Projects/AudioPlayer/list.txt");
 
     bool AudioEngine::isPlaying()const{
         return m_isPlaying;
@@ -48,15 +50,39 @@ AudioEngine::AudioEngine(QObject *parent):QObject(parent){
         m_player->setPosition(positionMs);
     }
 
+
+    void AudioEngine::load_list(){
+        if(!file.open(QIODevice::ReadOnly)){
+            qDebug() << "error";
+        }
+        QTextStream in(&file);
+        while (!in.atEnd()) {
+            QString line = in.readLine();
+            QUrl url = QUrl::fromLocalFile(line);
+            playList.append(url);
+        }
+    file.close();
+    }
+    void AudioEngine::append_list(QUrl url){
+        if(!file.open(QIODevice::Append)){
+            qDebug() << "error";
+        }
+            QTextStream out(&file);
+            QString str = url.toLocalFile();
+            out << str << "\n";
+            file.close();
+
+    }
+
     void AudioEngine::track_forward(){
-        if(!playList.isEmpty() && pointer != --playList.end()){ //подумай
+        if(!playList.isEmpty() && pointer != --playList.end()){
             ++pointer;
             m_player->setSource((*pointer));
             play();
         }
     }
     void AudioEngine::track_back(){
-        if(!playList.isEmpty() && pointer != ++playList.begin()){ //подумай
+        if(!playList.isEmpty() && pointer != playList.begin()){
             --pointer;
             m_player->setSource((*pointer));
             play();
@@ -66,6 +92,7 @@ AudioEngine::AudioEngine(QObject *parent):QObject(parent){
     {
         QString fileName = QFileDialog::getOpenFileName(nullptr, tr("Open file"), "/home/", tr("(*.mp3 *.flac)"));
         QUrl url = QUrl::fromUserInput(fileName);
+        append_list(url);
         playList.append(url);
         pointer = --playList.end();
        m_player->setSource(*pointer);
