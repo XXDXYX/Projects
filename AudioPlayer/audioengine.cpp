@@ -1,6 +1,6 @@
 #include "audioengine.h"
 #include "QFileDialog"
-#include <algorithm>
+
 AudioEngine::AudioEngine(QObject *parent):QObject(parent){
     m_player = new QMediaPlayer(this);
     m_audioOut = new QAudioOutput(this);
