@@ -62,6 +62,10 @@ AudioEngine::AudioEngine(QObject *parent):QObject(parent){
             playList.append(url);
         }
     file.close();
+        if(!playList.isEmpty()){
+            pointer = playList.begin();
+            m_player->setSource((*pointer));
+        }
     }
     void AudioEngine::append_list(QUrl url){
         if(!file.open(QIODevice::Append)){
@@ -74,6 +78,9 @@ AudioEngine::AudioEngine(QObject *parent):QObject(parent){
 
     }
 
+    void AudioEngine::first_load(){
+
+    }
     void AudioEngine::track_forward(){
         if(!playList.isEmpty() && pointer != --playList.end()){
             ++pointer;

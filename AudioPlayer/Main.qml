@@ -7,9 +7,7 @@ ApplicationWindow{
     width: 1000
     height: 650
 
-     Component.onCompleted: {
-         audEng.play();
-     }
+
     Rectangle{
         color: "white";
         anchors.fill: parent
@@ -47,23 +45,19 @@ ApplicationWindow{
 
          Image{
             id: start_stop_ico
-            source: "play.png"
             anchors.fill: parent
             fillMode: Image.Stretch
+            source: audEng.isPlaying ? "play.png" : "stop.png"
          }
          MouseArea {
-
                  anchors.fill: parent
                  hoverEnabled: true
                  cursorShape: Qt.PointingHandCursor
                  onClicked:
-                    if(start_stop_ico.source.toString().includes("play.png")){
-                    start_stop_ico.source = "stop.png";
 
+                    if(audEng.isPlaying){
                         audEng.pause();
                     }else{
-                      start_stop_ico.source = "play.png";
-
                         audEng.play();
                     }
                 }

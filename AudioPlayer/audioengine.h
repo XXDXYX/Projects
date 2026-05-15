@@ -30,6 +30,7 @@ public slots:
     Q_INVOKABLE void track_back();
     Q_INVOKABLE void load_list();
     Q_INVOKABLE void append_list(QUrl url);
+    Q_INVOKABLE void first_load();
 
 signals:
     void isPlayingChanged();
