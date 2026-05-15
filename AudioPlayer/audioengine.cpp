@@ -1,5 +1,6 @@
 #include "audioengine.h"
 #include "QFileDialog"
+#include <algorithm>
 AudioEngine::AudioEngine(QObject *parent):QObject(parent){
     m_player = new QMediaPlayer(this);
     m_audioOut = new QAudioOutput(this);
@@ -61,7 +62,8 @@ AudioEngine::AudioEngine(QObject *parent):QObject(parent){
             QUrl url = QUrl::fromLocalFile(line);
             playList.append(url);
         }
-    file.close();
+        file.close();
+
         if(!playList.isEmpty()){
             pointer = playList.begin();
             m_player->setSource((*pointer));
@@ -78,9 +80,7 @@ AudioEngine::AudioEngine(QObject *parent):QObject(parent){
 
     }
 
-    void AudioEngine::first_load(){
 
-    }
     void AudioEngine::track_forward(){
         if(!playList.isEmpty() && pointer != --playList.end()){
             ++pointer;
@@ -99,11 +99,14 @@ AudioEngine::AudioEngine(QObject *parent):QObject(parent){
     {
         QString fileName = QFileDialog::getOpenFileName(nullptr, tr("Open file"), "/home/", tr("(*.mp3 *.flac)"));
         QUrl url = QUrl::fromUserInput(fileName);
+        if (playList.contains(url)) {
+            return;
+        }
         append_list(url);
         playList.append(url);
         pointer = --playList.end();
        m_player->setSource(*pointer);
-        play();
+
     }
     void AudioEngine::onPlaybackStateChanged(QMediaPlayer::PlaybackState state){
         m_isPlaying = (state == QMediaPlayer::PlayingState);

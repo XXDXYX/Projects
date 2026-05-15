@@ -45,6 +45,7 @@ target_link_libraries(appAudioPlayer
         Qt6::Quick
         Qt6::Multimedia
         Qt6::Widgets
+
 )
 
 include(GNUInstallDirs)
