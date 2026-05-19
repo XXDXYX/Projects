@@ -1,6 +1,5 @@
-
-import QtQuick 2.15
-import QtQuick.Controls 2.15
+import QtQuick
+import QtQuick.Controls
 
 ApplicationWindow{
     visible: true
@@ -54,7 +53,6 @@ ApplicationWindow{
                  hoverEnabled: true
                  cursorShape: Qt.PointingHandCursor
                  onClicked:
-
                     if(audEng.isPlaying){
                         audEng.pause();
                     }else{
@@ -106,6 +104,51 @@ ApplicationWindow{
                     onClicked: audEng.track_back();
             }
 
+        }
+        Slider{
+            id:slider
+            anchors.top:parent.top
+            anchors.left: parent.left
+            anchors.right: parent.right
+            leftPadding: 8
+            rightPadding: 8
+            from:0
+            to: audEng.duration;
+
+            value:audEng.position;
+            background: Rectangle {
+                x: slider.leftPadding
+                y: slider.topPadding + slider.availableHeight / 2 - height / 2
+                implicitWidth: 200
+                implicitHeight: 6
+                width: slider.availableWidth
+                    height: implicitHeight
+                    radius: 3
+                    color: "#E0E0E0"
+                    Rectangle {
+                        width: slider.visualPosition * parent.width
+                        height: parent.height
+                        color: "#000000"
+                        radius: 3
+                    }
+            }
+
+            handle: Image{
+                x: slider.leftPadding + slider.visualPosition * (slider.availableWidth - width)
+                y: slider.topPadding + slider.availableHeight / 2 - height / 2
+                width:16
+                height: 32
+                source: "sliderHandle.png"
+                HoverHandler {
+                            cursorShape: Qt.PointingHandCursor
+                        }
+            }
+
+
+            onValueChanged:
+                if (slider.pressed) {
+                    audEng.seek(value);
+                }
         }
     }
     Rectangle{
