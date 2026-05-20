@@ -7,20 +7,7 @@ ApplicationWindow{
     height: 650
 
 
-    Rectangle{
-        color: "white";
-        anchors.fill: parent
-        Image {
-            id: photo
-            source: "photo.png"
-            width: 320
-            height: 408
-            anchors.left: parent.left
-            anchors.leftMargin: 50
-            anchors.topMargin: 0
-            y: 0
-         }
-    }
+
     Rectangle{
         id: panel
         color: "transparent"
@@ -116,6 +103,7 @@ ApplicationWindow{
             to: audEng.duration;
 
             value:audEng.position;
+
             background: Rectangle {
                 x: slider.leftPadding
                 y: slider.topPadding + slider.availableHeight / 2 - height / 2
@@ -131,6 +119,26 @@ ApplicationWindow{
                         color: "#000000"
                         radius: 3
                     }
+            }
+
+            Text{
+                id:songBegin
+                property int minutes: (audEng.position/1000)/60
+                property int seconds: (audEng.position/1000)%60
+                text: minutes + ":" + seconds
+                anchors.top:parent.bottom
+                anchors.left: parent.left
+                leftPadding: 10
+            }
+
+            Text{
+                id: songDuration
+                property int minutes: (audEng.duration/1000)/60
+                property int seconds: (audEng.duration/1000)%60
+                text: minutes + ":" + seconds
+                anchors.top: parent.bottom
+                anchors.right: parent.right
+                rightPadding: 5
             }
 
             handle: Image{

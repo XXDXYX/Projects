@@ -20,7 +20,6 @@ qt_add_qml_module(appAudioPlayer
         Main.qml
         SOURCES audioengine.h
         SOURCES audioengine.cpp
-        RESOURCES photo.png
         RESOURCES play.png
         RESOURCES stop.png
         RESOURCES right.png
