@@ -101,9 +101,7 @@ ApplicationWindow{
             rightPadding: 8
             from:0
             to: audEng.duration;
-
             value:audEng.position;
-
             background: Rectangle {
                 x: slider.leftPadding
                 y: slider.topPadding + slider.availableHeight / 2 - height / 2
@@ -158,6 +156,74 @@ ApplicationWindow{
                     audEng.seek(value);
                 }
         }
+
+    }
+        Rectangle {
+            color: "transparent"
+            width: 20
+            height: 60
+            anchors.bottom: volumeButton.top
+            anchors.right: parent.right
+            anchors.rightMargin: 25
+
+            Slider {
+                id: volumeSlider
+                anchors.top: parent.top
+                anchors.bottom: parent.bottom
+                orientation: Qt.Vertical
+                from: 0
+                to: 10
+                value: 5
+                onValueChanged: audEng.set_volume(value / 10)
+
+                background: Rectangle {
+                    x: volumeSlider.leftPadding + volumeSlider.availableWidth / 2 - width / 2
+                    y: volumeSlider.topPadding
+                    width: 4
+                    height: volumeSlider.availableHeight
+                    radius: 2
+                    color: "#e0e0e0"  // серый — незаполненная часть (сверху)
+
+                    Rectangle {
+                        width: parent.width
+                        height: (1 - volumeSlider.visualPosition) * parent.height  // заполненная часть
+                        color: "#000000"  // чёрный — снизу вверх
+                        anchors.bottom: parent.bottom
+                        radius: 2
+                    }
+                }
+
+                handle: Image {
+                    x: volumeSlider.leftPadding + volumeSlider.availableWidth / 2 - width / 2
+                    y: volumeSlider.topPadding + volumeSlider.visualPosition * volumeSlider.availableHeight - height / 2
+                    source: "sliderHandle.png"
+                    width: 8
+                    height: 16
+                }
+            }
+        }
+
+    Rectangle{
+        id: volumeButton
+        color: "transparent"
+        width: 45
+        height: 45
+        anchors.bottom: panel.top
+        anchors.bottomMargin: 5
+        anchors.right: parent.right
+        anchors.rightMargin: 20
+        Image{
+            source: "volumeOn"
+            anchors.fill: parent
+            fillMode: Image.Stretch
+        }
+        MouseArea{
+            anchors.fill: parent
+            hoverEnabled: true
+            cursorShape: Qt.PointingHandCursor
+            //onClicked:
+
+        }
     }
     Rectangle{
         id: add_button
@@ -182,8 +248,6 @@ ApplicationWindow{
         }
 
     }
-
-
 }
 
 

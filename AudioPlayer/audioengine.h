@@ -14,11 +14,12 @@ public:
     Q_PROPERTY(bool isPlaying READ isPlaying NOTIFY isPlayingChanged)
     Q_PROPERTY(qint64 position READ getPosition NOTIFY positionChanged)
     Q_PROPERTY(qint64 duration READ getDuration NOTIFY durationChanged)
-
+   // Q_PROPERTY(qreal volume READ getVolume  NOTIFY onVolumeChanged)
 
     bool isPlaying()const;
     qint64 getPosition()const;
     qint64 getDuration()const;
+    //qreal getVolume()const;
 
 public slots:
     Q_INVOKABLE void play();
@@ -30,17 +31,20 @@ public slots:
     Q_INVOKABLE void track_back();
     Q_INVOKABLE void load_list();
     Q_INVOKABLE void append_list(QUrl url);
+    Q_INVOKABLE void set_volume(qreal volume);
 
 
 signals:
     void isPlayingChanged();
     void positionChanged(qint64 position);
     void durationChanged(qint64 position);
+  //  void volumeChanged(qreal volume);
 
 private slots:
     void onPositionChanged(qint64 position);
     void onDurationChanged(qint64 duration);
     void onPlaybackStateChanged(QMediaPlayer::PlaybackState state);
+  //  void onVolumeChanged(qreal volume);
 private:
     QMediaPlayer* m_player;
     QAudioOutput* m_audioOut;

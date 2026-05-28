@@ -14,6 +14,8 @@ AudioEngine::AudioEngine(QObject *parent):QObject(parent){
     connect(m_player, &QMediaPlayer::playbackStateChanged,
             this,     &AudioEngine::onPlaybackStateChanged);
 
+
+
     load_list();
 }
 
@@ -28,6 +30,8 @@ AudioEngine::AudioEngine(QObject *parent):QObject(parent){
     qint64 AudioEngine::getDuration()const{
         return m_player->duration();
     }
+
+
     QList<QUrl> playList;
     QList<QUrl>::iterator pointer = playList.begin();
 
@@ -51,6 +55,9 @@ AudioEngine::AudioEngine(QObject *parent):QObject(parent){
         m_player->setPosition(positionMs);
     }
 
+    void AudioEngine::set_volume(qreal volume){
+        m_audioOut->setVolume(volume);
+    }
 
     void AudioEngine::load_list(){
         if(!file.open(QIODevice::ReadOnly)){
@@ -112,7 +119,6 @@ AudioEngine::AudioEngine(QObject *parent):QObject(parent){
         m_isPlaying = (state == QMediaPlayer::PlayingState);
         emit isPlayingChanged();
     }
-
 
     void AudioEngine::onPositionChanged(qint64 position)
     {
