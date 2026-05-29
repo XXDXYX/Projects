@@ -156,19 +156,25 @@ ApplicationWindow{
                     audEng.seek(value);
                 }
         }
-
     }
         Rectangle {
-            color: "transparent"
-            width: 20
-            height: 60
+            id: vol
+            width: 22
+            height: 0
+            clip: true
+
             anchors.bottom: volumeButton.top
+            color: "transparent"
             anchors.right: parent.right
             anchors.rightMargin: 25
-
+            Behavior on height {
+                    NumberAnimation { duration: 200 }
+                }
             Slider {
                 id: volumeSlider
                 anchors.top: parent.top
+                anchors.topMargin: 5
+                anchors.bottomMargin: 5
                 anchors.bottom: parent.bottom
                 orientation: Qt.Vertical
                 from: 0
@@ -179,15 +185,16 @@ ApplicationWindow{
                 background: Rectangle {
                     x: volumeSlider.leftPadding + volumeSlider.availableWidth / 2 - width / 2
                     y: volumeSlider.topPadding
+
                     width: 4
                     height: volumeSlider.availableHeight
                     radius: 2
-                    color: "#e0e0e0"  // серый — незаполненная часть (сверху)
+                    color: "#e0e0e0"
 
                     Rectangle {
                         width: parent.width
-                        height: (1 - volumeSlider.visualPosition) * parent.height  // заполненная часть
-                        color: "#000000"  // чёрный — снизу вверх
+                        height: (1 - volumeSlider.visualPosition) * parent.height
+                        color: "#000000"
                         anchors.bottom: parent.bottom
                         radius: 2
                     }
@@ -221,8 +228,8 @@ ApplicationWindow{
             anchors.fill: parent
             hoverEnabled: true
             cursorShape: Qt.PointingHandCursor
-            //onClicked:
-
+            onClicked:
+                vol.height = vol.height > 0 ? 0 : 60
         }
     }
     Rectangle{
