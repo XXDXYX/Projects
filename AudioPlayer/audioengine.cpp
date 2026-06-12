@@ -1,10 +1,12 @@
 #include "audioengine.h"
 #include "QFileDialog"
 
+
 AudioEngine::AudioEngine(QObject *parent):QObject(parent){
     m_player = new QMediaPlayer(this);
     m_audioOut = new QAudioOutput(this);
     m_player->setAudioOutput(m_audioOut);
+
 
     connect(m_player, &QMediaPlayer::positionChanged,
             this,     &AudioEngine::onPositionChanged);
@@ -14,13 +16,37 @@ AudioEngine::AudioEngine(QObject *parent):QObject(parent){
     connect(m_player, &QMediaPlayer::playbackStateChanged,
             this,     &AudioEngine::onPlaybackStateChanged);
 
+    connect(m_player, &QMediaPlayer::metaDataChanged,
+            this,&AudioEngine::onMetaDataChanged);
 
 
+    initDatabase();
     load_list();
 }
 
     QFile file("C:/Users/Lenovo/Desktop/Projects/AudioPlayer/list.txt");
 
+
+
+void AudioEngine::initDatabase(){
+        m_db = QSqlDatabase::addDatabase("QSQLITE");
+        m_db.setDatabaseName("my_database.db");
+        if (!m_db.open()) {
+            qDebug() << "Database is not open:" << m_db.lastError().text();
+            return;
+        }
+        qDebug() << "Database is opened correctly";
+        QSqlQuery tracks;
+        tracks.exec( "CREATE TABLE IF NOT EXISTS tracks ("
+                    "id       INTEGER PRIMARY KEY AUTOINCREMENT, "
+                    "path     TEXT UNIQUE, "
+                    "title    TEXT, "
+                    "artist   TEXT, "
+                    "album    TEXT, "
+                    "duration INTEGER"
+                    ")"
+                    );
+    }
     bool AudioEngine::isPlaying()const{
         return m_isPlaying;
     }
@@ -60,33 +86,17 @@ AudioEngine::AudioEngine(QObject *parent):QObject(parent){
     }
 
     void AudioEngine::load_list(){
-        if(!file.open(QIODevice::ReadOnly)){
-            qDebug() << "error";
+        QSqlQuery query;
+        query.exec("SELECT path FROM tracks");
+        while(query.next()){
+            QString path = query.value("path").toString();
+            playList.append(path);
         }
-        QTextStream in(&file);
-        while (!in.atEnd()) {
-            QString line = in.readLine();
-            QUrl url = QUrl::fromLocalFile(line);
-            playList.append(url);
-        }
-        file.close();
-
         if(!playList.isEmpty()){
             pointer = playList.begin();
             m_player->setSource((*pointer));
         }
     }
-    void AudioEngine::append_list(QUrl url){
-        if(!file.open(QIODevice::Append)){
-            qDebug() << "error";
-        }
-            QTextStream out(&file);
-            QString str = url.toLocalFile();
-            out << str << "\n";
-            file.close();
-
-    }
-
 
     void AudioEngine::track_forward(){
         if(!playList.isEmpty() && pointer != --playList.end()){
@@ -109,10 +119,9 @@ AudioEngine::AudioEngine(QObject *parent):QObject(parent){
         if (playList.contains(url)) {
             return;
         }
-        append_list(url);
         playList.append(url);
         pointer = --playList.end();
-       m_player->setSource(*pointer);
+        m_player->setSource(*pointer);
 
     }
     void AudioEngine::onPlaybackStateChanged(QMediaPlayer::PlaybackState state){
@@ -129,5 +138,47 @@ AudioEngine::AudioEngine(QObject *parent):QObject(parent){
     {
         emit durationChanged(duration);
     }
+    void AudioEngine::onMetaDataChanged(){
+        QString path = m_player->source().toLocalFile();
+        if (path.isEmpty()){
+            return;
+        }
 
+        QMediaMetaData meta = m_player->metaData();
+        QString title;
+        QString artist;
+        qint64 duration;
+        QString album;
+        if(meta.isEmpty()){
+            return;
+        }
+        if (!meta.value(QMediaMetaData::Title).isNull()) {
+            title = meta.value(QMediaMetaData::Title).toString();
+        }
+        if (!meta.value(QMediaMetaData::ContributingArtist).isNull()) {
+            artist = meta.value(QMediaMetaData::ContributingArtist).toString();
+        }
+        if (!meta.value(QMediaMetaData::Duration).isNull()) {
+           duration = meta.value(QMediaMetaData::Duration).toLongLong();
+        }
+        if (!meta.value(QMediaMetaData::AlbumTitle).isNull()) {
+            album = meta.value(QMediaMetaData::AlbumTitle).toString();
+        }
+
+        QSqlQuery query;
+        query.prepare(
+            "INSERT OR IGNORE INTO tracks (path, title, artist, album, duration) "
+            "VALUES (:path, :title, :artist, :album, :duration)"
+            );
+        query.bindValue(":path",     path);
+        query.bindValue(":title",    title);
+        query.bindValue(":artist",   artist);
+        query.bindValue(":album",    album);
+        query.bindValue(":duration", duration);
+
+        if (!query.exec()) {
+            qDebug() << "Insert error:" << m_db.lastError().text();
+        }
+
+    }
 

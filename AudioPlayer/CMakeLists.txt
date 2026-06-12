@@ -4,7 +4,7 @@ project(AudioPlayer VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Qt6 REQUIRED COMPONENTS Quick Multimedia Widgets)
+find_package(Qt6 REQUIRED COMPONENTS Quick Multimedia Widgets Sql)
 
 qt_standard_project_setup(REQUIRES 6.8)
 
@@ -25,7 +25,6 @@ qt_add_qml_module(appAudioPlayer
         RESOURCES right.png
         RESOURCES left.png
         RESOURCES add_track.png
-        RESOURCES list.txt
         RESOURCES sliderHandle.png
         RESOURCES volumeOn.png
         RESOURCES volumeOff.png
@@ -48,6 +47,7 @@ target_link_libraries(appAudioPlayer
         Qt6::Quick
         Qt6::Multimedia
         Qt6::Widgets
+        Qt6::Sql
 
 )
 

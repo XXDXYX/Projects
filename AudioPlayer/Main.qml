@@ -6,15 +6,11 @@ ApplicationWindow{
     width: 1000
     height: 650
 
-
-
     Rectangle{
         id: panel
         color: "transparent"
         width: 950
         height: 80
-
-
         anchors.bottom: parent.bottom
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottomMargin: 8
@@ -162,7 +158,6 @@ ApplicationWindow{
             width: 22
             height: 0
             clip: true
-
             anchors.bottom: volumeButton.top
             color: "transparent"
             anchors.right: parent.right
