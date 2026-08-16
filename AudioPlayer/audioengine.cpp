@@ -20,11 +20,12 @@ AudioEngine::AudioEngine(QObject *parent):QObject(parent){
             this,&AudioEngine::onMetaDataChanged);
 
 
+
     initDatabase();
     load_list();
 }
-
-    QFile file("C:/Users/Lenovo/Desktop/Projects/AudioPlayer/list.txt");
+    QImage albumImage;
+   // QFile file("C:/Users/Lenovo/Desktop/Projects/AudioPlayer/list.txt");
 
 
 
@@ -84,13 +85,23 @@ void AudioEngine::initDatabase(){
     void AudioEngine::set_volume(qreal volume){
         m_audioOut->setVolume(volume);
     }
+    QString AudioEngine::get_song(){
+        QMediaMetaData meta = m_player->metaData();
+        QString title;
+        if (!meta.value(QMediaMetaData::Title).isNull()) {
+            title = meta.value(QMediaMetaData::Title).toString();
+        }else{
+            title = "Unknown song";
+        }
+        return title;
+    }
 
     void AudioEngine::load_list(){
         QSqlQuery query;
         query.exec("SELECT path FROM tracks");
         while(query.next()){
             QString path = query.value("path").toString();
-            playList.append(path);
+            playList.append(QUrl::fromLocalFile(path));
         }
         if(!playList.isEmpty()){
             pointer = playList.begin();
@@ -106,7 +117,7 @@ void AudioEngine::initDatabase(){
         }
     }
     void AudioEngine::track_back(){
-        if(!playList.isEmpty() && pointer != playList.begin()){
+        if(!playList.isEmpty() && pointer != ++playList.begin()){
             --pointer;
             m_player->setSource((*pointer));
             play();
@@ -133,22 +144,62 @@ void AudioEngine::initDatabase(){
     {
         emit positionChanged(position);
     }
-
+    QString AudioEngine::get_artist(){
+        QMediaMetaData meta = m_player->metaData();
+        QString artist;
+        if (!meta.value(QMediaMetaData::ContributingArtist).isNull()) {
+            artist = meta.value(QMediaMetaData::ContributingArtist).toString();
+        }else{
+            artist = "Unknowm artist";
+        }
+        return artist;
+    }
     void AudioEngine::onDurationChanged(qint64 duration)
     {
         emit durationChanged(duration);
     }
-    void AudioEngine::onMetaDataChanged(){
-        QString path = m_player->source().toLocalFile();
-        if (path.isEmpty()){
-            return;
-        }
+    QImage AudioEngine::get_albomIco(){
 
         QMediaMetaData meta = m_player->metaData();
+         qDebug() << "meta keys:" << meta.keys();
+        if(!meta.value(QMediaMetaData::ThumbnailImage).isNull()) {
+            QVariant coverVar = meta.value(QMediaMetaData::ThumbnailImage);
+            albumImage = coverVar.value<QImage>();
+             qDebug() << "cover size:" << albumImage.size();
+            return albumImage;
+        }else{
+            return QImage("albumFoto.png");;
+        }
+
+    }
+    QString AudioEngine::albumArtBase64(){
+
+        QImage img=get_albomIco();
+         qDebug() << "albumArtBase64 called, img null:" << img.isNull();
+        if (img.isNull()) {
+            return "";
+        }
+
+        QByteArray byteArray;
+        QBuffer buffer(&byteArray);
+        buffer.open(QIODevice::WriteOnly);
+        img.save(&buffer, "PNG");
+        qDebug() << "byteArray size:" << byteArray.size();
+        return "data:image/png;base64," + QString::fromLatin1(byteArray.toBase64());
+    }
+    void AudioEngine::onMetaDataChanged(){
+
+        QMediaMetaData meta = m_player->metaData();
+         if (!meta.isEmpty()) {
+        QString path = m_player->source().toLocalFile();
+        qDebug() << "onMetaDataChanged called, path:" << path;
+        qDebug() << "meta empty:" << meta.isEmpty();
         QString title;
         QString artist;
         qint64 duration;
         QString album;
+
+
         if(meta.isEmpty()){
             return;
         }
@@ -165,6 +216,7 @@ void AudioEngine::initDatabase(){
             album = meta.value(QMediaMetaData::AlbumTitle).toString();
         }
 
+
         QSqlQuery query;
         query.prepare(
             "INSERT OR IGNORE INTO tracks (path, title, artist, album, duration) "
@@ -179,6 +231,8 @@ void AudioEngine::initDatabase(){
         if (!query.exec()) {
             qDebug() << "Insert error:" << m_db.lastError().text();
         }
-
+    }
+        emit metaDataChanged();
+        qDebug() << "metaDataChanged emitted";
     }
 

@@ -1,11 +1,70 @@
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Effects
+
 
 ApplicationWindow{
     visible: true
     width: 1000
     height: 650
+    color: "gray"
+  Rectangle{
+        id: container
+        width: 450
+        height: 480
+        anchors.centerIn: parent
+        color: "transparent"
+        Rectangle{
+        id: foto
+        height: 280
+        width: 280
+        anchors.top: parent.top
+        clip: true
+        color: "#f0f0f0"
+        anchors.horizontalCenter: parent.horizontalCenter
+        y: 12
+        radius: 20
+        Image{
+            id: albumArt
+            width: parent.width
+            height: parent.height
+            source: audEng.albumArtBase64
+            layer.enabled: true
+                layer.effect: MultiEffect {
+                    maskEnabled: true
+                    maskSource: ShaderEffectSource {
+                        sourceItem: Rectangle {
+                            width: albumArt.width
+                            height: albumArt.height
+                            radius: 20
+                        }
+                    }
+                }
+}
+}
+        Text{
+            id: songName
+            text: audEng.get_song
+            font.pixelSize: 40
+            font.weight: Font.DemiBold
+            font.family: "Inter, -apple-system, Roboto, sans-serif"
+            color: "black"
+            anchors.top: foto.bottom
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.topMargin: 5
+        }
+        Text{
+            id: artisName
+            text: audEng.get_artist
+            font.pixelSize: 30
+            color: "black"
+            anchors.top: songName.bottom
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.topMargin: 5
 
+        }
+
+}
     Rectangle{
         id: panel
         color: "transparent"
@@ -16,9 +75,8 @@ ApplicationWindow{
         anchors.bottomMargin: 8
         Rectangle{
         id: start_and_stop_bottom
-        width:45
+         width:45
          height: 45
-
          anchors.bottom: parent.bottom
          anchors.horizontalCenter: parent.horizontalCenter
          anchors.bottomMargin: 2
@@ -229,8 +287,8 @@ ApplicationWindow{
     }
     Rectangle{
         id: add_button
-        width: 60
-        height: 60
+        width: 45
+        height: 45
         anchors.top: parent.top
         anchors.right: parent.right
         anchors.topMargin: 3

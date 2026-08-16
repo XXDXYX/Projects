@@ -29,6 +29,7 @@ qt_add_qml_module(appAudioPlayer
         RESOURCES volumeOn.png
         RESOURCES volumeOff.png
         RESOURCES volumeMedium.png
+        RESOURCES albumFoto.png
     )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

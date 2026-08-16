@@ -10,6 +10,9 @@
 #include <QSqlError>
 #include <QSqlQuery>
 #include <QMediaMetaData>
+#include <QImage>
+#include <QBuffer>
+#include <QByteArray>
 
 class AudioEngine: public QObject{
     Q_OBJECT
@@ -18,13 +21,18 @@ public:
     Q_PROPERTY(bool isPlaying READ isPlaying NOTIFY isPlayingChanged)
     Q_PROPERTY(qint64 position READ getPosition NOTIFY positionChanged)
     Q_PROPERTY(qint64 duration READ getDuration NOTIFY durationChanged)
-   // Q_PROPERTY(qreal volume READ getVolume  NOTIFY onVolumeChanged)
+    Q_PROPERTY(QString albumArtBase64 READ albumArtBase64 NOTIFY metaDataChanged)
+    Q_PROPERTY(QString get_song READ get_song NOTIFY metaDataChanged)
+    Q_PROPERTY(QString get_artist READ get_artist NOTIFY metaDataChanged)
+    // Q_PROPERTY(qreal volume READ getVolume  NOTIFY onVolumeChanged)
 
     bool isPlaying()const;
     qint64 getPosition()const;
     qint64 getDuration()const;
     void load_list();
     void initDatabase();
+    QString albumArtBase64();
+
 
     //qreal getVolume()const;
 
@@ -37,7 +45,9 @@ public slots:
     Q_INVOKABLE void track_forward();
     Q_INVOKABLE void track_back();
     Q_INVOKABLE void set_volume(qreal volume);
-
+    Q_INVOKABLE QImage get_albomIco();
+    Q_INVOKABLE QString get_song();
+    Q_INVOKABLE QString get_artist();
 
 signals:
     void isPlayingChanged();
@@ -51,6 +61,7 @@ private slots:
     void onDurationChanged(qint64 duration);
     void onPlaybackStateChanged(QMediaPlayer::PlaybackState state);
     void onMetaDataChanged();
+
   //  void onVolumeChanged(qreal volume);
 private:
     QMediaPlayer* m_player;
