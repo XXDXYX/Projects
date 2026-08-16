@@ -8,6 +8,14 @@ ApplicationWindow{
     width: 1000
     height: 650
     color: "gray"
+    Rectangle {
+        anchors.fill: parent
+        gradient: Gradient {
+            GradientStop { position: 0.0; color: "#EDEBE4" }
+            GradientStop { position: 0.5; color: "#DFDCD2" }
+            GradientStop { position: 1.0; color: "#CFCBBE" }
+        }
+    }
   Rectangle{
         id: container
         width: 450
@@ -45,10 +53,10 @@ ApplicationWindow{
         Text{
             id: songName
             text: audEng.get_song
-            font.pixelSize: 40
+            font.pixelSize: 35
             font.weight: Font.DemiBold
             font.family: "Inter, -apple-system, Roboto, sans-serif"
-            color: "black"
+            color: "gray"
             anchors.top: foto.bottom
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.topMargin: 5
@@ -56,8 +64,8 @@ ApplicationWindow{
         Text{
             id: artisName
             text: audEng.get_artist
-            font.pixelSize: 30
-            color: "black"
+            font.pixelSize: 25
+            color: "gray"
             anchors.top: songName.bottom
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.topMargin: 5
@@ -164,11 +172,11 @@ ApplicationWindow{
                 width: slider.availableWidth
                     height: implicitHeight
                     radius: 3
-                    color: "#E0E0E0"
+                    color: "#c4c4c4"
                     Rectangle {
                         width: slider.visualPosition * parent.width
                         height: parent.height
-                        color: "#000000"
+                        color: "gray"
                         radius: 3
                     }
             }
@@ -197,7 +205,7 @@ ApplicationWindow{
                 x: slider.leftPadding + slider.visualPosition * (slider.availableWidth - width)
                 y: slider.topPadding + slider.availableHeight / 2 - height / 2
                 width:16
-                height: 32
+                height: 16
                 source: "sliderHandle.png"
                 HoverHandler {
                             cursorShape: Qt.PointingHandCursor
@@ -242,12 +250,12 @@ ApplicationWindow{
                     width: 4
                     height: volumeSlider.availableHeight
                     radius: 2
-                    color: "#e0e0e0"
+                    color: "#c4c4c4"
 
                     Rectangle {
                         width: parent.width
                         height: (1 - volumeSlider.visualPosition) * parent.height
-                        color: "#000000"
+                        color: "gray"
                         anchors.bottom: parent.bottom
                         radius: 2
                     }
@@ -258,7 +266,7 @@ ApplicationWindow{
                     y: volumeSlider.topPadding + volumeSlider.visualPosition * volumeSlider.availableHeight - height / 2
                     source: "sliderHandle.png"
                     width: 8
-                    height: 16
+                    height: 8
                 }
             }
         }
