@@ -110,7 +110,7 @@ void AudioEngine::initDatabase(){
     }
 
     void AudioEngine::track_forward(){
-        if(!playList.isEmpty() && pointer != playList.end()){
+        if(!playList.isEmpty() && pointer != --playList.end()){
             ++pointer;
             m_player->setSource((*pointer));
             play();

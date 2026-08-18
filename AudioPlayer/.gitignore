@@ -1,6 +1,21 @@
 # This file is used to ignore files which are generated
 # ----------------------------------------------------------------------------
 
+build/
+build-*/
+*.cmake.build
+
+
+*.exe
+*.dll
+*.o
+*.obj
+*.a
+*.lib
+
+*.user
+*.user.*
+.qmake.stash
 *~
 *.autosave
 *.a
