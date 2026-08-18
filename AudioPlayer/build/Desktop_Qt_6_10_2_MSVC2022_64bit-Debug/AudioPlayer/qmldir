@@ -1,6 +1,0 @@
-module AudioPlayer
-typeinfo appAudioPlayer.qmltypes
-prefer :/qt/qml/AudioPlayer/
-Main 254.0 Main.qml
-depends QtQuick
-
