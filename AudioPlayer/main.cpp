@@ -1,13 +1,6 @@
-<<<<<<< HEAD
+
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
-
-int main(int argc, char *argv[])
-{
-    QGuiApplication app(argc, argv);
-
-    QQmlApplicationEngine engine;
-=======
 #include <QApplication>
 #include <QQmlApplicationEngine>
 #include "audioengine.h"
@@ -20,18 +13,18 @@ int main(int argc, char *argv[])
     AudioEngine audEng;
     engine.rootContext()->setContextProperty("audEng",&audEng);
 
->>>>>>> audio_player_branch
+
     QObject::connect(
         &engine,
         &QQmlApplicationEngine::objectCreationFailed,
         &app,
         []() { QCoreApplication::exit(-1); },
         Qt::QueuedConnection);
-<<<<<<< HEAD
-    engine.loadFromModule("AudioPlayer", "Main");
-=======
+
         engine.loadFromModule("AudioPlayer", "Main");
->>>>>>> audio_player_branch
+
+        engine.loadFromModule("AudioPlayer", "Main");
+
 
     return app.exec();
 }
