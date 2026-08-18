@@ -1,100 +1,63 @@
-# This file is used to ignore files which are generated
-# ----------------------------------------------------------------------------
-
-<<<<<<< HEAD
-=======
+# ==========================================
+# Папки сборки CMake и Qt Creator (Builds)
+# ==========================================
 build/
 build-*/
-*.cmake.build
+build_*/
+CMakeCache.txt
+CMakeFiles/
+CMakeScripts/
+Testing/
+Makefile
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
 
-
-*.exe
-*.dll
-*.o
-*.obj
-*.a
-*.lib
-
+# ==========================================
+# Файлы настроек Qt Creator и пользователей
+# ==========================================
 *.user
 *.user.*
-.qmake.stash
->>>>>>> audio_player_branch
-*~
-*.autosave
+*.qmake.stash
+.qtc_settings/
+
+# ==========================================
+# Скомпилированные файлы и библиотеки
+# ==========================================
+*.exe
+*.dll
+*.so
+*.dylib
 *.a
-*.core
-*.moc
+*.lib
 *.o
 *.obj
-*.orig
-*.rej
-*.so
-*.so.*
-*_pch.h.cpp
-*_resource.rc
-*.qm
-.#*
-*.*#
-core
-!core/
-tags
-.DS_Store
-.directory
-*.debug
-Makefile*
-*.prl
-*.app
-moc_*.cpp
-ui_*.h
-qrc_*.cpp
-Thumbs.db
 *.res
-*.rc
-/.qmake.cache
-/.qmake.stash
 
-# qtcreator generated files
-*.pro.user*
-*.qbs.user*
-CMakeLists.txt.user*
+# ==========================================
+# Временные и сгенерированные файлы C++/Qt
+# ==========================================
+# Qt MOC, RCC, UIC
+moc_*.cpp
+qrc_*.cpp
+ui_*.h
+*.qmlc
+*.jsc
 
-# xemacs temporary files
-*.flc
-
-# Vim temporary files
-.*.swp
-
-# Visual Studio generated files
-*.ib_pdb_index
-*.idb
-*.ilk
-*.pdb
+# ==========================================
+# Настройки IDE (Visual Studio, VS Code и др.)
+# ==========================================
+.vs/
+.idea/
+.vscode/
 *.sln
-*.suo
-*.vcproj
-*vcproj.*.*.user
-*.ncb
-*.sdf
-*.opensdf
 *.vcxproj
-*vcxproj.*
+*.vcxproj.user
+*.suo
 
-# MinGW generated files
-*.Debug
-*.Release
-
-# Python byte code
-*.pyc
-
-# Binaries
-# --------
-*.dll
-*.exe
-
-# Directories with generated files
-.moc/
-.obj/
-.pch/
-.rcc/
-.uic/
-/build*/
+# ==========================================
+# Системные файлы ОС
+# ==========================================
+Thumbs.db
+Desktop.ini
+.DS_Store
