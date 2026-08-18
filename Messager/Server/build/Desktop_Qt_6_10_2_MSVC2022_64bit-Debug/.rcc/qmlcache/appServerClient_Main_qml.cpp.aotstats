@@ -8,7 +8,7 @@
                         {
                             "codegenResult": 0,
                             "column": 12,
-                            "durationMicroseconds": 0,
+                            "durationMicroseconds": 46000,
                             "functionName": "flags",
                             "line": 11,
                             "message": ""
@@ -386,7 +386,19 @@
                             "column": 24,
                             "durationMicroseconds": 0,
                             "functionName": "onPressed",
+<<<<<<< HEAD
                             "line": 171,
+=======
+                            "line": 143,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 32,
+                            "durationMicroseconds": 0,
+                            "functionName": "onPositionChanged",
+                            "line": 146,
+>>>>>>> audio_player_branch
                             "message": ""
                         },
                         {

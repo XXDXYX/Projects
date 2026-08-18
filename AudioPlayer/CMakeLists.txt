@@ -4,19 +4,46 @@ project(AudioPlayer VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+<<<<<<< HEAD
 find_package(Qt6 REQUIRED COMPONENTS Quick)
+=======
+find_package(Qt6 REQUIRED COMPONENTS Quick Multimedia Widgets Sql)
+>>>>>>> audio_player_branch
 
 qt_standard_project_setup(REQUIRES 6.8)
 
 qt_add_executable(appAudioPlayer
     main.cpp
+<<<<<<< HEAD
+=======
+
+>>>>>>> audio_player_branch
 )
 
 qt_add_qml_module(appAudioPlayer
     URI AudioPlayer
+<<<<<<< HEAD
     QML_FILES
         Main.qml
 )
+=======
+    VERSION 1.0
+    QML_FILES
+        Main.qml
+        SOURCES audioengine.h
+        SOURCES audioengine.cpp
+        RESOURCES play.png
+        RESOURCES stop.png
+        RESOURCES right.png
+        RESOURCES left.png
+        RESOURCES add_track.png
+        RESOURCES sliderHandle.png
+        RESOURCES volumeOn.png
+        RESOURCES volumeOff.png
+        RESOURCES volumeMedium.png
+        RESOURCES albumFoto.png
+    )
+>>>>>>> audio_player_branch
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an
@@ -30,7 +57,16 @@ set_target_properties(appAudioPlayer PROPERTIES
 )
 
 target_link_libraries(appAudioPlayer
+<<<<<<< HEAD
     PRIVATE Qt6::Quick
+=======
+    PRIVATE
+        Qt6::Quick
+        Qt6::Multimedia
+        Qt6::Widgets
+        Qt6::Sql
+
+>>>>>>> audio_player_branch
 )
 
 include(GNUInstallDirs)

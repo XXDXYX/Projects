@@ -47,6 +47,7 @@
 2348	2442	7961348092792159	.qt/rcc/qrc_appServerClient_raw_res_0.cpp	e83fa8d903225f2f
 2348	2442	7961348092792159	C:/Users/Lenovo/Desktop/Projects/Messager/Server/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Debug/.qt/rcc/qrc_appServerClient_raw_res_0.cpp	e83fa8d903225f2f
 3041	3578	7961348098919318	CMakeFiles/appServerClient.dir/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Debug/.qt/rcc/qrc_appServerClient_raw_res_0.cpp.obj	9606da36da7c7edd
+<<<<<<< HEAD
 313	765	7981608231846936	.qt/appServerClient_res.txt	b593eaf07494f250
 313	765	7981608231846936	C:/Users/Lenovo/Desktop/Projects/Messager/Server/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Debug/.qt/appServerClient_res.txt	b593eaf07494f250
 310	766	7981608231826960	.qt/appServerClient_qml.txt	17db856ae6726904
@@ -129,3 +130,48 @@
 711	1036	7981617550781996	CMakeFiles/appServerClient.dir/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Debug/.qt/rcc/qrc_appServerClient_raw_qml_0.cpp.obj	44e35f171025f2dc
 710	4144	7981617550772004	CMakeFiles/appServerClient.dir/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Debug/.rcc/qmlcache/appServerClient_Main_qml.cpp.obj	bf6bf5b9a92e7a0f
 4144	4369	7981617585116467	appServerClient.exe	89824dbd14b1491a
+=======
+227	848	8003019313469549	.qt/appServerClient_res.txt	b593eaf07494f250
+227	848	8003019313469549	C:/Users/Lenovo/Desktop/Projects/Messager/Server/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Debug/.qt/appServerClient_res.txt	b593eaf07494f250
+224	853	8003019313459586	.qt/appServerClient_qml.txt	17db856ae6726904
+224	853	8003019313459586	C:/Users/Lenovo/Desktop/Projects/Messager/Server/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Debug/.qt/appServerClient_qml.txt	17db856ae6726904
+228	2036	8003019325501770	.qt/qml_imports/appServerClient_build.cmake	12475b0f26eac456
+228	2036	8003019325501770	C:/Users/Lenovo/Desktop/Projects/Messager/Server/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Debug/.qt/qml_imports/appServerClient_build.cmake	12475b0f26eac456
+2036	2319	8003019325770833	appServerClient_autogen/timestamp	f051a1af271b89a1
+2036	2319	8003019325770833	appServerClient_autogen/mocs_compilation.cpp	f051a1af271b89a1
+2036	2319	8003019325770833	C:/Users/Lenovo/Desktop/Projects/Messager/Server/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Debug/appServerClient_autogen/timestamp	f051a1af271b89a1
+2036	2319	8003019325770833	C:/Users/Lenovo/Desktop/Projects/Messager/Server/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Debug/appServerClient_autogen/mocs_compilation.cpp	f051a1af271b89a1
+2324	2580	8003019331139354	.qt/rcc/qrc_appServerClient_raw_qml_0.cpp	c7ab3ee34612fec
+2324	2580	8003019331139354	C:/Users/Lenovo/Desktop/Projects/Messager/Server/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Debug/.qt/rcc/qrc_appServerClient_raw_qml_0.cpp	c7ab3ee34612fec
+2321	2580	8003019331139354	.qt/rcc/qrc_qmake_ServerClient.cpp	3feca613df743cd2
+2321	2580	8003019331139354	C:/Users/Lenovo/Desktop/Projects/Messager/Server/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Debug/.qt/rcc/qrc_qmake_ServerClient.cpp	3feca613df743cd2
+2325	2581	8003019331159290	.qt/rcc/qrc_appServerClient_raw_res_0.cpp	e83fa8d903225f2f
+2325	2581	8003019331159290	C:/Users/Lenovo/Desktop/Projects/Messager/Server/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Debug/.qt/rcc/qrc_appServerClient_raw_res_0.cpp	e83fa8d903225f2f
+2320	2611	8003019331471030	meta_types/appServerClient_json_file_list.txt	296c9ba23bdeb76b
+2320	2611	8003019331471030	meta_types/appServerClient_json_file_list.txt.timestamp	296c9ba23bdeb76b
+2320	2611	8003019331471030	C:/Users/Lenovo/Desktop/Projects/Messager/Server/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Debug/meta_types/appServerClient_json_file_list.txt	296c9ba23bdeb76b
+2320	2611	8003019331471030	C:/Users/Lenovo/Desktop/Projects/Messager/Server/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Debug/meta_types/appServerClient_json_file_list.txt.timestamp	296c9ba23bdeb76b
+2323	2716	8003019332430556	.rcc/qmlcache/appServerClient_qmlcache_loader.cpp	dce8e2129517b01c
+2323	2716	8003019332430556	C:/Users/Lenovo/Desktop/Projects/Messager/Server/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Debug/.rcc/qmlcache/appServerClient_qmlcache_loader.cpp	dce8e2129517b01c
+2611	2779	8003019331520881	meta_types/qt6appserverclient_metatypes.json.gen	849f0453d38d4ce4
+2611	2779	8003019331520881	meta_types/qt6appserverclient_metatypes.json	849f0453d38d4ce4
+2611	2779	8003019331520881	C:/Users/Lenovo/Desktop/Projects/Messager/Server/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Debug/meta_types/qt6appserverclient_metatypes.json.gen	849f0453d38d4ce4
+2611	2779	8003019331520881	C:/Users/Lenovo/Desktop/Projects/Messager/Server/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Debug/meta_types/qt6appserverclient_metatypes.json	849f0453d38d4ce4
+2780	3255	8003019337397255	appserverclient_qmltyperegistrations.cpp	e96e7fe857d779b0
+2780	3255	8003019337397255	ServerClient/appServerClient.qmltypes	e96e7fe857d779b0
+2780	3255	8003019337397255	C:/Users/Lenovo/Desktop/Projects/Messager/Server/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Debug/appserverclient_qmltyperegistrations.cpp	e96e7fe857d779b0
+2780	3255	8003019337397255	C:/Users/Lenovo/Desktop/Projects/Messager/Server/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Debug/ServerClient/appServerClient.qmltypes	e96e7fe857d779b0
+3255	3795	8003019343196937	.rcc/qmlcache/appServerClient_Main_qml.cpp	921c28b5f4f7069e
+3255	3795	8003019343196937	.rcc/qmlcache/appServerClient_Main_qml.cpp.aotstats	921c28b5f4f7069e
+3255	3795	8003019343196937	C:/Users/Lenovo/Desktop/Projects/Messager/Server/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Debug/.rcc/qmlcache/appServerClient_Main_qml.cpp	921c28b5f4f7069e
+3255	3795	8003019343196937	C:/Users/Lenovo/Desktop/Projects/Messager/Server/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Debug/.rcc/qmlcache/appServerClient_Main_qml.cpp.aotstats	921c28b5f4f7069e
+3798	6115	8003019343391398	CMakeFiles/appServerClient.dir/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Debug/.qt/rcc/qrc_qmake_ServerClient.cpp.obj	c5e61c64e18bca90
+3803	6116	8003019343441283	CMakeFiles/appServerClient.dir/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Debug/.qt/rcc/qrc_appServerClient_raw_qml_0.cpp.obj	44e35f171025f2dc
+3805	6116	8003019343461210	CMakeFiles/appServerClient.dir/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Debug/.qt/rcc/qrc_appServerClient_raw_res_0.cpp.obj	9606da36da7c7edd
+3797	10408	8003019343381429	CMakeFiles/appServerClient.dir/appserverclient_qmltyperegistrations.cpp.obj	f42af93a6c01ff24
+3801	11002	8003019343421303	CMakeFiles/appServerClient.dir/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Debug/.rcc/qmlcache/appServerClient_Main_qml.cpp.obj	bf6bf5b9a92e7a0f
+3795	11090	8003019343361442	CMakeFiles/appServerClient.dir/appServerClient_autogen/mocs_compilation.cpp.obj	b3b2e3be08b04fba
+3796	11512	8003019343371452	CMakeFiles/appServerClient.dir/main.cpp.obj	eb2a3e68d8cba32e
+3800	11585	8003019343411329	CMakeFiles/appServerClient.dir/build/Desktop_Qt_6_10_2_MSVC2022_64bit-Debug/.rcc/qmlcache/appServerClient_qmlcache_loader.cpp.obj	89a5f11b420f2756
+11586	13384	8003019421261316	appServerClient.exe	89824dbd14b1491a
+>>>>>>> audio_player_branch

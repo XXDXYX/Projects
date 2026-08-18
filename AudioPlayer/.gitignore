@@ -1,6 +1,24 @@
 # This file is used to ignore files which are generated
 # ----------------------------------------------------------------------------
 
+<<<<<<< HEAD
+=======
+build/
+build-*/
+*.cmake.build
+
+
+*.exe
+*.dll
+*.o
+*.obj
+*.a
+*.lib
+
+*.user
+*.user.*
+.qmake.stash
+>>>>>>> audio_player_branch
 *~
 *.autosave
 *.a
