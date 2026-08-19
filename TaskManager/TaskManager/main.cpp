@@ -1,5 +1,8 @@
 #include "mainwindow.h"
-
+#include <windows.h>
+#include <TlHelp32.h>
+#include <QThread>
+#include <QMutex>
 #include <QApplication>
 #include <QLocale>
 #include <QTranslator>
