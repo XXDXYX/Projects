@@ -24,7 +24,7 @@ AudioEngine::AudioEngine(QObject *parent):QObject(parent){
     initDatabase();
     load_list();
 }
-    QImage albumImage;
+
    // QFile file("C:/Users/Lenovo/Desktop/Projects/AudioPlayer/list.txt");
 
 
@@ -59,8 +59,8 @@ void AudioEngine::initDatabase(){
     }
 
 
-    QList<QUrl> playList;
-    QList<QUrl>::iterator pointer = playList.begin();
+
+
 
     void AudioEngine::play()
     {
@@ -96,8 +96,21 @@ void AudioEngine::initDatabase(){
         return title;
     }
 
+    void AudioEngine::delete_track(){
+        QSqlQuery query;
+        QString path = m_player->source().toLocalFile();
+        query.prepare("DELETE FROM tracks WHERE path = :path");
+        query.bindValue(":path", path);
+        if (!query.exec()) {
+            qDebug() << "Delete error:" << query.lastError().text();
+        }
+        load_list();
+
+
+    }
     void AudioEngine::load_list(){
         QSqlQuery query;
+        playList.clear();
         query.exec("SELECT path FROM tracks");
         while(query.next()){
             QString path = query.value("path").toString();
@@ -127,6 +140,9 @@ void AudioEngine::initDatabase(){
     {
         QString fileName = QFileDialog::getOpenFileName(nullptr, tr("Open file"), "/home/", tr("(*.mp3 *.flac)"));
         QUrl url = QUrl::fromUserInput(fileName);
+        if(url.isEmpty()){
+            return;
+        }
         if (playList.contains(url)) {
             return;
         }
@@ -168,18 +184,17 @@ void AudioEngine::initDatabase(){
              qDebug() << "cover size:" << albumImage.size();
             return albumImage;
         }else{
-            return QImage("albumFoto.png");;
+            return QImage(":/qt/qml/AudioPlayer/albumFoto.png");;
         }
 
     }
+
     QString AudioEngine::albumArtBase64(){
 
         QImage img=get_albomIco();
-         qDebug() << "albumArtBase64 called, img null:" << img.isNull();
         if (img.isNull()) {
-            return "";
+             return "";
         }
-
         QByteArray byteArray;
         QBuffer buffer(&byteArray);
         buffer.open(QIODevice::WriteOnly);
@@ -192,8 +207,6 @@ void AudioEngine::initDatabase(){
         QMediaMetaData meta = m_player->metaData();
          if (!meta.isEmpty()) {
         QString path = m_player->source().toLocalFile();
-        qDebug() << "onMetaDataChanged called, path:" << path;
-        qDebug() << "meta empty:" << meta.isEmpty();
         QString title;
         QString artist;
         qint64 duration;
@@ -202,6 +215,9 @@ void AudioEngine::initDatabase(){
 
         if(meta.isEmpty()){
             return;
+        }
+        for (auto key : meta.keys()) {
+            qDebug() << key << ":" << meta.value(key);
         }
         if (!meta.value(QMediaMetaData::Title).isNull()) {
             title = meta.value(QMediaMetaData::Title).toString();

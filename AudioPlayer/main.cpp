@@ -23,8 +23,6 @@ int main(int argc, char *argv[])
 
         engine.loadFromModule("AudioPlayer", "Main");
 
-        engine.loadFromModule("AudioPlayer", "Main");
-
 
     return app.exec();
 }

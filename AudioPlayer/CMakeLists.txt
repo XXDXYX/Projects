@@ -33,6 +33,7 @@ qt_add_qml_module(appAudioPlayer
         RESOURCES volumeOff.png
         RESOURCES volumeMedium.png
         RESOURCES albumFoto.png
+        RESOURCES delete.png
     )
 
 

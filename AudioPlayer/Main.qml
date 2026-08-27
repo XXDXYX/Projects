@@ -185,7 +185,7 @@ ApplicationWindow{
                 id:songBegin
                 property int minutes: (audEng.position/1000)/60
                 property int seconds: (audEng.position/1000)%60
-                text: minutes + ":" + seconds
+                text: minutes + ":" + (seconds < 10 ? "0" + seconds : seconds)
                 anchors.top:parent.bottom
                 anchors.left: parent.left
                 leftPadding: 10
@@ -195,7 +195,7 @@ ApplicationWindow{
                 id: songDuration
                 property int minutes: (audEng.duration/1000)/60
                 property int seconds: (audEng.duration/1000)%60
-                text: minutes + ":" + seconds
+                text: minutes + ":" + (seconds < 10 ? "0" + seconds : seconds)
                 anchors.top: parent.bottom
                 anchors.right: parent.right
                 rightPadding: 5
@@ -313,6 +313,29 @@ ApplicationWindow{
                 cursorShape: Qt.PointingHandCursor
                 onClicked:
                     audEng.load_track();
+        }
+
+    }
+    Rectangle{
+        id: delete_button
+        width: 45
+        height: 45
+        anchors.top: add_button.bottom
+        anchors.right: parent.right
+        anchors.topMargin: 3
+        anchors.rightMargin: 3
+        color:"transparent"
+        Image{
+           source: "delete.png"
+           anchors.fill: parent
+            fillMode: Image.Stretch
+        }
+        MouseArea {
+                anchors.fill: parent
+                hoverEnabled: true
+                cursorShape: Qt.PointingHandCursor
+                onClicked:
+                    audEng.delete_track();
         }
 
     }

@@ -24,6 +24,7 @@ public:
     Q_PROPERTY(QString albumArtBase64 READ albumArtBase64 NOTIFY metaDataChanged)
     Q_PROPERTY(QString get_song READ get_song NOTIFY metaDataChanged)
     Q_PROPERTY(QString get_artist READ get_artist NOTIFY metaDataChanged)
+
     // Q_PROPERTY(qreal volume READ getVolume  NOTIFY onVolumeChanged)
 
     bool isPlaying()const;
@@ -32,6 +33,8 @@ public:
     void load_list();
     void initDatabase();
     QString albumArtBase64();
+
+
 
 
     //qreal getVolume()const;
@@ -48,6 +51,7 @@ public slots:
     Q_INVOKABLE QImage get_albomIco();
     Q_INVOKABLE QString get_song();
     Q_INVOKABLE QString get_artist();
+    Q_INVOKABLE void delete_track();
 
 signals:
     void isPlayingChanged();
@@ -68,6 +72,10 @@ private:
     QAudioOutput* m_audioOut;
     bool m_isPlaying = false;
     QSqlDatabase m_db;
+    QList<QUrl> playList;
+    QList<QUrl>::iterator pointer = playList.begin();
+    QImage albumImage;
+
 };
 
 #endif
