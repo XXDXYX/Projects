@@ -95,7 +95,14 @@ void AudioEngine::initDatabase(){
         }
         return title;
     }
+    void AudioEngine::changeRepeat(){
+        if(isRepeat == false){
+            isRepeat = true;
+        }else{
+            isRepeat = false;
+        }
 
+    }
     void AudioEngine::delete_track(){
         QSqlQuery query;
         QString path = m_player->source().toLocalFile();
@@ -158,6 +165,15 @@ void AudioEngine::initDatabase(){
 
     void AudioEngine::onPositionChanged(qint64 position)
     {
+        if(isRepeat == true && position == getDuration()){
+            position = 0;
+        }
+        if(position == getDuration() && pointer == --playList.end()){
+            pointer = playList.begin();
+            m_player->setSource(*pointer);
+        }else if(position == getDuration()){
+            track_forward();
+        }
         emit positionChanged(position);
     }
     QString AudioEngine::get_artist(){

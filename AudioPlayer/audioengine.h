@@ -52,6 +52,8 @@ public slots:
     Q_INVOKABLE QString get_song();
     Q_INVOKABLE QString get_artist();
     Q_INVOKABLE void delete_track();
+    Q_INVOKABLE void changeRepeat();
+
 
 signals:
     void isPlayingChanged();
@@ -75,6 +77,7 @@ private:
     QList<QUrl> playList;
     QList<QUrl>::iterator pointer = playList.begin();
     QImage albumImage;
+    bool isRepeat = false;
 
 };
 

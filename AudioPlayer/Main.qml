@@ -4,6 +4,7 @@ import QtQuick.Effects
 
 
 ApplicationWindow{
+    id:main
     visible: true
     width: 1000
     height: 650
@@ -109,7 +110,10 @@ ApplicationWindow{
                     }
                 }
         }
+
+
         Rectangle{
+            id: forward_song
             width: 45
             height: 45
             anchors.bottom: parent.bottom
@@ -217,6 +221,28 @@ ApplicationWindow{
                 if (slider.pressed) {
                     audEng.seek(value);
                 }
+        }
+    }
+    Rectangle{
+        id: repeat_bottom
+        width: 45
+        height: 45
+        anchors.bottom: panel.bottom
+        anchors.bottomMargin: 2
+        anchors.right: parent.right
+        anchors.rightMargin: 20
+        color: "transparent"
+        radius: width * 0.5
+        Image{
+            source: "repeatOneGrey.png"
+            anchors.fill: parent
+            fillMode: Image.Stretch
+        }
+        MouseArea{
+            anchors.fill: parent
+            hoverEnabled: true
+            cursorShape: Qt.PointingHandCursor
+            onClicked: audEng.changeRepeat();
         }
     }
         Rectangle {
