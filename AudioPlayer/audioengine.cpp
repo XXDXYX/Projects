@@ -19,6 +19,9 @@ AudioEngine::AudioEngine(QObject *parent):QObject(parent){
     connect(m_player, &QMediaPlayer::metaDataChanged,
             this,&AudioEngine::onMetaDataChanged);
 
+    connect(m_player, &QMediaPlayer::mediaStatusChanged,
+            this,   &AudioEngine::onStatusChanged);
+
 
 
     initDatabase();
@@ -60,7 +63,18 @@ void AudioEngine::initDatabase(){
 
 
 
+    void AudioEngine::onStatusChanged(QMediaPlayer::MediaStatus status){
 
+        if(status == QMediaPlayer::EndOfMedia){
+        if(isRepeat){
+                seek(0);
+                play();
+        }else{
+            track_forward();
+        }
+
+    }
+    }
 
     void AudioEngine::play()
     {
@@ -96,11 +110,13 @@ void AudioEngine::initDatabase(){
         return title;
     }
     void AudioEngine::changeRepeat(){
+
         if(isRepeat == false){
             isRepeat = true;
         }else{
             isRepeat = false;
         }
+
 
     }
     void AudioEngine::delete_track(){
@@ -112,9 +128,10 @@ void AudioEngine::initDatabase(){
             qDebug() << "Delete error:" << query.lastError().text();
         }
         load_list();
-
-
     }
+
+
+
     void AudioEngine::load_list(){
         QSqlQuery query;
         playList.clear();
@@ -165,15 +182,6 @@ void AudioEngine::initDatabase(){
 
     void AudioEngine::onPositionChanged(qint64 position)
     {
-        if(isRepeat == true && position == getDuration()){
-            position = 0;
-        }
-        if(position == getDuration() && pointer == --playList.end()){
-            pointer = playList.begin();
-            m_player->setSource(*pointer);
-        }else if(position == getDuration()){
-            track_forward();
-        }
         emit positionChanged(position);
     }
     QString AudioEngine::get_artist(){

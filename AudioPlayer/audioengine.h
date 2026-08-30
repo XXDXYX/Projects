@@ -60,6 +60,7 @@ signals:
     void positionChanged(qint64 position);
     void durationChanged(qint64 position);
     void metaDataChanged();
+
   //  void volumeChanged(qreal volume);
 
 private slots:
@@ -67,6 +68,7 @@ private slots:
     void onDurationChanged(qint64 duration);
     void onPlaybackStateChanged(QMediaPlayer::PlaybackState state);
     void onMetaDataChanged();
+    void onStatusChanged(QMediaPlayer::MediaStatus status);
 
   //  void onVolumeChanged(qreal volume);
 private:
