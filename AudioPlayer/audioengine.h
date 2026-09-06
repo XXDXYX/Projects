@@ -13,6 +13,9 @@
 #include <QImage>
 #include <QBuffer>
 #include <QByteArray>
+#include <QList>
+
+
 
 class AudioEngine: public QObject{
     Q_OBJECT
@@ -33,7 +36,14 @@ public:
     void load_list();
     void initDatabase();
     QString albumArtBase64();
+    void getDataFromDatabase();
 
+    struct Track{
+        int path;
+        QString name;
+        QString artist;
+        int duration;
+    };
 
 
 
@@ -80,6 +90,7 @@ private:
     QList<QUrl>::iterator pointer = playList.begin();
     QImage albumImage;
     bool isRepeat = false;
+    QList<Track> m_songList;
 
 };
 

@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(AudioPlayer VERSION 0.1 LANGUAGES CXX)
+
+project(AudioPlayer VERSION 1.0 LANGUAGES CXX)
+
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
@@ -36,6 +38,7 @@ qt_add_qml_module(appAudioPlayer
         RESOURCES delete.png
         RESOURCES repeatOneBlack.png
         RESOURCES repeatOneGrey.png
+        RESOURCES playlist.png
     )
 
 

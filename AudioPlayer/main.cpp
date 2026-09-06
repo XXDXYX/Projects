@@ -13,7 +13,6 @@ int main(int argc, char *argv[])
     AudioEngine audEng;
     engine.rootContext()->setContextProperty("audEng",&audEng);
 
-
     QObject::connect(
         &engine,
         &QQmlApplicationEngine::objectCreationFailed,

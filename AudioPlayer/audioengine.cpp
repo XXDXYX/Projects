@@ -2,11 +2,11 @@
 #include "QFileDialog"
 
 
+
 AudioEngine::AudioEngine(QObject *parent):QObject(parent){
     m_player = new QMediaPlayer(this);
     m_audioOut = new QAudioOutput(this);
     m_player->setAudioOutput(m_audioOut);
-
 
     connect(m_player, &QMediaPlayer::positionChanged,
             this,     &AudioEngine::onPositionChanged);
@@ -25,7 +25,9 @@ AudioEngine::AudioEngine(QObject *parent):QObject(parent){
 
 
     initDatabase();
+    getDataFromDatabase();
     load_list();
+
 }
 
    // QFile file("C:/Users/Lenovo/Desktop/Projects/AudioPlayer/list.txt");
@@ -63,8 +65,24 @@ void AudioEngine::initDatabase(){
 
 
 
-    void AudioEngine::onStatusChanged(QMediaPlayer::MediaStatus status){
+  void AudioEngine::getDataFromDatabase(){
 
+        m_songList.clear();
+        QSqlQuery query("SELECT id, title, artist, duration FROM tracks");
+        while(query.next()){
+            m_songList.append({
+                query.value(0).toInt(),
+                query.value(1).toString(),
+                query.value(2).toString(),
+                query.value(3).toInt(),
+            });
+        }
+
+    }
+
+
+
+    void AudioEngine::onStatusChanged(QMediaPlayer::MediaStatus status){
         if(status == QMediaPlayer::EndOfMedia){
         if(isRepeat){
                 seek(0);
@@ -76,18 +94,15 @@ void AudioEngine::initDatabase(){
     }
     }
 
-    void AudioEngine::play()
-    {
+    void AudioEngine::play(){
         m_player->play();
     }
 
-    void AudioEngine::pause()
-    {
+    void AudioEngine::pause(){
         m_player->pause();
     }
 
-    void AudioEngine::stop()
-    {
+    void AudioEngine::stop(){
         m_player->stop();
     }
 

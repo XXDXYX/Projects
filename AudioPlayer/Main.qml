@@ -20,6 +20,94 @@ ApplicationWindow {
         }
     }
 
+    Rectangle{
+        id: songlist
+        width: main.width * 0.045
+        height: width
+        anchors.top:parent.top
+        anchors.left:parent.left
+        anchors.leftMargin: 5
+        color: "transparent"
+        radius: width * 0.5
+        Image{
+            source: "playlist.png"
+            anchors.fill: parent
+            fillMode: Image.Stretch
+        }
+
+        MouseArea {
+            anchors.fill: parent
+            hoverEnabled: true
+            cursorShape: Qt.PointingHandCursor
+            onClicked: songModelContainer.visible = !songModelContainer.visible
+        }
+    }
+
+
+    Rectangle {
+        id: songModelContainer
+        width: 200
+        height: 250
+        color: "transparent" // Прозорий фон головного контейнера
+        anchors.top: songlist.bottom
+        anchors.left:parent.left
+        anchors.leftMargin: 5
+
+        ListModel {
+            id: songModel
+            ListElement { title: "Song title"; artist: "Artist"; duration: "0:00" }
+            ListElement { title: "Song title"; artist: "Artist"; duration: "0:00" }
+            ListElement { title: "Song title"; artist: "Artist"; duration: "0:00" }
+            ListElement { title: "Song title"; artist: "Artist"; duration: "0:00" }
+            ListElement { title: "Song title"; artist: "Artist"; duration: "0:00" }
+        }
+
+        ListView {
+            anchors.fill: parent
+            model: songModel
+            spacing: 12
+
+            delegate: ItemDelegate {
+                width: ListView.view.width
+                height: 50
+
+
+                background: Rectangle {
+                    color: "transparent"
+                }
+
+                contentItem: Item {
+                    anchors.fill: parent
+
+                    Column {
+                        anchors.left: parent.left
+                        anchors.verticalCenter: parent.verticalCenter
+                        spacing: 2
+
+                        Text {
+                            text: model.title
+                            color: "black"
+                            font.bold: true
+                            font.pixelSize: 14
+                        }
+
+                        Text {
+                            text: model.artist
+                            color: "#8e8e93"
+                            font.pixelSize: 10
+                        }
+                    }
+                    Text {
+                        text: model.duration
+                        color: "black"
+                        font.pixelSize: 12
+                        anchors.right: parent.right
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
+                }
+            }
+        }
+    }
     Rectangle {
         id: container
         width: parent.width * 0.45
