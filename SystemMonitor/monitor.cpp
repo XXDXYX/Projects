@@ -55,8 +55,3 @@ double SysMonitor::getCPU(){
         prev_userTime = userTime;
         return cpuUsagePercent;
 }
-
-
-FILETIME SysMonitor::getData(){
-
-}

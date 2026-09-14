@@ -12,7 +12,6 @@ public:
     void setData(FILETIME& Idle,FILETIME& Kernel,FILETIME& User);
 
 public slots:
-    Q_INVOKABLE FILETIME getData();
     Q_INVOKABLE double getCPU();
 
 
