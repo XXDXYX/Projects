@@ -1,11 +1,15 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QQmlContext>
+#include "monitor.h"
 
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
 
+    SysMonitor monitor;
     QQmlApplicationEngine engine;
+    engine.rootContext()->setContextProperty("monitor",&monitor);
     QObject::connect(
         &engine,
         &QQmlApplicationEngine::objectCreationFailed,
