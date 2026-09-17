@@ -15,6 +15,7 @@ endif()
 
 qt_add_executable(appSystemMonitor
     main.cpp
+    monitor.cpp
 )
 
 qt_add_qml_module(appSystemMonitor
@@ -23,6 +24,7 @@ qt_add_qml_module(appSystemMonitor
         Main.qml
         SOURCES monitor.h
         SOURCES monitor.cpp
+        QML_FILES CircularGauge.qml
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

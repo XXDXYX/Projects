@@ -1,11 +1,12 @@
 #include "monitor.h"
 
 SysMonitor::SysMonitor(QObject *parent):QObject(parent){
-
+    connect(timer, &QTimer::timeout, this, &SysMonitor::setCPU);
+    timer->start(1000);
 
 }
 
-static ULONGLONG FileTimeToUInt64(const FILETIME& ft){
+ULONGLONG SysMonitor::FileTimeToUInt64(const FILETIME& ft){
     ULARGE_INTEGER uli;
     uli.LowPart  = ft.dwLowDateTime;
     uli.HighPart = ft.dwHighDateTime;
@@ -19,11 +20,10 @@ void SysMonitor::setData(FILETIME& idle,FILETIME &kernel,FILETIME& user){
 }
 
 
-
-double SysMonitor::getCPU(){
+void SysMonitor::setCPU(){
     if(!GetSystemTimes(&idle,&kernel,&user)){
         qDebug() << "Error with GetSystemTimes" << GetLastError();
-        return -1;
+        return ;
     }
 
     setData(idle,kernel,user);
@@ -45,13 +45,17 @@ double SysMonitor::getCPU(){
         delta_user = userTime - prev_userTime;
         totalDelta = delta_kernel + delta_user;  // весь CPU time за интервал
         busyDelta  = totalDelta - delta_idle;   // сколько из этого — не простой
-        double cpuUsagePercent = 0.0;
         if (totalDelta > 0) // защита от деления на 0 (первый тик, либо аномалия)
         {
-            cpuUsagePercent = (static_cast<double>(busyDelta) / static_cast<double>(totalDelta)) * 100.0;
+            cpuUsage = (static_cast<double>(busyDelta) / static_cast<double>(totalDelta)) * 100.0;
         }
         prev_idleTime = idleTime;
         prev_kernelTime = kernelTime;
         prev_userTime = userTime;
-        return cpuUsagePercent;
+        qDebug() << "CPU: " << cpuUsage;
+        emit cpuUsageChanged();
+}
+
+double SysMonitor::getCPU(){
+    return cpuUsage;
 }
