@@ -2,6 +2,7 @@
 
 SysMonitor::SysMonitor(QObject *parent):QObject(parent){
     connect(timer, &QTimer::timeout, this, &SysMonitor::setCPU);
+    connect(timer, &QTimer::timeout, this, &SysMonitor::setRAM);
     timer->start(1000);
 
 }
@@ -38,8 +39,6 @@ void SysMonitor::setCPU(){
         prev_userTime = userTime;
         hasFirstScreen = true;
     }
-
-
         delta_idle = idleTime - prev_idleTime;
         delta_kernel = kernelTime - prev_kernelTime;
         delta_user = userTime - prev_userTime;
@@ -58,4 +57,30 @@ void SysMonitor::setCPU(){
 
 double SysMonitor::getCPU(){
     return cpuUsage;
+}
+
+void SysMonitor::setRAM(){
+    lpBuffer.dwLength = sizeof(MEMORYSTATUSEX);
+    if(GlobalMemoryStatusEx(&lpBuffer)){
+    usageRam = lpBuffer.dwMemoryLoad;
+    totalMb = static_cast<double>(lpBuffer.ullTotalPhys) / (1024.0 * 1024.0);
+    usageMb = static_cast<double>(lpBuffer.ullAvailPhys) / (1024.0 * 1024.0);
+    qDebug() << lpBuffer.dwMemoryLoad;
+    }else{
+        qDebug() << "Error with RAM: " << GetLastError();
+    }
+    emit ramUsageChanged();
+}
+
+DWORD SysMonitor::getUsageRAM(){
+    return usageRam;
+}
+DWORD SysMonitor::getTotalRAM(){
+    return totalRam;
+}
+double SysMonitor::getTotalMb(){
+    return totalMb;
+}
+double SysMonitor::getUsageMb(){
+    return usageMb;
 }

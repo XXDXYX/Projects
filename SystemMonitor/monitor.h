@@ -8,12 +8,19 @@
 class SysMonitor: public QObject{
     Q_OBJECT
     Q_PROPERTY(double cpuUsage READ getCPU NOTIFY cpuUsageChanged)
-
+    Q_PROPERTY(DWORD usageRAM READ getUsageRAM NOTIFY ramUsageChanged)
+    Q_PROPERTY(DWORD totalRAM READ getTotalRAM NOTIFY ramUsageChanged)
+    Q_PROPERTY(double totalMb READ getTotalMb NOTIFY ramUsageChanged)
+    Q_PROPERTY(double usageMb READ getUsageMb NOTIFY ramUsageChanged)
 public:
     explicit SysMonitor(QObject* parent = nullptr);
     static ULONGLONG FileTimeToUInt64(const FILETIME& ft);
     void setData(FILETIME& Idle,FILETIME& Kernel,FILETIME& User);
     double getCPU();
+    DWORD getUsageRAM();
+    DWORD getTotalRAM();
+    double getUsageMb();
+    double getTotalMb();
 public slots:
 
 
@@ -31,12 +38,19 @@ private:
     bool hasFirstScreen = false;
     QTimer *timer = new QTimer(this);
     double cpuUsage = 0.0;
+    MEMORYSTATUSEX lpBuffer;
+    DWORD usageRam = 0.0, totalRam = 0.0;
+    double totalMb;
+    double usageMb;
+
+
 signals:
     void cpuUsageChanged();
-
+    void ramUsageChanged();
 
 private slots:
     void setCPU();
+    void setRAM();
 
 };
 

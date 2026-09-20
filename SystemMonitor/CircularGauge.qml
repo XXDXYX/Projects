@@ -11,6 +11,7 @@ Item {
     property color progressColor: "#4CAF50"
     property string label: ""
     property int strokeWidth: 12
+    property string unit: "%"
 
     implicitWidth: 160
     implicitHeight: 160
@@ -90,8 +91,9 @@ Item {
         spacing: 2
 
         Text {
+            id:title
             anchors.horizontalCenter: parent.horizontalCenter
-            text: Math.round(root.value) + "%"
+            text: Math.round(root.value) + root.unit
             color: "white"
             font.pixelSize: 24
             font.bold: true
