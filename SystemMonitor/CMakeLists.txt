@@ -25,6 +25,8 @@ qt_add_qml_module(appSystemMonitor
         SOURCES monitor.h
         SOURCES monitor.cpp
         QML_FILES CircularGauge.qml
+        SOURCES monitorGPU.h
+        SOURCES monitorGPU.cpp
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
@@ -38,13 +40,18 @@ set_target_properties(appSystemMonitor PROPERTIES
     WIN32_EXECUTABLE TRUE
 )
 
+set(NVAPI_DIR ${CMAKE_SOURCE_DIR}/APi/nvapi)
+target_include_directories(appSystemMonitor PRIVATE
+    ${NVAPI_DIR}
+)
 target_link_libraries(appSystemMonitor
     PRIVATE
         Qt6::Core
         Qt6::Gui
         Qt6::Qml
         Qt6::Quick
-)
+        ${NVAPI_DIR}/nvapi64.lib
+    )
 
 install(TARGETS appSystemMonitor
     BUNDLE DESTINATION .

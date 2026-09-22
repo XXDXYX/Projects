@@ -82,3 +82,6 @@ CMakeLists.txt.user*
 .uic/
 /build*/
 /.qtcreator/
+APi/nvapi/*.h
+APi/nvapi/*.c
+APi/nvapi/*.lib

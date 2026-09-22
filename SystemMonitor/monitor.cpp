@@ -3,8 +3,9 @@
 SysMonitor::SysMonitor(QObject *parent):QObject(parent){
     connect(timer, &QTimer::timeout, this, &SysMonitor::setCPU);
     connect(timer, &QTimer::timeout, this, &SysMonitor::setRAM);
-    timer->start(1000);
 
+
+    timer->start(1000);
 }
 
 ULONGLONG SysMonitor::FileTimeToUInt64(const FILETIME& ft){
@@ -20,6 +21,24 @@ void SysMonitor::setData(FILETIME& idle,FILETIME &kernel,FILETIME& user){
     userTime = FileTimeToUInt64(user);
 }
 
+QString SysMonitor::getProcessorName(){
+    HKEY hKey;
+    LONG result = RegOpenKeyExW(
+        HKEY_LOCAL_MACHINE,
+        L"HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0",
+        0,
+        KEY_READ,
+        &hKey
+        );
+    DWORD dataSize = 0;
+    RegQueryValueExW(hKey, L"ProcessorNameString", nullptr, nullptr, nullptr, &dataSize);
+    std::wstring buffer(dataSize / sizeof(wchar_t), L'\0'); // выделяем буфер под строку
+    RegQueryValueExW(hKey, L"ProcessorNameString", nullptr, nullptr,
+                     reinterpret_cast<LPBYTE>(buffer.data()), &dataSize);
+    RegCloseKey(hKey);
+    QString processorName = QString::fromWCharArray(buffer.c_str());
+    return processorName;
+}
 
 void SysMonitor::setCPU(){
     if(!GetSystemTimes(&idle,&kernel,&user)){
@@ -42,9 +61,9 @@ void SysMonitor::setCPU(){
         delta_idle = idleTime - prev_idleTime;
         delta_kernel = kernelTime - prev_kernelTime;
         delta_user = userTime - prev_userTime;
-        totalDelta = delta_kernel + delta_user;  // весь CPU time за интервал
-        busyDelta  = totalDelta - delta_idle;   // сколько из этого — не простой
-        if (totalDelta > 0) // защита от деления на 0 (первый тик, либо аномалия)
+        totalDelta = delta_kernel + delta_user;
+        busyDelta  = totalDelta - delta_idle;
+        if (totalDelta > 0)
         {
             cpuUsage = (static_cast<double>(busyDelta) / static_cast<double>(totalDelta)) * 100.0;
         }
@@ -55,7 +74,7 @@ void SysMonitor::setCPU(){
         emit cpuUsageChanged();
 }
 
-double SysMonitor::getCPU(){
+double SysMonitor::getCPU() const{
     return cpuUsage;
 }
 
@@ -72,15 +91,15 @@ void SysMonitor::setRAM(){
     emit ramUsageChanged();
 }
 
-DWORD SysMonitor::getUsageRAM(){
+DWORD SysMonitor::getUsageRAM() const{
     return usageRam;
 }
-DWORD SysMonitor::getTotalRAM(){
+DWORD SysMonitor::getTotalRAM() const{
     return totalRam;
 }
-double SysMonitor::getTotalMb(){
+double SysMonitor::getTotalMb() const{
     return totalMb;
 }
-double SysMonitor::getUsageMb(){
+double SysMonitor::getUsageMb() const{
     return usageMb;
 }
