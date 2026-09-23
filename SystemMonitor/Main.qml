@@ -108,8 +108,8 @@ ApplicationWindow {
                 anchors.left: parent.left
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.leftMargin: 12
-                value: 0
-                label: "CPU"
+                value: gpu.gpuUsagePer
+                label: "GPU"
                 width: 140
                 height: 140
                 progressColor: "#4CAF50"
@@ -120,11 +120,12 @@ ApplicationWindow {
                 anchors.left: first_2.right
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.leftMargin: 18
-                value: 0
-                label: "CPU"
+                value: gpu.gpuTem
+                label: "GPU"
                 width: 140
                 height: 140
                 progressColor: "#4CAF50"
+                unit: "°C"
 
             }
         CircularGauge {
@@ -132,8 +133,10 @@ ApplicationWindow {
                 anchors.left: second_2.right
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.leftMargin: 18
-                value: 0
-                label: "CPU"
+                value: gpu.usedMemoryMB
+                 maximumValue: gpu.totalMemoryMB
+                label: "VRAM (Mb)"
+                unit: "/" + Math.round(gpu.totalMemoryMB)
                 width: 140
                 height: 140
                 progressColor: "#4CAF50"
