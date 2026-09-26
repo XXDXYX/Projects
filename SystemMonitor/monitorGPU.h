@@ -13,6 +13,8 @@ class GpuMonitor: public QObject{
     Q_PROPERTY(double gpuTem READ getGpuTem NOTIFY OnGpuTemChanged)
     Q_PROPERTY(unsigned long totalMemoryMB READ getTotalVram CONSTANT)
     Q_PROPERTY(unsigned long usedMemoryMB READ getUsageVram NOTIFY OnVramChanged)
+    Q_PROPERTY(unsigned int gpuClock READ getGpuClock NOTIFY onGpuClock)
+    Q_PROPERTY(unsigned int gpuTotalClock READ getTotalClock CONSTANT)
 public:
     explicit GpuMonitor(QObject* parent = nullptr);
 
@@ -28,10 +30,14 @@ private:
     NvPhysicalGpuHandle hGpu[NVAPI_MAX_PHYSICAL_GPUS] = { 0 };;
     NV_GPU_DYNAMIC_PSTATES_INFO_EX gpuUsage;
     QTimer* timer = new QTimer(this);
+    unsigned int gpuClock = 0;
+    unsigned int gpuTotalClock = 0;
 
+    void setGpuClock();
     void setGpuTem();
     void setGpuUsage();
     void setVram();
+    void setTotalClock();
 public slots:
     NvU32 getNumGpu();
     QString getGpuName() const;
@@ -39,11 +45,15 @@ public slots:
     double getGpuTem() const;
     unsigned long getTotalVram()const;
     unsigned long getUsageVram()const;
+    unsigned long getTotalClock() const;
+    unsigned int getGpuClock()const;
+
 
 signals:
     void OnGpuUsageChanged();
     void OnGpuTemChanged();
     void OnVramChanged();
+    void onGpuClock();
 
 
 

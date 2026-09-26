@@ -3,7 +3,7 @@
 SysMonitor::SysMonitor(QObject *parent):QObject(parent){
     connect(timer, &QTimer::timeout, this, &SysMonitor::setCPU);
     connect(timer, &QTimer::timeout, this, &SysMonitor::setRAM);
-
+    connect(timer, &QTimer::timeout, this, &SysMonitor::setProcClock);
 
     timer->start(1000);
 }
@@ -91,6 +91,41 @@ void SysMonitor::setRAM(){
     emit ramUsageChanged();
 }
 
+void SysMonitor::setProcClock(){
+    HKEY hKey;
+    LONG result = RegOpenKeyExW(
+        HKEY_LOCAL_MACHINE,
+        L"HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0",
+        0,
+        KEY_READ,
+        &hKey
+        );
+    if (result != ERROR_SUCCESS) {
+        qDebug() << L"Не удалось открыть ключ реестра. Код ошибки: " << result;
+        return;
+    }
+    DWORD mhzValue = 0;
+    DWORD dwordSize = sizeof(DWORD);
+    DWORD type = REG_DWORD;
+
+    result = RegQueryValueExW(
+        hKey,
+        L"~MHz",
+        nullptr,
+        &type,
+        reinterpret_cast<LPBYTE>(&mhzValue),
+        &dwordSize
+        );
+    if (result == ERROR_SUCCESS) {
+        qDebug() << L"Частота: " << mhzValue << L" МГц";
+        procClock = mhzValue;
+    } else {
+        return;
+    }
+    RegCloseKey(hKey); // <-- добавь это! у тебя не хватает закрытия ключа
+    emit procClockChanged();
+}
+
 DWORD SysMonitor::getUsageRAM() const{
     return usageRam;
 }
@@ -102,4 +137,7 @@ double SysMonitor::getTotalMb() const{
 }
 double SysMonitor::getUsageMb() const{
     return usageMb;
+}
+unsigned int SysMonitor::getProcClock()const{
+    return procClock;
 }

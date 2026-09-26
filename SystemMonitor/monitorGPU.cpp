@@ -10,10 +10,11 @@ GpuMonitor::GpuMonitor(QObject* parent) : QObject(parent){
     m_available = true;
     getNumGpu();
     setVram();
+    setTotalClock();
     connect(timer, &QTimer::timeout, this, &GpuMonitor::setGpuUsage);
     connect(timer, &QTimer::timeout, this, &GpuMonitor::setGpuTem);
     connect(timer, &QTimer::timeout, this, &GpuMonitor::setVram);
-
+    connect(timer, &QTimer::timeout, this, &GpuMonitor::setGpuClock);
     timer->start(1000);
 }
 
@@ -42,6 +43,10 @@ QString GpuMonitor::getGpuName() const{
     return qstr;
 }
 
+unsigned int GpuMonitor::getGpuClock() const{
+    return gpuClock;
+}
+
 double GpuMonitor::getGpuTem()const{
     return gpuTem;
 }
@@ -54,15 +59,50 @@ unsigned long GpuMonitor::getUsageVram() const{
     return usedMemoryMB;
 }
 
+unsigned long GpuMonitor::getTotalClock() const{
+    return gpuTotalClock;
+}
+
 void GpuMonitor::setGpuUsage(){
     gpuUsage.version = NV_GPU_DYNAMIC_PSTATES_INFO_EX_VER;
     NvAPI_Status status = NvAPI_GPU_GetDynamicPstatesInfoEx(hGpu[0], &gpuUsage);
-    gpuUsagePer = gpuUsage.utilization[0].percentage;
     if (status != NVAPI_OK) {
         qDebug() << GetLastError();
         return;
     }
+    gpuUsagePer = gpuUsage.utilization[0].percentage;
     emit OnGpuUsageChanged();
+}
+
+void GpuMonitor::setTotalClock(){
+    NV_GPU_CLOCK_FREQUENCIES boostSettings = {0};
+    boostSettings.version = NV_GPU_CLOCK_FREQUENCIES_VER;
+    boostSettings.ClockType = NV_GPU_CLOCK_FREQUENCIES_BOOST_CLOCK;
+    NvAPI_Status status2 = NvAPI_GPU_GetAllClockFrequencies(hGpu[0], &boostSettings);
+    if (status2 != NVAPI_OK) {
+        qDebug() << "NVAPI status (boost):" << status2;
+        return;
+    }
+    if (boostSettings.domain[NVAPI_GPU_PUBLIC_CLOCK_GRAPHICS].bIsPresent) {
+        gpuTotalClock = boostSettings.domain[NVAPI_GPU_PUBLIC_CLOCK_GRAPHICS].frequency;
+    }
+}
+
+void GpuMonitor::setGpuClock(){
+    NV_GPU_CLOCK_FREQUENCIES settings = {0};
+    settings.version = NV_GPU_CLOCK_FREQUENCIES_VER;
+    settings.ClockType = NV_GPU_CLOCK_FREQUENCIES_CURRENT_FREQ;
+    NvAPI_Status status = NvAPI_GPU_GetAllClockFrequencies(hGpu[0],&settings);
+    if (status != NVAPI_OK) {
+        qDebug() << GetLastError();
+        return;
+    }
+    if (settings.domain[NVAPI_GPU_PUBLIC_CLOCK_GRAPHICS].bIsPresent) {
+        gpuClock = settings.domain[NVAPI_GPU_PUBLIC_CLOCK_GRAPHICS].frequency;
+    }else{
+        return;
+    }
+    emit onGpuClock();
 }
 
 void GpuMonitor::setGpuTem(){

@@ -14,6 +14,7 @@ class SysMonitor: public QObject{
     Q_PROPERTY(double totalMb READ getTotalMb NOTIFY ramUsageChanged)
     Q_PROPERTY(double usageMb READ getUsageMb NOTIFY ramUsageChanged)
     Q_PROPERTY(QString processorName READ getProcessorName CONSTANT)
+    Q_PROPERTY(unsigned int procClock READ getProcClock NOTIFY procClockChanged)
 public:
     explicit SysMonitor(QObject* parent = nullptr);
     static ULONGLONG FileTimeToUInt64(const FILETIME& ft);
@@ -25,6 +26,7 @@ public slots:
     double getUsageMb() const;
     double getTotalMb() const;
     QString getProcessorName();
+    unsigned int getProcClock() const;
 
 private:
     FILETIME idle;
@@ -44,15 +46,18 @@ private:
     double totalMb;
     double usageMb;
     QString processorName;
+    unsigned int procClock = 0;
 
 signals:
     void cpuUsageChanged();
     void ramUsageChanged();
+    void procClockChanged();
 
 private slots:
     void setCPU();
     void setRAM();
     void setData(FILETIME& Idle,FILETIME& Kernel,FILETIME& User);
+    void setProcClock();
 
 };
 

@@ -77,8 +77,9 @@ ApplicationWindow {
                 anchors.right: parent.right
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.rightMargin: 12
-                value: 0
-                label: "CPU"
+                value: monitor.procClock
+                label: "CPU Clock (мГц)"
+                unit: "MHz"
                 width: 140
                 height: 140
                 progressColor: "#4CAF50"
@@ -147,8 +148,10 @@ ApplicationWindow {
                 anchors.right: parent.right
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.rightMargin: 12
-                value: 0
-                label: "CPU"
+                value: gpu.gpuClock/1000
+                maximumValue: gpu.gpuTotalClock/1000
+                label: "GPU Clock (мГц)"
+                unit: "MHz"
                 width: 140
                 height: 140
                 progressColor: "#4CAF50"
