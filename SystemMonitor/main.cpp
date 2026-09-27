@@ -1,7 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
-#include "monitor.h"
+#include "monitorCPU.h"
 #include "monitorGPU.h"
 int main(int argc, char *argv[])
 {

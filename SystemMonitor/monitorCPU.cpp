@@ -1,4 +1,4 @@
-#include "monitor.h"
+#include "monitorCPU.h"
 
 SysMonitor::SysMonitor(QObject *parent):QObject(parent){
     connect(timer, &QTimer::timeout, this, &SysMonitor::setCPU);

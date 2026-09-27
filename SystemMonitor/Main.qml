@@ -5,7 +5,7 @@ import QtQuick.Controls.Basic
 ApplicationWindow {
     id: window
 
-    // Уменьшенный размер окна под новые компактные отступы
+
     width: 610
     height: 520
 
@@ -24,10 +24,10 @@ ApplicationWindow {
 
         ColumnLayout {
             anchors.fill: parent
-            anchors.margins: 8 // Уменьшенный внешний отступ (было 12)
-            spacing: 4 // Уменьшенное расстояние между рядами (было 8)
+            anchors.margins: 8
+            spacing: 4
 
-            // --- БЛОК ПРОЦЕССОРА ---
+
             Text {
                 text: "Процесор: " + monitor.processorName
                 font.pixelSize: 16
@@ -39,12 +39,12 @@ ApplicationWindow {
 
             Rectangle {
                 Layout.fillWidth: true
-                Layout.preferredHeight: 148 // Уменьшенная высота серого фона
+                Layout.preferredHeight: 148
                 color: "#737272"
 
                 Row {
                     anchors.centerIn: parent
-                    spacing: 10 // Уменьшенное расстояние между кругами (было 20)
+                    spacing: 10
 
                     CircularGauge {
                         value: monitor.cpuUsage
@@ -80,7 +80,7 @@ ApplicationWindow {
                 }
             }
 
-            // --- БЛОК ВИДЕОКАРТЫ ---
+
             Text {
                 text: "Відеокарта: " + gpu.gpuName
                 font.pixelSize: 16
@@ -136,7 +136,7 @@ ApplicationWindow {
                 }
             }
 
-            // --- ДОПОЛНИТЕЛЬНЫЙ БЛОК (НИЖНИЙ) ---
+
             Rectangle {
                 Layout.fillWidth: true
                 Layout.preferredHeight: 148
