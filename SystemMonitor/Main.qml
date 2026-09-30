@@ -148,15 +148,17 @@ ApplicationWindow {
                     spacing: 10
 
                     CircularGauge {
-                        value: 0
-                        label: "CPU"
+                        value: network.download
+                        label: "Download speed"
+                        unit: " Mb"
                         width: 140
                         height: 140
                         progressColor: "#4CAF50"
                     }
                     CircularGauge {
-                        value: 0
-                        label: "RAM"
+                        value: network.upload
+                        label: "Upload speed"
+                        unit: " Mb"
                         width: 140
                         height: 140
                         progressColor: "#4CAF50"

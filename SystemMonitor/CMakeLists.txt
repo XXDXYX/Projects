@@ -46,6 +46,7 @@ set(NVAPI_DIR ${CMAKE_SOURCE_DIR}/APi/nvapi)
 target_include_directories(appSystemMonitor PRIVATE
     ${NVAPI_DIR}
 )
+target_compile_definitions(appSystemMonitor PRIVATE WIN32_LEAN_AND_MEAN)
 target_link_libraries(appSystemMonitor
     PRIVATE
         Qt6::Core
@@ -53,6 +54,8 @@ target_link_libraries(appSystemMonitor
         Qt6::Qml
         Qt6::Quick
         ${NVAPI_DIR}/nvapi64.lib
+        Iphlpapi
+        Ws2_32
     )
 
 install(TARGETS appSystemMonitor
