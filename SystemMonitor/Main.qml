@@ -145,7 +145,7 @@ ApplicationWindow {
 
                 Row {
                     anchors.centerIn: parent
-                    spacing: 10
+                    spacing: 25
 
                     CircularGauge {
                         value: network.download
@@ -164,19 +164,13 @@ ApplicationWindow {
                         progressColor: "#4CAF50"
                     }
                     CircularGauge {
-                        value: 0
-                        label: "CPU"
+                        value: monitor.battery
+                        label: "Battery"
                         width: 140
                         height: 140
                         progressColor: "#4CAF50"
                     }
-                    CircularGauge {
-                        value: 0
-                        label: "CPU"
-                        width: 140
-                        height: 140
-                        progressColor: "#4CAF50"
-                    }
+
                 }
             }
         }

@@ -15,6 +15,7 @@ class SysMonitor: public QObject{
     Q_PROPERTY(double usageMb READ getUsageMb NOTIFY ramUsageChanged)
     Q_PROPERTY(QString processorName READ getProcessorName CONSTANT)
     Q_PROPERTY(unsigned int procClock READ getProcClock NOTIFY procClockChanged)
+    Q_PROPERTY(int battery READ getBattery NOTIFY onBatteryChanged)
 public:
     explicit SysMonitor(QObject* parent = nullptr);
     static ULONGLONG FileTimeToUInt64(const FILETIME& ft);
@@ -27,6 +28,7 @@ public slots:
     double getTotalMb() const;
     QString getProcessorName();
     unsigned int getProcClock() const;
+    int getBattery() const;
 
 private:
     FILETIME idle;
@@ -47,17 +49,20 @@ private:
     double usageMb;
     QString processorName;
     unsigned int procClock = 0;
+    int battery = 0;
 
 signals:
     void cpuUsageChanged();
     void ramUsageChanged();
     void procClockChanged();
+    void onBatteryChanged();
 
 private slots:
     void setCPU();
     void setRAM();
     void setData(FILETIME& Idle,FILETIME& Kernel,FILETIME& User);
     void setProcClock();
+    void setBattery();
 
 };
 

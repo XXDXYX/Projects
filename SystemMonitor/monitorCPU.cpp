@@ -4,7 +4,7 @@ SysMonitor::SysMonitor(QObject *parent):QObject(parent){
     connect(timer, &QTimer::timeout, this, &SysMonitor::setCPU);
     connect(timer, &QTimer::timeout, this, &SysMonitor::setRAM);
     connect(timer, &QTimer::timeout, this, &SysMonitor::setProcClock);
-
+    connect(timer, &QTimer::timeout, this, &SysMonitor::setBattery);
     timer->start(1000);
 }
 
@@ -91,6 +91,29 @@ void SysMonitor::setRAM(){
     emit ramUsageChanged();
 }
 
+void SysMonitor::setBattery(){
+     SYSTEM_POWER_STATUS status;
+    if (GetSystemPowerStatus(&status)) {
+
+        if (status.ACLineStatus == 1) {
+            qDebug() << " (AC)\n";
+        } else if (status.ACLineStatus == 0) {
+            qDebug() << "Charging from acumulator\n";
+        } else {
+            qDebug() << "Error\n";
+        }
+
+        if (status.BatteryLifePercent != 255) {
+            battery = (int)status.BatteryLifePercent;
+        } else {
+            qDebug() << "Error\n";
+        }
+    }else{
+        qDebug() << "Error: " << GetLastError();
+    }
+    emit onBatteryChanged();
+}
+
 void SysMonitor::setProcClock(){
     HKEY hKey;
     LONG result = RegOpenKeyExW(
@@ -137,6 +160,9 @@ double SysMonitor::getTotalMb() const{
 }
 double SysMonitor::getUsageMb() const{
     return usageMb;
+}
+int SysMonitor::getBattery() const{
+    return battery;
 }
 unsigned int SysMonitor::getProcClock()const{
     return procClock;
