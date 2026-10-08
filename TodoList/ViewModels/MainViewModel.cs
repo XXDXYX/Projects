@@ -1,13 +1,34 @@
+using System;
+using System.Collections.Generic;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using static TodoList.NoteModelView;
 namespace TodoList.ViewModels;
 
 public partial class MainViewModel : ViewModelBase
 {
-    [ObservableProperty] public partial string Greeting { get; set; } = "Welcome to Avalonia!";
+    private List<NoteModelView> _notes = new List<NoteModelView>();
+    [ObservableProperty] public partial string _task { get; set; } = "";
 
-    [RelayCommand] private void Reset()
+    [RelayCommand]
+    void addNote()
     {
-        Greeting = "Welcome to Avalonia!";
+        string text = _task;
+        if (string.IsNullOrWhiteSpace(text))
+        {
+            return;
+        }
+
+        var note = new NoteModelView { Content = text };
+        _notes.Add(note);
+        Console.WriteLine(text);
+        _task = "";
     }
+
+    void showList()
+    {
+        
+    }
+    
+
 }

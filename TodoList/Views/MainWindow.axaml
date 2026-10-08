@@ -10,7 +10,9 @@
         Title="TodoList"
         Background="AliceBlue"
         >
-
+<Window.Styles>
+    
+</Window.Styles>
     <Grid ColumnDefinitions="250,*">
     <Border Grid.Column="0"
             
@@ -34,15 +36,35 @@
             Margin="40,0,80,40"
             VerticalAlignment="Bottom" 
             >
-    <TextBox  
+   <Grid ColumnDefinitions="*,Auto">
+        <TextBox  
+            Text = "{Binding _task}"
             CornerRadius= "12"
             Watermark="Enter your task..." 
             BorderThickness="0"
             FontSize="18"
              
-    />
+        />
+        <Button 
+                CornerRadius="5"
+                Content="+"
+                Width="40"
+                Height="40"
+                Background="Aqua"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                Margin="0,0,-12,-12"
+                Command="{Binding addNoteCommand}"
+                
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                
+        >
+        
+        </Button>
+        </Grid>
     </Border>
-
+    
     
     </Grid>
 
