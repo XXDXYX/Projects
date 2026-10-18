@@ -7,16 +7,19 @@
         x:Class="BookReader.Views.MainWindow"
         x:DataType="vm:MainViewModel"
         Icon="/Assets/avalonia-logo.ico"
-        Title="BookReader">
-
-    <Design.DataContext>
-        <!-- This only sets the DataContext for the previewer in an IDE,
-             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-        <vm:MainViewModel />
-    </Design.DataContext>
-
-    <TextBox Text="{Binding Greeting}"
-             HorizontalAlignment="Center"
-             VerticalAlignment="Center" />
-
+        Title="BookReader"
+        Background="#444444">
+        <Grid ColumnDefinitions="50,*" >
+            <Border Grid.Column="1" Background="#979394" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+            <Grid Grid.Column="0" RowDefinitions="50,50,50,*">
+                                                         
+              </Grid> 
+             <Border Grid.Column="0" Background="#535353"></Border>
+            <Border Grid.Column="1" Background="#444444"/>
+            <TextBlock Grid.Column="1" Text="Books" Margin="65,45,0,0" FontSize="24"/>
+                                        
+                
+        </Grid>
+        
+        
 </Window>
