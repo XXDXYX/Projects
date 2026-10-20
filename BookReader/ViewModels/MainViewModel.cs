@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.IO;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Win32;
@@ -13,6 +15,15 @@ public partial class MainViewModel : ViewModelBase
     void AddBook()
     {
         
+        string path = " ";
+        string extension = Path.GetExtension(path).ToLowerInvariant();
+        BookLoader loader = extension switch
+        {
+            ".epub" => new EpubBookLoader(),
+           // ".fb2"  => new Fb2BookLoader(path),
+            _       => throw new NotSupportedException($"Формат {extension} не підтримується")
+        };
+        BookDetailsView Book = loader.LoadBook(path);
     }
     
     
