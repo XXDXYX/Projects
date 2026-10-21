@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using Avalonia.Interactivity;
+using Avalonia.Platform.Storage;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Win32;
+
 namespace BookReader.ViewModels;
 
 public partial class MainViewModel : ViewModelBase
@@ -11,11 +14,13 @@ public partial class MainViewModel : ViewModelBase
     [ObservableProperty]
     public partial List<BookDetailsView> Library { get;private set; } = new();
 
+    
+    
     [RelayCommand]
-    void AddBook()
+    public void AddBook(string path)
     {
-        
-        string path = " ";
+        if (string.IsNullOrEmpty(path))
+            return;
         string extension = Path.GetExtension(path).ToLowerInvariant();
         BookLoader loader = extension switch
         {
@@ -24,6 +29,8 @@ public partial class MainViewModel : ViewModelBase
             _       => throw new NotSupportedException($"Формат {extension} не підтримується")
         };
         BookDetailsView Book = loader.LoadBook(path);
+        Library.Add(Book);
+        Console.WriteLine($"Book added: {Book.Title}");
     }
     
     

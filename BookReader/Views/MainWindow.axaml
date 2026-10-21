@@ -19,6 +19,7 @@
             <TextBlock Grid.Column="1" Text="Books" Margin="65,60,0,0" FontSize="24"/>
             <Button Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,60,70,0" Content="+ Add books"
                     Background="#D04ADB"
+                    Click="OpenButton_Click"
                     > </Button>
                 
         </Grid>
