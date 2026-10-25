@@ -1,8 +1,26 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             x:Class="BookReader.Views.BookDetailsView">
+             xmlns:bookReader="clr-namespace:BookReader"
+             xmlns:local="clr-namespace:BookReader.ViewModels"
+             x:Class="BookReader.Views.BookDetailsView"
+             x:DataType="local:BookDetailsView">
+            <Border Width="160" Height="220" Margin="15" Background="#807E7C">
+                <Grid RowDefinitions="180,20,20">
+                    
+                    
+                    <Image Grid.Row="0" Source="{Binding Image}"  Stretch="UniformToFill"/>
+                    
+                    <TextBlock Grid.Row="1" Text="{Binding Title}" FontSize="14" FontWeight="Bold" TextAlignment="Center"
+                               ></TextBlock>
+                    <TextBlock Grid.Row="2" Text = "{Binding Author}" FontSize="10" TextAlignment="Center"
+                               ></TextBlock>
+                    
+                </Grid>
+                
+            </Border>
+    
+    
+    
     
    
-    
-    
 </UserControl>

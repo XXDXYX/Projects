@@ -1,3 +1,4 @@
+using Avalonia.Media.Imaging;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BookReader.ViewModels;
@@ -5,7 +6,7 @@ namespace BookReader.ViewModels;
 public partial class BookDetailsView : ViewModelBase
 {
     [ObservableProperty]
-    public partial string Autor { get; set; }
+    public partial string Author { get; set; }
 
     [ObservableProperty]
     public partial string Title { get; set; }
@@ -14,10 +15,11 @@ public partial class BookDetailsView : ViewModelBase
     public partial string Path { get; set; }
 
     [ObservableProperty]
-    public partial byte[]? Image { get; set; }
+    public partial Bitmap? Image { get; set; }
 
     [ObservableProperty]
     public partial BookContent? Content { get; set; }
+    
     
     
 }

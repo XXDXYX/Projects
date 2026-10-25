@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
@@ -12,7 +13,7 @@ namespace BookReader.ViewModels;
 public partial class MainViewModel : ViewModelBase
 {
     [ObservableProperty]
-    public partial List<BookDetailsView> Library { get;private set; } = new();
+    public partial ObservableCollection<BookDetailsView> Library { get;private set; } = new();
 
     
     

@@ -1,3 +1,5 @@
+using System.IO;
+using Avalonia.Media.Imaging;
 using VersOne.Epub;
 
 namespace BookReader.ViewModels;
@@ -10,6 +12,16 @@ public abstract class BookLoader:ViewModelBase
 
 public class EpubBookLoader:BookLoader
 {
+    
+   
+    private static Bitmap? ToBitmap(byte[]? bytes)
+    {
+        if (bytes is null || bytes.Length == 0)
+            return null;
+
+        using var stream = new MemoryStream(bytes);
+        return new Bitmap(stream);
+    }
      public override BookDetailsView LoadBook(string path)
     {
         EpubBook epubBook = EpubReader.ReadBook(path);
@@ -26,18 +38,19 @@ public class EpubBookLoader:BookLoader
 
         if (epubBook.Author != null)
         {
-            Book.Autor = epubBook.Author;
+            Book.Author = epubBook.Author;
         }
         else
         {
-            Book.Autor = "Unknown Autor";
+            Book.Author = "Unknown Autor";
         }
         
         Book.Path = path;
         
         if (epubBook.CoverImage != null)
         {
-            Book.Image = epubBook.CoverImage;
+
+            Book.Image = ToBitmap(epubBook.CoverImage);
         }
         else
         {
