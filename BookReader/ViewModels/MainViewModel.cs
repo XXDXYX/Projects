@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Text.Json;
+using System.Runtime.InteropServices;
 using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -12,10 +14,25 @@ namespace BookReader.ViewModels;
 
 public partial class MainViewModel : ViewModelBase
 {
+   private string Books = "library.json";
+    
+   public MainViewModel()
+    {
+        if (!File.Exists(Books))
+            return;
+        string jsonFromLines = File.ReadAllText(Books);
+        var restoredBook = JsonSerializer.Deserialize<List<BookDetailsView>>(jsonFromLines);  
+        if (restoredBook is null)
+            return;
+        
+        foreach (var i in restoredBook)
+        {
+            Library.Add(i);
+        }
+    }
+    
     [ObservableProperty]
     public partial ObservableCollection<BookDetailsView> Library { get;private set; } = new();
-
-    
     
     [RelayCommand]
     public void AddBook(string path)
@@ -33,6 +50,12 @@ public partial class MainViewModel : ViewModelBase
         Library.Add(Book);
         Console.WriteLine($"Book added: {Book.Title}");
     }
+
+    private void Save()
+    {
+        
+    }
+    
     
     
 }

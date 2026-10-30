@@ -18,7 +18,7 @@
                                                          
               </Grid> 
              <Border Grid.Column="0" Background="#535353"></Border>
-            <Border Grid.Column="1" Background="#444444"/>
+            <Border Grid.Column="1" Background="#3A3A3A"/>
             <Grid RowDefinitions="auto,*" Grid.Column="1">           
             <TextBlock Grid.Column="1" Text="Books" Margin="65,60,0,0" FontSize="24"/>
            

@@ -1,17 +1,21 @@
+using System.Collections.Generic;
 using VersOne.Epub;
 
 namespace BookReader.ViewModels;
 
-public abstract class BookContent : ViewModelBase
+public abstract partial class BookContent : ViewModelBase
 {
 }
 
-public abstract class BookContent<T> : BookContent
+public class Chapter
 {
-    public T? Content { get; set; }
+    public List<string> Paragraphs = new();
+    
 }
 
-public class EpubContent : BookContent<VersOne.Epub.EpubContent>
+
+public class EpubContent : BookContent
 {
+    public List<Chapter> Chapters = new ();
     
 }

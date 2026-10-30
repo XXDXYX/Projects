@@ -1,6 +1,9 @@
+using System.Collections.Generic;
 using System.IO;
 using Avalonia.Media.Imaging;
 using VersOne.Epub;
+using HtmlAgilityPack;
+using VersOne.Epub.Options;
 
 namespace BookReader.ViewModels;
 
@@ -22,11 +25,48 @@ public class EpubBookLoader:BookLoader
         using var stream = new MemoryStream(bytes);
         return new Bitmap(stream);
     }
-     public override BookDetailsView LoadBook(string path)
+
+    private List<Chapter> GetChapters(EpubBook epubBook)
     {
-        EpubBook epubBook = EpubReader.ReadBook(path);
+        var chapters = new List<Chapter>();
+
+        foreach (var file in epubBook.ReadingOrder)
+        {
+            var paragraphs = ParseParagraphs(file.Content);
+
+            chapters.Add(new Chapter
+            { 
+                Paragraphs = paragraphs
+            });
+        }
+
+        return chapters;                    
+        
+    }
+
+    private List<string> ParseParagraphs(string fileContent)
+    {
+        
+        var doc = new HtmlDocument();
+        doc.LoadHtml(fileContent);                              
+
+        var paragraphs = new List<string>();
+        var nodes = doc.DocumentNode.SelectNodes("//p");
+
+        if (nodes != null)                               
+        {
+            foreach (var node in nodes)
+                paragraphs.Add(node.InnerText.Trim());   
+        }
+
+        return paragraphs;
+    }
+
+    public override BookDetailsView LoadBook(string path)
+    {
+        EpubBook epubBook = EpubReader.ReadBook(path, EpubReaderOptionsPreset.IGNORE_ALL_ERRORS);
         BookDetailsView Book = new();
-        EpubContent Content = new();
+      
         if (epubBook.Title != null)
         {
             Book.Title = epubBook.Title;
@@ -56,10 +96,8 @@ public class EpubBookLoader:BookLoader
         {
             Book.Image = null;
         }
-
-        Content.Content = epubBook.Content;
-        Book.Content = Content;
         
+        Book.Content = GetChapters(epubBook);
         
         return Book;
     }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Avalonia.Media.Imaging;
 using CommunityToolkit.Mvvm.ComponentModel;
 
@@ -18,7 +19,7 @@ public partial class BookDetailsView : ViewModelBase
     public partial Bitmap? Image { get; set; }
 
     [ObservableProperty]
-    public partial BookContent? Content { get; set; }
+    public partial List<Chapter> Content { get; set; }
     
     
     
