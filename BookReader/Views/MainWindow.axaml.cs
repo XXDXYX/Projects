@@ -30,7 +30,7 @@ public partial class MainWindow : Window
             string path = files[0].Path.LocalPath; 
             if (DataContext is MainViewModel vm)     
             {
-                vm.AddBook(path);
+                vm.LibraryClass.AddBook(path);
             }
         }
 }
