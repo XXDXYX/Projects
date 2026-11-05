@@ -4,9 +4,9 @@ using Avalonia.Markup.Xaml;
 
 namespace BookReader.Views;
 
-public partial class LibraryView : UserControl
+public partial class BookReaderPageView : Window
 {
-    public LibraryView()
+    public BookReaderPageView()
     {
         InitializeComponent();
     }

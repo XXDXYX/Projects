@@ -1,26 +1,15 @@
-namespace BookReader.ViewModels;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Text.Json;
-using System.Runtime.InteropServices;
-using Avalonia.Interactivity;
-using Avalonia.Platform.Storage;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-
+namespace BookReader.ViewModels;
 public partial class LibraryViewModel:ViewModelBase
 {
-    
-    
-   
     
     [ObservableProperty]
     public partial ObservableCollection<BookDetailsView> Library { get; set; } = new();
     
-    
-
     [RelayCommand]
     public void AddBook(string path)
     {

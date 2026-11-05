@@ -1,31 +1,78 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:bookReader="clr-namespace:BookReader"
              xmlns:local="clr-namespace:BookReader.ViewModels"
              x:Class="BookReader.Views.BookDetailsView"
              x:DataType="local:BookDetailsView">
-            <Border Width="160" Height="260" Margin="15" Background="#444444">
-                <Grid RowDefinitions="180,*,Auto">
-                    
-                    
-                    <Border Grid.Row = "0" 
-                            
-                           Background="#4C4C4C">
-                        <Image Source="{Binding Image}" Margin="3" Stretch="UniformToFill" />
-                    </Border>
-                    
-                    <TextBlock Grid.Row="1" Text="{Binding Title}"  TextTrimming="CharacterEllipsis" MaxLines="2"
-                               Margin="5,5,5,0" FontSize="14" TextWrapping="Wrap" FontWeight="Bold" TextAlignment="Center"
-                               ></TextBlock>
-                    <TextBlock Grid.Row="2" Text = "{Binding Author}" Margin="0,0,0,10" FontSize="12" TextAlignment="Center"
-                               ></TextBlock>
-                    
-                </Grid>
-                
-            </Border>
-    
-    
-    
-    
-   
+    <UserControl.Resources>
+        <LinearGradientBrush x:Key="CardImageGradient"
+                             StartPoint="0%,0%"
+                             EndPoint="0%,100%">
+            <GradientStop Offset="0" Color="#00000000" />
+            <GradientStop Offset="1" Color="#CC26283A" />
+        </LinearGradientBrush>
+
+    </UserControl.Resources>
+
+    <UserControl.Styles>
+        <Style Selector="Border.book-card:pointerover">
+            <Setter Property="Background" Value="#343750" />
+            <Setter Property="BoxShadow" Value="0 14 28 0 #88000000" />
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <ScaleTransform ScaleX="1.04" ScaleY="1.04" />
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Styles>
+
+    <Border Classes="book-card"
+            Cursor="Hand"
+            Width="180"
+            Height="285"
+            Margin="14"
+            Padding="1"
+            Background="#26283A"
+            CornerRadius="14"
+            RenderTransformOrigin="50%,50%"
+            BoxShadow="0 8 20 0 #55000000">
+        <Border Background="#26283A"
+                CornerRadius="13">
+            <Grid RowDefinitions="202,*,Auto">
+                <Border Grid.Row="0"
+                        Margin="1"
+                        CornerRadius="12,12,4,4"
+                        ClipToBounds="True"
+                        Background="#353851">
+                    <Grid>
+                        <Image Source="{Binding Image}"
+                               Stretch="UniformToFill" />
+                        <Border VerticalAlignment="Bottom"
+                                Height="72"
+                                Background="{DynamicResource CardImageGradient}" />
+                        
+                    </Grid>
+                </Border>
+
+                <TextBlock Grid.Row="1"
+                           Text="{Binding Title}"
+                           TextTrimming="CharacterEllipsis"
+                           MaxLines="2"
+                           Margin="12,10,12,0"
+                           FontSize="15"
+                           TextWrapping="Wrap"
+                           FontWeight="SemiBold"
+                           Foreground="#F6F3FF"
+                           TextAlignment="Center"
+                           VerticalAlignment="Center" />
+
+                <TextBlock Grid.Row="2"
+                           Text="{Binding Author}"
+                           TextTrimming="CharacterEllipsis"
+                           Margin="10,0,10,12"
+                           FontSize="12"
+                           Foreground="#AAA9BD"
+                           TextAlignment="Center" />
+            </Grid>
+        </Border>
+    </Border>
 </UserControl>

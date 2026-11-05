@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using VersOne.Epub;
+
 
 namespace BookReader.ViewModels;
 

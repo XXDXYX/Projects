@@ -1,0 +1,45 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:views="using:BookReader.Views"
+             xmlns:vm="using:BookReader.ViewModels"
+             x:Class="BookReader.Views.LibraryPageView"
+             x:DataType="vm:LibraryViewModel">
+    <Grid RowDefinitions="Auto,*" Background="#444444">
+        <Grid ColumnDefinitions="*,Auto" Margin="30,25,30,20">
+            <TextBlock Text="Books"
+                       FontSize="28"
+                       FontWeight="SemiBold"
+                       VerticalAlignment="Center" />
+
+            <Button Grid.Column="1" Content="Add book"
+                    Click="OpenButton_Click"
+                    Padding="18,9" Background="#6D63A3" >
+                      
+                <Button.Resources>
+                       <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#5048A3"/>
+                       <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#343750" />
+                   </Button.Resources>
+                    
+            </Button>
+                    
+        </Grid>
+
+        <ScrollViewer Grid.Row="1"
+                      HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto">
+            <ItemsControl ItemsSource="{Binding Library}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <views:BookDetailsView />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</UserControl>
