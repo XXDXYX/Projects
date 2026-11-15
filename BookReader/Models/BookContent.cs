@@ -9,8 +9,8 @@ public abstract partial class BookContent : ViewModelBase
 
 public class Chapter
 {
-    public List<string> Paragraphs = new();
-    
+    public List<string> Paragraphs { get; set; } = new();
+
 }
 
 

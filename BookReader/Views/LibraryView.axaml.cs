@@ -6,9 +6,9 @@ using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
 using BookReader.ViewModels;
 
-public partial class LibraryPageView : UserControl
+public partial class LibraryView : UserControl
 {
-    public LibraryPageView()
+    public LibraryView()
     {
         InitializeComponent();
     }

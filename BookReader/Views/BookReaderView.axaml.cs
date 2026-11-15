@@ -1,12 +1,14 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using BookReader.ViewModels;
 
 namespace BookReader.Views;
 
-public partial class BookReaderPageView : Window
+
+public partial class BookReaderView :UserControl
 {
-    public BookReaderPageView()
+    public BookReaderView()
     {
         InitializeComponent();
     }
