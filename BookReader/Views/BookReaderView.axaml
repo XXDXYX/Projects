@@ -74,34 +74,44 @@
                                Margin="0,0,0,32" />
 
                    
-                    <ItemsControl ItemsSource="{Binding Book.Content}">
+                    <ItemsControl x:CompileBindings="False"
+                                  ItemsSource="{Binding Book.Content}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-
                                 <Border BorderBrush="#504D68"
                                         BorderThickness="0,1,0,0"
                                         Padding="0,26,0,14"
                                         Margin="0,8,0,0">
-
-                                    <ItemsControl ItemsSource="{Binding Paragraphs}">
+                                    <ItemsControl x:CompileBindings="False"
+                                                  ItemsSource="{Binding Paragraphs}">
                                         <ItemsControl.ItemTemplate>
-                                            <DataTemplate>
+                                            <DataTemplate x:DataType="vm:ContentBlock">
+                                                <StackPanel Margin="0,0,0,16"
+                                                            Spacing="8">
+                                                    <TextBlock Text="{Binding Text}"
+                                                               IsVisible="{Binding Type,
+                                                                   Converter={x:Static ObjectConverters.Equal},
+                                                                   ConverterParameter={x:Static vm:ChapterType.Text}}"
+                                                               FontFamily="Georgia"
+                                                               FontSize="17"
+                                                               LineHeight="28"
+                                                               Foreground="#E8E5F0"
+                                                               TextWrapping="Wrap"
+                                                               TextAlignment="Justify">
+                                                    </TextBlock>
 
-                                                <TextBlock Text="{Binding}"
-                                                           FontFamily="Georgia"
-                                                           FontSize="17"
-                                                           LineHeight="28"
-                                                           Foreground="#E8E5F0"
-                                                           TextWrapping="Wrap"
-                                                           TextAlignment="Justify"
-                                                           Margin="0,0,0,16" />
-
+                                                    <Image Source="{Binding Image}"
+                                                           IsVisible="{Binding Type,
+                                                               Converter={x:Static ObjectConverters.Equal},
+                                                               ConverterParameter={x:Static vm:ChapterType.Image}}"
+                                                           MaxHeight="600"
+                                                           Stretch="Uniform">
+                                                    </Image>
+                                                </StackPanel>
                                             </DataTemplate>
                                         </ItemsControl.ItemTemplate>
                                     </ItemsControl>
-
                                 </Border>
-
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>

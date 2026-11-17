@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Avalonia.Media.Imaging;
 using VersOne.Epub;
 using HtmlAgilityPack;
@@ -32,7 +34,8 @@ public class EpubBookLoader:BookLoader
 
         foreach (var file in epubBook.ReadingOrder)
         {
-            var paragraphs = ParseParagraphs(file.Content);
+            
+            var paragraphs = ParseParagraphs(file.Content,epubBook);
 
             chapters.Add(new Chapter
             { 
@@ -44,22 +47,64 @@ public class EpubBookLoader:BookLoader
         
     }
 
-    private List<string> ParseParagraphs(string fileContent)
+    private List<ContentBlock> ParseParagraphs(string fileContent, EpubBook epubBook)
     {
-        
+        List<ContentBlock> Paragraphs = new();
         var doc = new HtmlDocument();
-        doc.LoadHtml(fileContent);                              
-
-        var paragraphs = new List<string>();
-        var nodes = doc.DocumentNode.SelectNodes("//p");
-
+        doc.LoadHtml(fileContent);
+        
+        var nodes = doc.DocumentNode.SelectNodes("//p | //img | //svg/img");
+        
+    
         if (nodes != null)                               
         {
             foreach (var node in nodes)
-                paragraphs.Add(node.InnerText.Trim());   
+                if (node.Name == "p")
+                {
+                    ContentBlock contentBlock = new();
+                    contentBlock.Type = ChapterType.Text;
+                    contentBlock.Text = node.InnerText.Trim();
+                    Paragraphs.Add(contentBlock);
+                }
+                else if (node.Name == "img" || node.Name == "image")
+                {
+                    ContentBlock contentBlock = new();
+                    contentBlock.Type = ChapterType.Image;
+                    string imageUrl = null;
+                    if (node.Name == "img")
+                    { 
+                         imageUrl = node.GetAttributeValue("src", "");
+                    }else if (node.Name == "image")
+                    {
+                        imageUrl = node.GetAttributeValue("xlink:href", node.GetAttributeValue("href", ""));
+                    }
+                    
+                    
+                    if (!string.IsNullOrEmpty(imageUrl))
+                    {
+                        string cleanSrc = Uri.UnescapeDataString(imageUrl.Split('#')[0]);
+                        
+                        string fileName = Path.GetFileName(cleanSrc);
+                        
+                        var image = epubBook.Content.Images.Local
+                            .FirstOrDefault(img => Path.GetFileName(img.FilePath)
+                                .Equals(fileName, StringComparison.OrdinalIgnoreCase));
+
+                        if (image != null)
+                        {
+                            byte[] imageBytes = image.Content;
+                            contentBlock.Image = ToBitmap(imageBytes);
+                        }
+                    }
+                    
+                    
+                    Paragraphs.Add(contentBlock);
+                    
+                }
+                    
         }
 
-        return paragraphs;
+        return Paragraphs;
     }
 
     public override BookDetailsView LoadBook(string path)
