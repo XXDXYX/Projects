@@ -27,7 +27,8 @@ public partial class LibraryView : UserControl
             AllowMultiple = false,
             FileTypeFilter = new[]
             {
-                new FilePickerFileType("EPUB-книги") { Patterns = new[] { "*.epub" } }
+                new FilePickerFileType("Книги") { Patterns = new[] { "*.epub", "*.fb2"} }
+               
             }
         });
 

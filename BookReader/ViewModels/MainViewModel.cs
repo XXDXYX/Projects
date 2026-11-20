@@ -14,16 +14,18 @@ public partial class MainViewModel : ViewModelBase
     {
         CurentPage = LibraryClass;
 
-        if (!File.Exists(Books))
-            return;
-        string jsonFromLines = File.ReadAllText(Books);
-        var restoredBook = JsonSerializer.Deserialize<List<BookDetailsView>>(jsonFromLines);
-        if (restoredBook is null)
-            return;
-        
-        foreach (var i in restoredBook)
+        if (File.Exists(filePath))
         {
-            LibraryClass.Library.Add(i);
+            string[] lines = File.ReadAllLines(filePath);
+            foreach (var i in lines)
+            {
+                if (!string.IsNullOrWhiteSpace(i))
+                {
+                    LibraryClass.AddBook(i);
+                }
+            }
+
+            
         }
        
     }
@@ -32,7 +34,7 @@ public partial class MainViewModel : ViewModelBase
     public partial ViewModelBase? CurentPage { get; set;}
     public  LibraryViewModel? LibraryClass { get; } = new();
     public BookReaderViewModel? ReaderClass { get; } = new();
-    private string Books = "library.json";
+    private string filePath = "Library.txt";
     
     [RelayCommand]
     public void AddBook(string path)
@@ -44,7 +46,7 @@ public partial class MainViewModel : ViewModelBase
         BookLoader loader = extension switch
         {
             ".epub" => new EpubBookLoader(),
-            // ".fb2"  => new Fb2BookLoader(path),
+            ".fb2"  => new Fb2Book(path),
             _ => throw new NotSupportedException($"Формат {extension} не підтримується")
         };
 

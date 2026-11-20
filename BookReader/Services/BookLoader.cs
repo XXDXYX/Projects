@@ -6,6 +6,9 @@ using Avalonia.Media.Imaging;
 using VersOne.Epub;
 using HtmlAgilityPack;
 using VersOne.Epub.Options;
+using Fb2.Document;
+using Fb2.Document.Constants;
+using Fb2.Document.Models;
 
 namespace BookReader.ViewModels;
 
@@ -13,24 +16,26 @@ public abstract class BookLoader:ViewModelBase
 {
     
     public abstract BookDetailsView LoadBook(string path);
-}
 
-public class EpubBookLoader:BookLoader
-{
-    
-   
-    private static Bitmap? ToBitmap(byte[]? bytes)
+    protected static Bitmap? ToBitmap(byte[]? bytes)
     {
         if (bytes is null || bytes.Length == 0)
             return null;
 
         using var stream = new MemoryStream(bytes);
         return new Bitmap(stream);
-    }
 
+    }
+}
+
+public class EpubBookLoader:BookLoader
+{
+   
+    
     private List<Chapter> GetChapters(EpubBook epubBook)
     {
         var chapters = new List<Chapter>();
+        
 
         foreach (var file in epubBook.ReadingOrder)
         {
@@ -43,13 +48,13 @@ public class EpubBookLoader:BookLoader
             });
         }
 
-        return chapters;                    
+        return  chapters;                    
         
     }
 
     private List<ContentBlock> ParseParagraphs(string fileContent, EpubBook epubBook)
     {
-        List<ContentBlock> Paragraphs = new();
+        List<ContentBlock> Paragraphs = new(); 
         var doc = new HtmlDocument();
         doc.LoadHtml(fileContent);
         
@@ -145,5 +150,70 @@ public class EpubBookLoader:BookLoader
         Book.Content = GetChapters(epubBook);
         
         return Book;
+    }
+}
+
+public class Fb2Book(string path) : BookLoader
+{
+    public override BookDetailsView LoadBook(string path)
+    {
+        BookDetailsView book = new();
+        Fb2Document fb2Document = new Fb2Document();
+        var fileStream = File.OpenRead(path);
+        fb2Document.Load(fileStream);
+        var fb2Book = fb2Document.Book;
+        var titleInfo = fb2Book.GetFirstDescendant<TitleInfo>();
+        if (titleInfo != null)
+        {
+            var title = titleInfo.GetFirstDescendant<BookTitle>()?.Content;
+            if (title != null)
+            {
+                book.Title = title;
+            }else
+            {
+                book.Title = "Unknown Title";
+            }
+
+            var authors = titleInfo.GetChildren<Author>().Select(a =>
+            {
+                var first = a.GetFirstDescendant<FirstName>()?.Content;
+                var middle = a.GetFirstDescendant<MiddleName>()?.Content;
+                var last = a.GetFirstDescendant<LastName>()?.Content;
+                return string.Join(" ", new[] { first, middle, last }.Where(s => !string.IsNullOrWhiteSpace(s)));
+
+            }).ToList();
+            if (authors.Count > 0)
+            {
+                string.Join(", ", authors);
+            }else
+            {
+                book.Author = "Unknown Author";
+            }
+            var coverImage = titleInfo?.GetFirstDescendant<Coverpage>()?.GetFirstDescendant<Image>();
+
+
+            var href = coverImage?.GetAttribute(AttributeNames.XHref, ignoreCase: true)?.Value?.TrimStart('#');
+
+            if (!string.IsNullOrEmpty(href))
+            {
+                
+                var binary = titleInfo.GetDescendants<BinaryImage>().FirstOrDefault(b => b.GetAttribute(AttributeNames.Id)?.Value == href);
+
+                if (binary != null)
+                {
+                    byte[] imageBytes = Convert.FromBase64String(binary.Content);
+                    var image = ToBitmap(imageBytes);
+                    book.Image = image;
+                }
+            }
+
+            book.Path = path;
+           
+            book.Content = null;
+        }
+
+
+
+        return book;
     }
 }
