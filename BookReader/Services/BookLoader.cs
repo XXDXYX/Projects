@@ -16,6 +16,7 @@ public abstract class BookLoader:ViewModelBase
 {
     
     public abstract BookDetailsView LoadBook(string path);
+    
 
     protected static Bitmap? ToBitmap(byte[]? bytes)
     {
@@ -26,6 +27,8 @@ public abstract class BookLoader:ViewModelBase
         return new Bitmap(stream);
 
     }
+
+    
 }
 
 public class EpubBookLoader:BookLoader
@@ -155,6 +158,102 @@ public class EpubBookLoader:BookLoader
 
 public class Fb2Book(string path) : BookLoader
 {
+    /*private List<Chapter> GetChapters(Fb2Book book)
+    {
+        var chapters = new List<Chapter>();
+        //foreach (var file in book)
+        {
+            
+           // var paragraphs = ParseParagraphs(file.Content,book);
+
+            chapters.Add(new Chapter
+            { 
+               // Paragraphs = paragraphs
+            });
+        }
+
+        return  chapters;                
+    }*/
+    
+    Dictionary<string, byte[]> imagesBytes = new Dictionary<string, byte[]>(StringComparer.OrdinalIgnoreCase);
+    string ReadParagraphInOrder(Paragraph paragraph)
+    {
+        var sb = new System.Text.StringBuilder();
+
+        foreach (var child in paragraph.Content)
+        {
+            if (child is Image inlineImg)
+            {
+              continue;
+            }
+            else if (child is TextItem textItem)
+            {
+                sb.Append(textItem.Content);
+            }
+           
+        }
+
+        if (sb.Length > 0)
+        {
+            return sb.ToString();
+        }
+
+        return " ";
+    }
+    byte[]? GetImageBytes(Image imageNode)
+    {
+        var href = imageNode.GetAttribute(AttributeNames.XHref, ignoreCase: true)?.Value?.TrimStart('#');
+
+        if (!string.IsNullOrEmpty(href) && imagesBytes.TryGetValue(href, out var bytes))
+        {
+            return bytes;
+        }
+
+        return null;
+    }
+    private List<Chapter> ParseParapraph(FictionBook fb2Book)
+    {
+        var sections = fb2Book.GetDescendants<BodySection>();
+        List<Chapter> Chapters = new();
+        
+        foreach (var section in sections)
+        {
+            List<ContentBlock> Paragraphs = new();
+            foreach (var note in section.Content)
+            {
+                ContentBlock block;
+                switch (note)
+                {
+                    case Paragraph paragraph:
+                        block = new();
+                        block.Type = ChapterType.Text;
+                        block.Text = ReadParagraphInOrder(paragraph);
+                        Paragraphs.Add(block);
+                        break;
+                    case Image image:
+                        block = new();
+                        block.Type = ChapterType.Image;
+                        var href = image.GetAttribute(AttributeNames.XHref, ignoreCase: true)?.Value?.TrimStart('#');
+                        byte[]? imgBytes = GetImageBytes(image);
+                        if (imgBytes != null)
+                        {
+                            block.Image = ToBitmap(imgBytes);
+                        }
+                        Paragraphs.Add(block);
+                        break; 
+                    default:
+                        break;
+                }
+                
+            }
+
+            Chapter chapter = new();
+            chapter.Paragraphs = Paragraphs;
+            Chapters.Add(chapter);
+        }
+
+        return Chapters;
+    }
     public override BookDetailsView LoadBook(string path)
     {
         BookDetailsView book = new();
@@ -162,6 +261,13 @@ public class Fb2Book(string path) : BookLoader
         var fileStream = File.OpenRead(path);
         fb2Document.Load(fileStream);
         var fb2Book = fb2Document.Book;
+        foreach (var binary in fb2Book.GetDescendants<BinaryImage>())
+        {
+            var id = binary.GetAttribute(AttributeNames.Id)?.Value;
+            if (!string.IsNullOrEmpty(id))
+                imagesBytes[id] = Convert.FromBase64String(binary.Content);
+        }
+        
         var titleInfo = fb2Book.GetFirstDescendant<TitleInfo>();
         if (titleInfo != null)
         {
@@ -173,7 +279,6 @@ public class Fb2Book(string path) : BookLoader
             {
                 book.Title = "Unknown Title";
             }
-
             var authors = titleInfo.GetChildren<Author>().Select(a =>
             {
                 var first = a.GetFirstDescendant<FirstName>()?.Content;
@@ -189,8 +294,8 @@ public class Fb2Book(string path) : BookLoader
             {
                 book.Author = "Unknown Author";
             }
-            var coverImage = titleInfo?.GetFirstDescendant<Coverpage>()?.GetFirstDescendant<Image>();
-
+            var coverPage = titleInfo?.GetFirstDescendant<Coverpage>();
+            var coverImage = coverPage?.GetFirstDescendant<Image>();
 
             var href = coverImage?.GetAttribute(AttributeNames.XHref, ignoreCase: true)?.Value?.TrimStart('#');
 
@@ -209,7 +314,7 @@ public class Fb2Book(string path) : BookLoader
 
             book.Path = path;
            
-            book.Content = null;
+            book.Content = ParseParapraph(fb2Book);
         }
 
 

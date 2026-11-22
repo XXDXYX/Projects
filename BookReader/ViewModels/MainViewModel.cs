@@ -1,6 +1,4 @@
-using System.Collections.Generic;
 using System.IO;
-using System.Text.Json;
 using System;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -36,24 +34,6 @@ public partial class MainViewModel : ViewModelBase
     public BookReaderViewModel? ReaderClass { get; } = new();
     private string filePath = "Library.txt";
     
-    [RelayCommand]
-    public void AddBook(string path)
-    {
-        if (string.IsNullOrEmpty(path))
-            return;
-
-        string extension = Path.GetExtension(path).ToLowerInvariant();
-        BookLoader loader = extension switch
-        {
-            ".epub" => new EpubBookLoader(),
-            ".fb2"  => new Fb2Book(path),
-            _ => throw new NotSupportedException($"Формат {extension} не підтримується")
-        };
-
-        BookDetailsView book = loader.LoadBook(path);
-        LibraryClass.Library.Add(book);
-        Console.WriteLine($"Book added: {book.Title}");
-    }
     [RelayCommand]
     public void OnBookClicked(BookDetailsView book)
     {

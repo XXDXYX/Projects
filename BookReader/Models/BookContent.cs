@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using Avalonia.Media.Imaging;
-using CommunityToolkit.Mvvm.ComponentModel;
+
 
 
 namespace BookReader.ViewModels;
