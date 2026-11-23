@@ -22,7 +22,7 @@ public partial class LibraryViewModel:ViewModelBase
         BookLoader loader = extension switch
         {
             ".epub" => new EpubBookLoader(),
-             ".fb2"  => new Fb2Book(path),
+             ".fb2"  => new Fb2Book(),
                 _   => throw new NotSupportedException($"Формат {extension} не підтримується")
         };
         BookDetailsView Book = loader.LoadBook(path);

@@ -27,8 +27,6 @@ public abstract class BookLoader:ViewModelBase
         return new Bitmap(stream);
 
     }
-
-    
 }
 
 public class EpubBookLoader:BookLoader
@@ -109,6 +107,13 @@ public class EpubBookLoader:BookLoader
                     Paragraphs.Add(contentBlock);
                     
                 }
+                else if (node.Name == "h1")
+                {
+                    ContentBlock contentBlock = new();
+                    contentBlock.Type = ChapterType.PartTitle;
+                    contentBlock.Text = node.InnerText.Trim();
+                    Paragraphs.Add(contentBlock);
+                }
                     
         }
 
@@ -118,6 +123,7 @@ public class EpubBookLoader:BookLoader
     public override BookDetailsView LoadBook(string path)
     {
         EpubBook epubBook = EpubReader.ReadBook(path, EpubReaderOptionsPreset.IGNORE_ALL_ERRORS);
+        
         BookDetailsView Book = new();
       
         if (epubBook.Title != null)
@@ -156,7 +162,7 @@ public class EpubBookLoader:BookLoader
     }
 }
 
-public class Fb2Book(string path) : BookLoader
+public class Fb2Book : BookLoader
 {
     /*private List<Chapter> GetChapters(Fb2Book book)
     {
@@ -241,8 +247,14 @@ public class Fb2Book(string path) : BookLoader
                         }
                         Paragraphs.Add(block);
                         break; 
-                    default:
+                    case Title title:
+                        block = new();
+                        block.Type = ChapterType.PartTitle;
+                        string titleText = string.Join(" ", title.GetDescendants<TextItem>().Select(t => t.Content));
+                        block.PartTitle = titleText;
+                        Paragraphs.Add(block);
                         break;
+                    
                 }
                 
             }

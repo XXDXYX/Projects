@@ -42,5 +42,11 @@ public partial class MainViewModel : ViewModelBase
         CurentPage = ReaderClass;
         
     }
+
+    [RelayCommand]
+    public void BackToLibrary()
+    {
+        CurentPage = LibraryClass;
+    }
     
 }

@@ -12,45 +12,26 @@
     <Grid Background="#444444"
           RowDefinitions="Auto,*">
 
-        <!-- Верхняя панель -->
-        <Grid Grid.Row="0"
-              ColumnDefinitions="*,Auto"
-              Margin="30,25,30,20">
+        <Button Grid.Row="0"
+                HorizontalAlignment="Left"
+                Margin="30,16,0,0"
+                Padding="12,4"
+                Content="←"
+                FontSize="26"
+                Background="Transparent"
+                Command="{Binding $parent[Window].((vm:MainViewModel)DataContext).BackToLibraryCommand}">
+            <Button.Resources>
+                <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#5048A3"/>
+                <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#343750"/>
+            </Button.Resources>
+        </Button>
 
-            <StackPanel>
-                <TextBlock Text="{Binding Book.Title}"
-                           FontSize="28"
-                           FontWeight="SemiBold"
-                           Foreground="#F6F3FF"
-                           TextWrapping="Wrap" />
-
-                <TextBlock Text="{Binding Book.Author}"
-                           FontSize="14"
-                           Foreground="#AAA9BD"
-                           Margin="0,5,0,0" />
-            </StackPanel>
-
-            <Border Grid.Column="1"
-                    Width="44"
-                    Height="44"
-                    CornerRadius="22"
-                    Background="#6D63A3"
-                    VerticalAlignment="Center">
-                <TextBlock Text="📖"
-                           FontSize="21"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Center" />
-            </Border>
-        </Grid>
-
-    
         <ScrollViewer Grid.Row="1"
                       HorizontalScrollBarVisibility="Disabled"
                       VerticalScrollBarVisibility="Auto">
 
-            <Border MaxWidth="900"
-                    HorizontalAlignment="Center"
-                    Margin="30,0,30,35"
+            <Border HorizontalAlignment="Stretch"
+                    Margin="30,16,30,35"
                     Padding="48,42"
                     Background="#26283A"
                     CornerRadius="14"
@@ -88,6 +69,30 @@
                                             <DataTemplate x:DataType="vm:ContentBlock">
                                                 <StackPanel Margin="0,0,0,16"
                                                             Spacing="8">
+                                                    <TextBlock Text="{Binding Text}"
+                                                               IsVisible="{Binding Type,
+                                                                   Converter={x:Static ObjectConverters.Equal},
+                                                                   ConverterParameter={x:Static vm:ChapterType.PartTitle}}"
+                                                               FontFamily="Georgia"
+                                                               FontSize="24"
+                                                               FontWeight="SemiBold"
+                                                               Foreground="#F6F3FF"
+                                                               TextWrapping="Wrap"
+                                                               TextAlignment="Center"
+                                                               Margin="0,8,0,4" />
+
+                                                    <TextBlock Text="{Binding PartTitle}"
+                                                               IsVisible="{Binding Type,
+                                                                   Converter={x:Static ObjectConverters.Equal},
+                                                                   ConverterParameter={x:Static vm:ChapterType.PartTitle}}"
+                                                               FontFamily="Georgia"
+                                                               FontSize="24"
+                                                               FontWeight="SemiBold"
+                                                               Foreground="#F6F3FF"
+                                                               TextWrapping="Wrap"
+                                                               TextAlignment="Center"
+                                                               Margin="0,8,0,4" />
+
                                                     <TextBlock Text="{Binding Text}"
                                                                IsVisible="{Binding Type,
                                                                    Converter={x:Static ObjectConverters.Equal},
